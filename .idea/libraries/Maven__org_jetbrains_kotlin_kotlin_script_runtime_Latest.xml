@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Maven: org.jetbrains.kotlin:kotlin-script-runtime:Latest" type="repository">
+    <properties maven-id="org.jetbrains.kotlin:kotlin-script-runtime:LATEST" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.m2/repository/org/jetbrains/kotlin/kotlin-script-runtime/2.0.0-Beta5/kotlin-script-runtime-2.0.0-Beta5.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.m2/repository/org/jetbrains/kotlin/kotlin-script-runtime/2.0.0-Beta5/kotlin-script-runtime-2.0.0-Beta5-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.m2/repository/org/jetbrains/kotlin/kotlin-script-runtime/2.0.0-Beta5/kotlin-script-runtime-2.0.0-Beta5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
