@@ -56,13 +56,15 @@
             android:hint="@string/login_password_hint" />
 
         <LinearLayout
+            android:id="@+id/login_button"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/login_button"
             android:orientation="horizontal"
             android:layout_marginBottom="25dp"
             android:elevation="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
