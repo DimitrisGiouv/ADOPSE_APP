@@ -31,51 +31,41 @@ class MainActivity : AppCompatActivity() {
         }
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
 
-        // Create 6 instances of ModuleCard1 layout
-        repeat(10) { index ->
+// Δημιουργία 10 περιπτώσεων του μοντέλου ModuleCard1
+        repeat(6) { index ->
             val moduleCard1 = layoutInflater.inflate(R.layout.module, null) as ConstraintLayout
-            moduleCard1.id = View.generateViewId() // Generate unique ID for each module card
+            moduleCard1.id = View.generateViewId() // Δημιουργία μοναδικού αναγνωριστικού για κάθε κάρτα ενότητας
 
-            // Find TextViews inside ModuleCard1
+            // Εύρεση TextViews μέσα στο ModuleCard1
             val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
             val disModuleTextView = moduleCard1.findViewById<TextView>(R.id.Dismodule1)
             val difficultyTextView = moduleCard1.findViewById<TextView>(R.id.difficulty_module1)
             val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
 
-            // Set text for TextViews
-            moduleTextView.text = "Module ${index + 1}"
-            disModuleTextView.text = "Description of module ${index + 1}"
-            difficultyTextView.text = "Easy"
+            // Ορισμός κειμένου για τα TextViews
+            moduleTextView.text = "Μονάδα ${index + 1}"
+            disModuleTextView.text = "Περιγραφή της μονάδας ${index + 1}"
+            difficultyTextView.text = "Εύκολο"
             popularityTextView.text = "50"
             ratingTextView.text = "4"
 
-            // Add constraints for positioning
+            // Προσθήκη περιορισμών για τη θέση
             val layoutParams = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.WRAP_CONTENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT
             )
-            if(index%2 == 0)
-            {
-                if (index == 0) {
-                    layoutParams.topToBottom = R.id.Recommend
-                } else {
-                    layoutParams.topToBottom = parentLayout.getChildAt((index - 1) / 2) .id // Each ModuleCard1 has 2 children
-                }
+
+            if (index % 2 == 0) {
                 layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-                layoutParams.setMargins(10, 10, 10, 10)
-                parentLayout.addView(moduleCard1, layoutParams);
+                layoutParams.topToBottom = if (index == 0) R.id.Recommend else parentLayout.getChildAt(index - 1).id
+            } else {
+                layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+                layoutParams.topToBottom = if (index == 1) R.id.Recommend else parentLayout.getChildAt(index - 2).id
             }
-            else {
-                if (index == 1) {
-                      layoutParams.topToBottom = R.id.Recommend
-                } else {
-                      layoutParams.topToBottom = parentLayout.getChildAt((index - 1) / 2) .id // Each ModuleCard1 has 2 children
-                }
-                      layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-                      layoutParams.setMargins(10, 10, 10, 10)
-                      parentLayout.addView(moduleCard1, layoutParams);
-            }
+
+            layoutParams.setMargins(10, 10, 10, 10)
+            parentLayout.addView(moduleCard1, layoutParams)
         }
     }
 }
