@@ -29,10 +29,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        val parentLayout: ConstraintLayout = findViewById(R.id.main)
+        val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
 
         // Create 6 instances of ModuleCard1 layout
-        repeat(6) { index ->
+        repeat(10) { index ->
             val moduleCard1 = layoutInflater.inflate(R.layout.module, null) as ConstraintLayout
             moduleCard1.id = View.generateViewId() // Generate unique ID for each module card
 
@@ -55,17 +55,27 @@ class MainActivity : AppCompatActivity() {
                 ConstraintLayout.LayoutParams.WRAP_CONTENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT
             )
-            if (index == 0) {
-                layoutParams.topToBottom = R.id.Recommend
-            } else {
-                layoutParams.topToBottom = parentLayout.getChildAt((index - 1) * 2).id // Each ModuleCard1 has 2 children
+            if(index%2 == 0)
+            {
+                if (index == 0) {
+                    layoutParams.topToBottom = R.id.Recommend
+                } else {
+                    layoutParams.topToBottom = parentLayout.getChildAt((index - 1) / 2) .id // Each ModuleCard1 has 2 children
+                }
+                layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+                layoutParams.setMargins(10, 10, 10, 10)
+                parentLayout.addView(moduleCard1, layoutParams);
             }
-            layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-            layoutParams.setMargins(10, 10, 10, 10)
-
-            // Add ModuleCard1 to parent layout
-            parentLayout.addView(moduleCard1, layoutParams)
+            else {
+                if (index == 1) {
+                      layoutParams.topToBottom = R.id.Recommend
+                } else {
+                      layoutParams.topToBottom = parentLayout.getChildAt((index - 1) / 2) .id // Each ModuleCard1 has 2 children
+                }
+                      layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+                      layoutParams.setMargins(10, 10, 10, 10)
+                      parentLayout.addView(moduleCard1, layoutParams);
+            }
         }
     }
-
-    }
+}
