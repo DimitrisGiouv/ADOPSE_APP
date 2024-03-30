@@ -13,14 +13,12 @@
         android:layout_height="41dp"
         android:layout_marginStart="13dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="15dp"
         android:padding="10px"
         android:text="Recommended Module"
         android:textColor="@color/black"
         android:textFontWeight="100"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ModuleCard1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchBlock" />
@@ -35,6 +33,32 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <!-- Button for Grid View -->
+
+    <!-- Button for List View -->
+
+    <Button
+        android:id="@+id/gridViewButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:text="Grid View"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/listViewButton"
+        app:layout_constraintTop_toTopOf="@+id/Recommend" />
+
+    <Button
+        android:id="@+id/listViewButton"
+        android:layout_width="65dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="4dp"
+        android:text="List View"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBlock" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/searchBlock"
@@ -58,7 +82,7 @@
             android:ems="10"
             android:inputType="text"
             android:padding="16dp"
-            android:text="Search"
+            android:hint="Search"
             android:textColor="@color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -76,341 +100,4 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ModuleCard1"
-        android:layout_width="175dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/banner_white"
-        app:layout_constraintTop_toBottomOf="@id/Recommend"
-        app:layout_constraintLeft_toLeftOf="parent"
-        >
-
-
-        <TextView
-            android:id="@+id/module1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:text="module1"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/Dismodule1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/light_orange"
-            android:text="Discription of module 1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/module1" />
-
-        <TextView
-            android:id="@+id/difficulty_module1"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:drawableLeft="@drawable/difficulty"
-            android:gravity="center_vertical"
-            android:text="Easy"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/Dismodule1"/>
-
-        <TextView
-            android:id="@+id/popularity_module1"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="0dp"
-            android:drawableLeft="@drawable/team_fill"
-            android:text="50"
-            android:gravity="center_vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/difficulty_module1"/>
-
-        <TextView
-            android:id="@+id/rating_module1"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="2dp"
-            android:drawableLeft="@drawable/star_fill"
-            android:text="4"
-            android:gravity="center_vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/popularity_module1"/>
-
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/price_frame"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:text="72$"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ModuleCard2"
-        android:layout_width="175dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/banner_white"
-        app:layout_constraintTop_toBottomOf="@id/Recommend"
-        app:layout_constraintRight_toRightOf="parent"
-        >
-
-
-        <TextView
-            android:id="@+id/module2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:text="module2"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/Dismodule2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/light_orange"
-            android:text="Discription of module 1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/module2" />
-
-        <TextView
-            android:id="@+id/difficulty_module2"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/difficulty"
-            android:text="Easy"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/Dismodule2"/>
-
-        <TextView
-            android:id="@+id/popularity_module2"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="0dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/team_fill"
-            android:text="50"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/difficulty_module2"/>
-
-        <TextView
-            android:id="@+id/rating_module2"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="2dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/star_fill"
-            android:text="4"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/popularity_module2"/>
-
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/price_frame"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:text="72$"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ModuleCard3"
-        android:layout_width="175dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/banner_white"
-        app:layout_constraintTop_toBottomOf="@id/ModuleCard1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        >
-
-
-        <TextView
-            android:id="@+id/module3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:text="module1"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/Dismodule3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/light_orange"
-            android:text="Discription of module 3"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/module3" />
-
-        <TextView
-            android:id="@+id/difficulty_module3"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/difficulty"
-            android:text="Easy"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/Dismodule3"/>
-
-        <TextView
-            android:id="@+id/popularity_module3"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="0dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/team_fill"
-            android:text="50"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/difficulty_module3"/>
-
-        <TextView
-            android:id="@+id/rating_module3"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="2dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/star_fill"
-            android:text="4"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/popularity_module3"/>
-
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/price_frame"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:text="72$"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ModuleCard4"
-        android:layout_width="175dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/banner_white"
-        app:layout_constraintTop_toBottomOf="@id/ModuleCard2"
-        app:layout_constraintRight_toRightOf="parent"
-        >
-
-
-        <TextView
-            android:id="@+id/module4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:text="module2"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/Dismodule4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/light_orange"
-            android:text="Discription of module 4"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/module4" />
-
-
-        <TextView
-            android:id="@+id/difficulty_module4"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/difficulty"
-            android:text="Easy"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/Dismodule4"/>
-
-        <TextView
-            android:id="@+id/popularity_module4"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="0dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/team_fill"
-            android:text="50"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/difficulty_module4"/>
-
-        <TextView
-            android:id="@+id/rating_module4"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="2dp"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/star_fill"
-            android:text="4"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/popularity_module4"/>
-
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/price_frame"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:text="72$"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
