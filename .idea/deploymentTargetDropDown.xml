@@ -4,18 +4,18 @@
     <value>
       <entry key="Unnamed">
         <State>
-          <targetSelectedWithDropDown>
+          <runningDeviceTargetSelectedWithDropDown>
             <Target>
-              <type value="QUICK_BOOT_TARGET" />
+              <type value="RUNNING_DEVICE_TARGET" />
               <deviceKey>
                 <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\sotch\.android\avd\Pixel_3a_API_34_extension_level_7_x86_64.avd" />
+                  <type value="SERIAL_NUMBER" />
+                  <value value="adb-514a85d3-SjgV3Q._adb-tls-connect._tcp" />
                 </Key>
               </deviceKey>
             </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-03-30T10:13:16.962376600Z" />
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-30T18:39:53.919643700Z" />
         </State>
       </entry>
     </value>
