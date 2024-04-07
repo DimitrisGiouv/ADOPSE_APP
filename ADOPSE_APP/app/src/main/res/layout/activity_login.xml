@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/holo_orange_dark"
@@ -26,8 +27,9 @@
             android:layout_height="wrap_content"
             android:text="Educator"
             android:textColor="@color/white"
-            android:textSize="80dp"
+            android:textSize="60dp"
             android:textStyle="bold"
+            android:layout_marginBottom="30px"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,11 +38,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30px"
             android:gravity="center"
             android:text="Login"
             android:textColor="@color/black"
-            android:textSize="40dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <EditText
@@ -67,10 +69,9 @@
             android:layout_height="50dp"
             android:background="@drawable/login_button"
             android:orientation="horizontal"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="5dp"
             android:elevation="10dp"
-            android:gravity="center"
-            >
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,6 +86,26 @@
                 android:layout_height="20dp"
                 android:src="@drawable/baseline_arrow_forward_24"
                 android:paddingTop="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="25dp">
+
+            <CheckBox
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/checkbox_round_selector"
+                android:layout_marginEnd="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remember me"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
