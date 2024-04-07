@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ModuleCard1"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/banner_white">
+
+
+    <TextView
+        android:id="@+id/module1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="9dp"
+        android:text="module1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Dismodule1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Dismodule1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="2dp"
+        android:text="Discription of module 1"
+        android:textColor="@color/light_orange"
+        app:layout_constraintBottom_toTopOf="@+id/difficulty_module1"
+        app:layout_constraintStart_toStartOf="@+id/module1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/difficulty_module1"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="7dp"
+        android:drawableLeft="@drawable/difficulty"
+        android:gravity="center_vertical"
+        android:text="Easy"
+        app:layout_constraintBottom_toTopOf="@+id/rating_module1"
+        app:layout_constraintStart_toStartOf="@+id/Dismodule1"
+        app:layout_constraintTop_toBottomOf="@+id/Dismodule1" />
+
+    <TextView
+        android:id="@+id/popularity_module1"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:drawableLeft="@drawable/team_fill"
+        android:gravity="center_vertical"
+        android:text="50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rating_module1"
+        app:layout_constraintTop_toBottomOf="@+id/rating_module1" />
+
+    <TextView
+        android:id="@+id/rating_module1"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/star_fill"
+        android:gravity="center_vertical"
+        android:text="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/difficulty_module1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/price_frame"
+        android:gravity="center"
+        android:text="72$"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rating_module1" />
+</androidx.constraintlayout.widget.ConstraintLayout>
