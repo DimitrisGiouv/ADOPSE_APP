@@ -14,7 +14,7 @@
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="-26dp"
-        tools:layout_editor_absoluteY="210dp">
+        tools:layout_editor_absoluteY="210dp" >
 
         <!--<ImageView
             android:id="@+id/logoImg"
