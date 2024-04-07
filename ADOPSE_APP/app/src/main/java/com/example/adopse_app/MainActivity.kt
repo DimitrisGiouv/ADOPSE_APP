@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 layoutParams.topToBottom = if (index == 1) R.id.Recommend else parentLayout.getChildAt(index - 2).id
             }
 
-            layoutParams.setMargins(10, 10, 10, 10)
+            layoutParams.setMargins(10, 60, 10, 10)
             parentLayout.addView(moduleCard1, layoutParams)
         }
     }

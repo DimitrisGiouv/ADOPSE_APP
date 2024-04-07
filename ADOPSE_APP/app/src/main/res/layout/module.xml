@@ -4,8 +4,6 @@
     android:id="@+id/ModuleCard1"
     android:layout_width="175dp"
     android:layout_height="200dp"
-    android:layout_marginTop="15dp"
-    android:layout_marginLeft="10dp"
     android:background="@drawable/banner_white"
     >
 
