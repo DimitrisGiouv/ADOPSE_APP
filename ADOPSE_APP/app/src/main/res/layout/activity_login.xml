@@ -16,11 +16,11 @@
         tools:layout_editor_absoluteX="-26dp"
         tools:layout_editor_absoluteY="210dp">
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/logoImg"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/logo" />!-->
 
         <TextView
             android:layout_width="wrap_content"
