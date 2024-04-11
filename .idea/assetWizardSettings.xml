@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -18,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/arrow_right/baseline_arrow_right_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/close/baseline_close_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,8 +34,8 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="arrow_right" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/users-svgrepo-com.svg" />
+                            <entry key="outputName" value="baseline_close_24" />
+                            <entry key="sourceFile" value="C:\Users\dimit\Desktop\MOOCUP\buttons\logo transparent.svg" />
                           </map>
                         </option>
                       </PersistentState>

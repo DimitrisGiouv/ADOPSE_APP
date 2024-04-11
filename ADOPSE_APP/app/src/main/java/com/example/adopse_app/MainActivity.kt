@@ -3,9 +3,7 @@ package com.example.adopse_app
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,34 +17,40 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        // Καθορισμός των περιοχών των system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        val loginPage = findViewById<ImageView>(R.id.User)
-
+        // Κουμπί που μεταφέρει στην οθόνη πλοήγησης
+        val navigationButton = findViewById<ImageButton>(R.id.navigation_button)
+            navigationButton.setOnClickListener {
+            val intent = Intent(this, NavigationActivity::class.java)
+            startActivity(intent)
+        }
+        
+        // Κουμπί που μεταφέρει στην οθόνη εισόδου
+        val loginPage = findViewById<ImageButton>(R.id.User)
         loginPage.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-
-        val gridModules = findViewById<Button>(R.id.gridViewButton)
-
+        // Κουμπί που μεταφέρει στην οθόνη μια λιστας
+        val gridModules = findViewById<ImageButton>(R.id.gridViewButton)
         gridModules.setOnClickListener {
             twoModuleList()
         }
-
-        val listModules = findViewById<Button>(R.id.listViewButton)
-
+        // Κουμπί που μεταφέρει στην οθόνη δυο λίστας
+        val listModules = findViewById<ImageButton>(R.id.listViewButton)
         listModules.setOnClickListener {
             singleModuleList()
+            listModules.isPressed = true
         }
 
-// Δημιουργία 10 περιπτώσεων του μοντέλου ModuleCard1
+        // Οταν ανοιγη το app τοτε θα φορτωθει η μια λιστα
         twoModuleList()
-    }
+        }
 
     fun singleModuleList() {
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
@@ -69,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
             val layoutParams = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT
+                ConstraintLayout.LayoutParams.PARENT_ID
             )
 
             layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
@@ -83,6 +87,7 @@ class MainActivity : AppCompatActivity() {
     fun twoModuleList(){
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
+
         repeat(10) { index ->
             val moduleCard1 = layoutInflater.inflate(R.layout.module, null) as ConstraintLayout
             moduleCard1.id = View.generateViewId() // Δημιουργία μοναδικού αναγνωριστικού για κάθε κάρτα ενότητας
@@ -107,20 +112,20 @@ class MainActivity : AppCompatActivity() {
                 ConstraintLayout.LayoutParams.WRAP_CONTENT
             )
 
+
             if (index % 2 == 0) {
                 layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-                layoutParams.topToBottom = if (index == 0) R.id.Recommend else parentLayout.getChildAt(index - 1).id
+                layoutParams.topToBottom = if (index == 0) R.id.RecommendBlock else parentLayout.getChildAt(index - 1).id
             } else {
                 layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-                layoutParams.topToBottom = if (index == 1) R.id.Recommend else parentLayout.getChildAt(index - 2).id
+                layoutParams.topToBottom = if (index == 1) R.id.RecommendBlock else parentLayout.getChildAt(index - 2).id
             }
 
-            layoutParams.setMargins(10, 60, 10, 10)
+            layoutParams.setMargins(10, 30, 10, 10)
             parentLayout.addView(moduleCard1, layoutParams)
+
         }
+
     }
-
-
-
 
 }
