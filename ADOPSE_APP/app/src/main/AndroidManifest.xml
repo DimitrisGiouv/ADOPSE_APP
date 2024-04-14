@@ -31,7 +31,8 @@
             android:exported="true"
             android:theme="@style/Theme.ADOPSE_APP"/>
 
-        <activity android:name=".SignupActivity"
+        <activity
+            android:name=".SignupActivity"
             android:exported="true"
             android:theme="@style/Theme.ADOPSE_APP"/>
 
@@ -44,6 +45,12 @@
             android:name=".ModuleActivity"
             android:exported="true"
             android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".UserProfileActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"
+            />
 
     </application>
 
