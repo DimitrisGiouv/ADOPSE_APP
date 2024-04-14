@@ -38,7 +38,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30px"
+            android:layout_marginBottom="45dp"
             android:gravity="center"
             android:text="Login"
             android:textColor="@color/black"
@@ -48,20 +48,24 @@
         <EditText
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/input_text"
             android:drawableLeft="@drawable/username_login"
             android:elevation="10dp"
-            android:hint="@string/login_username_hint" />
+            android:hint="@string/login_username_hint"
+            android:drawablePadding="10dp"
+            />
 
         <EditText
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/input_text"
             android:drawableLeft="@drawable/password_login"
             android:elevation="10dp"
-            android:hint="@string/login_password_hint" />
+            android:hint="@string/login_password_hint"
+            android:drawablePadding="10dp"
+            />
 
         <LinearLayout
             android:id="@+id/login_button"
@@ -69,7 +73,7 @@
             android:layout_height="50dp"
             android:background="@drawable/login_button"
             android:orientation="horizontal"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             android:elevation="10dp"
             android:gravity="center">
 
@@ -114,11 +118,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="15dp"
             android:text="Forgot password?"
             android:textColor="@color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:textSize="16dp"
+            android:textStyle="normal" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -137,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:text="OR"
                 android:textColor="@color/black"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_margin="5dp"/>
 
             <LinearLayout
