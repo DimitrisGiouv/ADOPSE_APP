@@ -19,5 +19,13 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        /* Redirection to Sign up if user does not have an account */
+        val btnSignupLoginPage = findViewById<LinearLayout>(R.id.redirect_register)
+
+        btnSignupLoginPage.setOnClickListener{
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
