@@ -13,10 +13,19 @@ class SignupActivity :AppCompatActivity() {
         enableEdgeToEdge();
         setContentView(R.layout.activity_signup)
 
+
+        /* Temporary Until Full Development */
         val btnSignup = findViewById<LinearLayout>(R.id.register_button)
 
         btnSignup.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        val btnLoginRegisterPage = findViewById<LinearLayout>(R.id.redirect_login)
+
+        btnLoginRegisterPage.setOnClickListener{
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }
