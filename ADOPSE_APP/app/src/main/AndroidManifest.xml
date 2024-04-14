@@ -40,6 +40,11 @@
             android:exported="true"
             android:theme="@style/Theme.ADOPSE_APP"/>
 
+        <activity
+            android:name=".ModuleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
     </application>
 
 </manifest>

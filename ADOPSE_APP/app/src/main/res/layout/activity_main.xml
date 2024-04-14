@@ -122,29 +122,27 @@
             android:textFontWeight="100"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/listViewButton"
+            app:layout_constraintEnd_toStartOf="@+id/gridViewButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <ImageButton
-            android:id="@+id/listViewButton"
+            android:id="@+id/gridViewButton"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/module_button_singlelist"
-            android:background="@drawable/button_background"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background_twolist"
             app:layout_constraintStart_toEndOf="@+id/Recommend"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/gridViewButton"/>
+            app:layout_constraintEnd_toStartOf="@+id/listViewButton"/>
 
         <ImageButton
-            android:id="@+id/gridViewButton"
+            android:id="@+id/listViewButton"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/module_button_twolist"
-            android:background="@drawable/button_background"
-            app:layout_constraintStart_toEndOf="@+id/listViewButton"
+            android:layout_height="0dp"
+            android:background="@drawable/button_background_singlelist"
+            app:layout_constraintStart_toEndOf="@+id/gridViewButton"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

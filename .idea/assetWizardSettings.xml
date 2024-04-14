@@ -33,9 +33,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="baseline_close_24" />
-                            <entry key="sourceFile" value="C:\Users\dimit\Desktop\MOOCUP\buttons\logo transparent.svg" />
+                            <entry key="outputName" value="module_button_twolist_active" />
+                            <entry key="sourceFile" value="C:\Users\dimit\Desktop\MOOCUP\buttons\Module_button_2_active.svg" />
                           </map>
                         </option>
                       </PersistentState>

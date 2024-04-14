@@ -54,10 +54,10 @@
         />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_modules"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Navigation"
+        android:text="MODULES"
         android:textSize="30sp"
         android:textStyle="bold"
         android:background="@android:color/transparent"
@@ -75,8 +75,9 @@
         android:background="@color/light_orange"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/btn_modules"
         />
+
     <Button
         android:id="@+id/button3"
         android:layout_width="match_parent"
@@ -90,7 +91,6 @@
         app:layout_constraintTop_toBottomOf="@+id/divider3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         />
 
     <View
