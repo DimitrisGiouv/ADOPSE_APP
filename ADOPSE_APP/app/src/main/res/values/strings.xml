@@ -3,4 +3,5 @@
     <string name="title_activity_main_page">MainPage</string>
     <string name="login_username_hint"><font size="15"><b>Email Address</b></font></string>
     <string name="login_password_hint"><font size="15"><b>Password</b></font></string>
+    <string name="sign_up_username_hint"><font size="15"><b>username</b></font></string>
 </resources>
