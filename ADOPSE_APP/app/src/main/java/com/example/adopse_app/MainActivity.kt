@@ -1,6 +1,5 @@
 package com.example.adopse_app
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,7 +12,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,37 +29,35 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, NavigationActivity::class.java)
             startActivity(intent)
         }
-
+        
         // Κουμπί που μεταφέρει στην οθόνη εισόδου
-        val loginPage = findViewById<ImageButton>(R.id.User)
-        loginPage.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+//        val loginPage = findViewById<ImageButton>(R.id.User)
+//        loginPage.setOnClickListener {
+//            val intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
+//        }
+
+        val profilePage =findViewById<ImageButton>(R.id.User)
+        profilePage.setOnClickListener {
+            val intent = Intent(this, UserProfileActivity::class.java)
             startActivity(intent)
         }
 
-        // Καλεί την συνάρτηση twoModuleList() για να δημιουργήσει την αρχική λίστα με δύο μονάδες
-        twoModuleList()
-
-        // Κωδικας για την αλλαγη της λιστας απο δυο σε μια και αντιστροφα
+        // Κουμπί που μεταφέρει στην οθόνη μια λιστας
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)
-        val listModules = findViewById<ImageButton>(R.id.listViewButton)
-
         gridModules.setOnClickListener {
-            gridModules.isEnabled = false// Απενεργοποίηση του κουμπιού
-            listModules.isEnabled = true// Ενεργοποίηση του κουμπιού
             twoModuleList()
-                gridModules.setBackgroundResource(R.drawable.module_button_twolist_active)
-                listModules.setBackgroundResource(R.drawable.module_button_singlelist)
+        }
+        // Κουμπί που μεταφέρει στην οθόνη δυο λίστας
+        val listModules = findViewById<ImageButton>(R.id.listViewButton)
+        listModules.setOnClickListener {
+            singleModuleList()
+            listModules.isPressed = true
         }
 
-        listModules.setOnClickListener {
-            gridModules.isEnabled = true// Ενεργοποίηση του κουμπιού
-            listModules.isEnabled = false// Απενεργοποίηση του κουμπιού
-            singleModuleList()
-                listModules.setBackgroundResource(R.drawable.module_button_singlelist_active)
-                gridModules.setBackgroundResource(R.drawable.module_button_twolist)
+        // Οταν ανοιγη το app τοτε θα φορτωθει η μια λιστα
+        twoModuleList()
         }
-    }
 
     fun singleModuleList() {
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
