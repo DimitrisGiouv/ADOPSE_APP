@@ -65,7 +65,7 @@
             android:background="@drawable/input_text"
             android:drawableLeft="@drawable/username_singup"
             android:elevation="10dp"
-            android:hint="@string/login_username_hint"
+            android:hint="@string/sign_up_username_hint"
             android:drawablePadding="10dp"
             />
 
