@@ -5,7 +5,8 @@
     android:id="@+id/ModuleCard1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/banner_white">
+    android:background="@drawable/banner_white_nostroke"
+    android:elevation="5dp">
     >
 
     <TextView
