@@ -51,6 +51,8 @@
             android:exported="true"
             android:theme="@style/Theme.ADOPSE_APP"
             />
+        <activity android:name=".SearchActivity" />
+
 
     </application>
 
