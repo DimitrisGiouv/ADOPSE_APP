@@ -257,6 +257,7 @@
             android:elevation="5dp"
             android:layout_marginLeft="@dimen/profile_modulecard_margin_start"
             android:layout_marginTop="@dimen/profile_modulecard_margin_top"
+            android:layout_marginRight="@dimen/profile_modulecard_margin_right"
             app:layout_constraintStart_toEndOf="@id/ModuleCard1"
             app:layout_constraintTop_toBottomOf="@id/your_courses_pill"
             app:layout_constraintHorizontal_bias="0.5"
