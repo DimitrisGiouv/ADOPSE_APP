@@ -3,9 +3,17 @@ package com.example.adopse_app
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONObject
+
 class SignupActivity :AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,13 +21,32 @@ class SignupActivity :AppCompatActivity() {
         enableEdgeToEdge();
         setContentView(R.layout.activity_signup)
 
-
+        val email = findViewById<EditText>(R.id.email)
+        val username = findViewById<EditText>(R.id.username)
+        val password = findViewById<EditText>(R.id.password)
         /* Temporary Until Full Development */
         val btnSignup = findViewById<LinearLayout>(R.id.register_button)
 
         btnSignup.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            val Items = JSONObject();
+            Items.put("username", username.text)
+            Items.put("password",password.text)
+            Items.put("email",email.text)
+            val queue = Volley.newRequestQueue(this)
+            val url = "http://10.0.2.2:5051/Authentication/register"
+
+            // Request a string response from the provided URL.
+            val request = JsonObjectRequest (Request.Method.POST,url,Items,
+                Response.Listener { response ->
+                    Toast.makeText(this,"Welocome back "+ Items.get("username") + "!", Toast.LENGTH_SHORT).show()
+
+                    //Toast.makeText(this,response.toString(),Toast.LENGTH_SHORT).show()
+                }
+                , Response.ErrorListener{ error ->
+                    Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
+                }
+            )
+            queue.add(request)
         }
 
         val btnLoginRegisterPage = findViewById<LinearLayout>(R.id.redirect_login)

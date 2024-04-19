@@ -5,11 +5,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +31,9 @@ class MainActivity : AppCompatActivity() {
         }
         // Κουμπί που μεταφέρει στην οθόνη πλοήγησης
         val navigationButton = findViewById<ImageButton>(R.id.navigation_button)
-            navigationButton.setOnClickListener {
-            val intent = Intent(this, NavigationActivity::class.java)
-            startActivity(intent)
+           navigationButton.setOnClickListener {
+           val intent = Intent(this, NavigationActivity::class.java)
+           startActivity(intent)
         }
         
         // Κουμπί που μεταφέρει στην οθόνη εισόδου
@@ -72,11 +78,45 @@ class MainActivity : AppCompatActivity() {
             val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
 
-            moduleTextView.text = "Μονάδα ${index + 1}"
-            disModuleTextView.text = "Περιγραφή της μονάδας ${index + 1}"
-            difficultyTextView.text = "Εύκολο"
-            popularityTextView.text = "50"
-            ratingTextView.text = "4"
+            //    call api for values
+            //val mauhma = api.mathma
+
+
+            val queue = Volley.newRequestQueue(this)
+
+            if (index %2 ==0)
+            {
+                val url = "http://10.0.2.2:5051/module/15139"
+                val request = JsonObjectRequest (Request.Method.GET,url,null,
+                    Response.Listener { response ->
+                        moduleTextView.text = response.get("name").toString()
+                        disModuleTextView.text = response.get("description").toString()
+                        difficultyTextView.text = response.get("difficultyName").toString()
+                        popularityTextView.text = response.get("price").toString()
+                        ratingTextView.text = response.get("rating").toString()
+                    }
+                    , Response.ErrorListener{ error ->
+                        Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
+                    }
+                )
+                queue.add(request)
+            }
+            else {
+                val url = "http://10.0.2.2:5051/module/15140"
+                val request = JsonObjectRequest (Request.Method.GET,url,null,
+                    Response.Listener { response ->
+                        moduleTextView.text = response.get("name").toString()
+                        disModuleTextView.text = response.get("description").toString()
+                        difficultyTextView.text = response.get("difficultyName").toString()
+                        popularityTextView.text = response.get("price").toString()
+                        ratingTextView.text = response.get("rating").toString()
+                    }
+                    , Response.ErrorListener{ error ->
+                        Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
+                    }
+                )
+                queue.add(request)
+            }
 
             val layoutParams = ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.MATCH_PARENT,
@@ -106,12 +146,47 @@ class MainActivity : AppCompatActivity() {
             val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
 
+            //val module = JsonOb
+
+
+            val queue = Volley.newRequestQueue(this)
+
+            if (index %2 ==0)
+            {
+                val url = "http://10.0.2.2:5051/module/15139"
+                val request = JsonObjectRequest (Request.Method.GET,url,null,
+                    Response.Listener { response ->
+                        moduleTextView.text = response.get("name").toString()
+                        disModuleTextView.text = response.get("description").toString()
+                        difficultyTextView.text = response.get("difficultyName").toString()
+                        popularityTextView.text = response.get("price").toString()
+                        ratingTextView.text = response.get("rating").toString()
+                    }
+                    , Response.ErrorListener{ error ->
+                        Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
+                    }
+                )
+                queue.add(request)
+            }
+            else {
+                val url = "http://10.0.2.2:5051/module/15140"
+                val request = JsonObjectRequest (Request.Method.GET,url,null,
+                    Response.Listener { response ->
+                        moduleTextView.text = response.get("name").toString()
+                        disModuleTextView.text = response.get("description").toString()
+                        difficultyTextView.text = response.get("difficultyName").toString()
+                        popularityTextView.text = response.get("price").toString()
+                        ratingTextView.text = response.get("rating").toString()
+                    }
+                    , Response.ErrorListener{ error ->
+                        Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
+                    }
+                )
+                queue.add(request)
+            }
+            // Request a string response from the provided URL.
+
             // Ορισμός κειμένου για τα TextViews
-            moduleTextView.text = "Μονάδα ${index + 1}"
-            disModuleTextView.text = "Περιγραφή της μονάδας ${index + 1}"
-            difficultyTextView.text = "Εύκολο"
-            popularityTextView.text = "50"
-            ratingTextView.text = "4"
 
             // Προσθήκη περιορισμών για τη θέση
             val layoutParams = ConstraintLayout.LayoutParams(
