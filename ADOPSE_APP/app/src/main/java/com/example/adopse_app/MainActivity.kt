@@ -31,7 +31,13 @@ class MainActivity : AppCompatActivity() {
 
         //Search bar να γινει μια παραπανω υλοποιηση
         val searchBar = findViewById<EditText>(R.id.SearchBar)
-        performSearch(searchBar.text.toString())
+
+        val logo = findViewById<ImageButton>(R.id.logo_button)
+        logo.setOnClickListener{
+            performSearch(searchBar.text.toString())
+        }
+
+
 
         // Καθορισμός των περιοχών των system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -224,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
-        val url = "http://10.0.2.2:5051/module?id=$searchBar"
+        val url = "http://10.0.2.2:5051/module/$searchBar"
         val queue = Volley.newRequestQueue(this)
 
         val request = JsonObjectRequest(Request.Method.GET, url, null,
