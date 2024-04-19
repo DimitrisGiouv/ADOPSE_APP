@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -19,6 +20,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
@@ -32,9 +34,9 @@ class MainActivity : AppCompatActivity() {
         //Search bar να γινει μια παραπανω υλοποιηση
         val searchBar = findViewById<EditText>(R.id.SearchBar)
 
-        val logo = findViewById<ImageButton>(R.id.logo_button)
+        val logo = findViewById<Button>(R.id.searchButton)
         logo.setOnClickListener{
-            performSearch(searchBar.text.toString())
+            performSearchByCategory(searchBar.text.toString())
         }
 
 
@@ -263,4 +265,58 @@ class MainActivity : AppCompatActivity() {
 
         queue.add(request)
     }
+
+    fun performSearchByCategory(searchTerm: String) {
+        val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
+        parentLayout.removeAllViews()
+
+        val url = "http://10.0.2.2:5051/module/"  // Ολόκληρο URL για το αίτημα
+        val queue = Volley.newRequestQueue(this)
+
+        val request = JsonArrayRequest(Request.Method.GET, url, null,
+            { response ->
+                for (i in 0 until response.length()) {
+                    val moduleObject = response.getJSONObject(i)
+                    val moduleName = moduleObject.getString("name")
+                    val description = moduleObject.getString("description")
+                    val created = moduleObject.getString("created")
+                    val subCategory = moduleObject.getInt("subCategoryId").toString()
+
+                    // Έλεγχος αν το searchTerm υπάρχει
+                    if (subCategory == searchTerm) {
+                        val moduleCard1 = layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
+                        moduleCard1.id = View.generateViewId()
+
+                        val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
+                        val difficultyTextView = moduleCard1.findViewById<TextView>(R.id.difficulty_module1)
+                        val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
+                        val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
+
+                        moduleTextView.text = moduleName
+                        difficultyTextView.text = moduleObject.getString("difficultyName")
+                        popularityTextView.text = moduleObject.getInt("price").toString()
+                        ratingTextView.text = moduleObject.getInt("rating").toString()
+
+                        parentLayout.addView(moduleCard1)
+                    }
+                }
+
+                if (parentLayout.childCount == 0) {
+                    Toast.makeText(this, "No modules found with the given subCategory", Toast.LENGTH_SHORT).show()
+                }
+            },
+            { error ->
+                Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        )
+
+        queue.add(request)
+    }
+
+
+
+
+
+
+
 }
