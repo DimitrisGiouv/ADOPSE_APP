@@ -47,25 +47,25 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        // Κουμπί που μεταφέρει στην οθόνη πλοήγησης
-        val navigationButton = findViewById<ImageButton>(R.id.navigation_button)
-           navigationButton.setOnClickListener {
-           val intent = Intent(this, NavigationActivity::class.java)
-           startActivity(intent)
-        }
+//        // Κουμπί που μεταφέρει στην οθόνη πλοήγησης
+//        val navigationButton = findViewById<ImageButton>(R.id.navigation_button)
+//           navigationButton.setOnClickListener {
+//           val intent = Intent(this, NavigationActivity::class.java)
+//           startActivity(intent)
+//        }
         
         // Κουμπί που μεταφέρει στην οθόνη εισόδου
-//        val loginPage = findViewById<ImageButton>(R.id.User)
-//        loginPage.setOnClickListener {
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
-//        }
-
-        val profilePage =findViewById<ImageButton>(R.id.User)
-        profilePage.setOnClickListener {
-            val intent = Intent(this, UserProfileActivity::class.java)
+        val loginPage = findViewById<ImageButton>(R.id.User)
+        loginPage.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+
+//        val profilePage =findViewById<ImageButton>(R.id.User)
+//        profilePage.setOnClickListener {
+//            val intent = Intent(this, UserProfileActivity::class.java)
+//            startActivity(intent)
+//        }
 
         // Κουμπί που μεταφέρει στην οθόνη μια λιστας
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)

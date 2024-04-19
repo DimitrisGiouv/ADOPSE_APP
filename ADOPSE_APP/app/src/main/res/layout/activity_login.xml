@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login"
     android:background="@android:color/holo_orange_dark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,17 +16,11 @@
         tools:layout_editor_absoluteX="-26dp"
         tools:layout_editor_absoluteY="210dp" >
 
-        <ImageButton
-            android:id="@+id/logo_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/logo_white"
-            android:backgroundTint="@color/light_orange"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="parent"
-            />
+        <!--<ImageView
+            android:id="@+id/logoImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/logo" />!-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,7 +38,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="45dp"
+            android:layout_marginBottom="30px"
             android:gravity="center"
             android:text="Login"
             android:textColor="@color/black"
@@ -53,28 +46,24 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/username"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/input_text"
             android:drawableLeft="@drawable/username_login"
             android:elevation="10dp"
-            android:hint="@string/login_username_hint"
-            android:drawablePadding="10dp"
-            />
+            android:hint="@string/login_username_hint" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/pwd"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/input_text"
             android:drawableLeft="@drawable/password_login"
             android:elevation="10dp"
-            android:hint="@string/login_password_hint"
-            android:drawablePadding="10dp"
-            />
+            android:hint="@string/login_password_hint" />
 
         <LinearLayout
             android:id="@+id/login_button"
@@ -82,7 +71,7 @@
             android:layout_height="50dp"
             android:background="@drawable/login_button"
             android:orientation="horizontal"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:elevation="10dp"
             android:gravity="center">
 
@@ -127,19 +116,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="25dp"
             android:text="Forgot password?"
             android:textColor="@color/black"
-            android:textSize="16dp"
-            android:textStyle="normal" />
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="25dp">
 
             <LinearLayout
                 android:layout_width="100dp"
@@ -151,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:text="OR"
                 android:textColor="@color/black"
-                android:textStyle="normal"
+                android:textStyle="bold"
                 android:layout_margin="5dp"/>
 
             <LinearLayout
@@ -162,7 +150,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/redirect_register"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/signup_button"
