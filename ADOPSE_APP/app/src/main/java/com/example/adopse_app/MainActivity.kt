@@ -2,7 +2,13 @@ package com.example.adopse_app
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -22,6 +28,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        //Search bar να γινει μια παραπανω υλοποιηση
+        val searchBar = findViewById<EditText>(R.id.SearchBar)
+        performSearch(searchBar.text.toString())
 
         // Καθορισμός των περιοχών των system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -58,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         val listModules = findViewById<ImageButton>(R.id.listViewButton)
         listModules.setOnClickListener {
             singleModuleList()
-            listModules.isPressed = true
+            //listModules.isPressed = true
         }
 
         // Οταν ανοιγη το app τοτε θα φορτωθει η μια λιστα
@@ -78,8 +88,6 @@ class MainActivity : AppCompatActivity() {
             val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
 
-            //    call api for values
-            //val mauhma = api.mathma
 
 
             val queue = Volley.newRequestQueue(this)
@@ -88,14 +96,14 @@ class MainActivity : AppCompatActivity() {
             {
                 val url = "http://10.0.2.2:5051/module/15139"
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
-                    Response.Listener { response ->
+                   { response ->
                         moduleTextView.text = response.get("name").toString()
                         disModuleTextView.text = response.get("description").toString()
                         difficultyTextView.text = response.get("difficultyName").toString()
                         popularityTextView.text = response.get("price").toString()
                         ratingTextView.text = response.get("rating").toString()
                     }
-                    , Response.ErrorListener{ error ->
+                    ,{ error ->
                         Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
                     }
                 )
@@ -104,14 +112,15 @@ class MainActivity : AppCompatActivity() {
             else {
                 val url = "http://10.0.2.2:5051/module/15140"
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
-                    Response.Listener { response ->
+                    { response ->
                         moduleTextView.text = response.get("name").toString()
                         disModuleTextView.text = response.get("description").toString()
                         difficultyTextView.text = response.get("difficultyName").toString()
                         popularityTextView.text = response.get("price").toString()
                         ratingTextView.text = response.get("rating").toString()
-                    }
-                    , Response.ErrorListener{ error ->
+                    },
+
+                    { error ->
                         Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
                     }
                 )
@@ -155,14 +164,14 @@ class MainActivity : AppCompatActivity() {
             {
                 val url = "http://10.0.2.2:5051/module/15139"
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
-                    Response.Listener { response ->
+                    { response ->
                         moduleTextView.text = response.get("name").toString()
                         disModuleTextView.text = response.get("description").toString()
                         difficultyTextView.text = response.get("difficultyName").toString()
                         popularityTextView.text = response.get("price").toString()
                         ratingTextView.text = response.get("rating").toString()
                     }
-                    , Response.ErrorListener{ error ->
+                    ,{ error ->
                         Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
                     }
                 )
@@ -171,14 +180,14 @@ class MainActivity : AppCompatActivity() {
             else {
                 val url = "http://10.0.2.2:5051/module/15140"
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
-                    Response.Listener { response ->
+                    { response ->
                         moduleTextView.text = response.get("name").toString()
                         disModuleTextView.text = response.get("description").toString()
                         difficultyTextView.text = response.get("difficultyName").toString()
                         popularityTextView.text = response.get("price").toString()
                         ratingTextView.text = response.get("rating").toString()
                     }
-                    , Response.ErrorListener{ error ->
+                    ,{ error ->
                         Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
                     }
                 )
@@ -210,4 +219,42 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun performSearch(searchBar: String) {
+
+        val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
+        parentLayout.removeAllViews()
+
+        val url = "http://10.0.2.2:5051/module?id=$searchBar"
+        val queue = Volley.newRequestQueue(this)
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+            { response ->
+                val moduleId = response.getInt("id")
+
+                if (moduleId == searchBar.toInt()) {
+                    val moduleCard1 = layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
+                    moduleCard1.id = View.generateViewId()
+
+                    val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
+                    val difficultyTextView = moduleCard1.findViewById<TextView>(R.id.difficulty_module1)
+                    val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
+                    val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
+
+                    moduleTextView.text = response.getString("name")
+                    difficultyTextView.text = response.getString("difficultyName")
+                    popularityTextView.text = response.getInt("price").toString()
+                    ratingTextView.text = response.getInt("rating").toString()
+
+                    parentLayout.addView(moduleCard1)
+                } else {
+                    Toast.makeText(this, "No modules found with ID $searchBar", Toast.LENGTH_SHORT).show()
+                }
+            },
+            { error ->
+                Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        )
+
+        queue.add(request)
+    }
 }
