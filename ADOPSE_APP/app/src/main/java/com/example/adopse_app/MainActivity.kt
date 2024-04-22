@@ -270,21 +270,24 @@ class MainActivity : AppCompatActivity() {
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
-        val url = "http://10.0.2.2:5051/module/"  // Ολόκληρο URL για το αίτημα
+        val url = "http://10.0.2.2:5051/module/stack/100/1/"  // Ολόκληρο URL για το αίτημα
         val queue = Volley.newRequestQueue(this)
 
-        val request = JsonArrayRequest(Request.Method.GET, url, null,
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
             { response ->
-                for (i in 0 until response.length()) {
-                    val moduleObject = response.getJSONObject(i)
-                    val moduleName = moduleObject.getString("name")
-                    val description = moduleObject.getString("description")
-                    val created = moduleObject.getString("created")
+                var foundModules = false
+                val modulesArray = response.getJSONArray("modules") // Ανάκτηση του πίνακα modules από την απόκριση JSON
+                for (i in 0 until modulesArray.length()) {
+                    val moduleObject = modulesArray.getJSONObject(i) // Ανάκτηση του κάθε module από τον πίνακα modules
                     val subCategory = moduleObject.getInt("subCategoryId").toString()
 
-                    // Έλεγχος αν το searchTerm υπάρχει
+                    // Έλεγχος αν ο όρος αναζήτησης ταιριάζει με το subCategoryId
                     if (subCategory == searchTerm) {
-                        val moduleCard1 = layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
+                        val moduleName = moduleObject.getString("name")
+                        val description = moduleObject.getString("description")
+                        val created = moduleObject.getString("created")
+
+                        val moduleCard1 = layoutInflater.inflate(R.layout.module, null) as ConstraintLayout
                         moduleCard1.id = View.generateViewId()
 
                         val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
@@ -298,11 +301,12 @@ class MainActivity : AppCompatActivity() {
                         ratingTextView.text = moduleObject.getInt("rating").toString()
 
                         parentLayout.addView(moduleCard1)
+                        foundModules = true
                     }
                 }
-
-                if (parentLayout.childCount == 0) {
+                if (!foundModules) {
                     Toast.makeText(this, "No modules found with the given subCategory", Toast.LENGTH_SHORT).show()
+                    twoModuleList()
                 }
             },
             { error ->
