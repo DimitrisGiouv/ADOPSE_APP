@@ -47,12 +47,12 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-//        // Κουμπί που μεταφέρει στην οθόνη πλοήγησης
-//        val navigationButton = findViewById<ImageButton>(R.id.navigation_button)
-//           navigationButton.setOnClickListener {
-//           val intent = Intent(this, NavigationActivity::class.java)
-//           startActivity(intent)
-//        }
+        // Κουμπί που μεταφέρει στην οθόνη πλοήγησης
+        val navigationButton = findViewById<ImageButton>(R.id.navigation_button)
+            navigationButton.setOnClickListener {
+           val intent = Intent(this, NavigationActivity::class.java)
+           startActivity(intent)
+        }
 
         // Κουμπί που μεταφέρει στην οθόνη εισόδου
         val loginPage = findViewById<ImageButton>(R.id.User)
@@ -61,24 +61,31 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        val profilePage =findViewById<ImageButton>(R.id.User)
-//        profilePage.setOnClickListener {
-//            val intent = Intent(this, UserProfileActivity::class.java)
-//            startActivity(intent)
-//        }
+/*        val profilePage =findViewById<ImageButton>(R.id.User)
+        profilePage.setOnClickListener {
+            val intent = Intent(this, UserProfileActivity::class.java)
+            startActivity(intent)
+         }*/
 
-        // Κουμπί που μεταφέρει στην οθόνη μια λιστας
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)
-        gridModules.setOnClickListener {
-            twoModuleList()
-        }
-        // Κουμπί που μεταφέρει στην οθόνη δυο λίστας
         val listModules = findViewById<ImageButton>(R.id.listViewButton)
-        listModules.setOnClickListener {
-            singleModuleList()
-            //listModules.isPressed = true
+        // Κωδικας για την αλλαγη της λιστας απο δυο σε μια και αντιστροφα
+
+        gridModules.setOnClickListener {
+            gridModules.isEnabled = false// Απενεργοποίηση του κουμπιού
+            listModules.isEnabled = true// Ενεργοποίηση του κουμπιού
+            twoModuleList()
+            gridModules.setBackgroundResource(R.drawable.module_button_twolist_active)
+            listModules.setBackgroundResource(R.drawable.module_button_singlelist)
         }
 
+        listModules.setOnClickListener {
+            gridModules.isEnabled = true// Ενεργοποίηση του κουμπιού
+            listModules.isEnabled = false// Απενεργοποίηση του κουμπιού
+            singleModuleList()
+            listModules.setBackgroundResource(R.drawable.module_button_singlelist_active)
+            gridModules.setBackgroundResource(R.drawable.module_button_twolist)
+        }
         // Οταν ανοιγη το app τοτε θα φορτωθει η μια λιστα
         twoModuleList()
         }
@@ -91,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             moduleCard1.id = View.generateViewId()
 
             val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
-            val disModuleTextView = moduleCard1.findViewById<TextView>(R.id.Dismodule1)
+            //val disModuleTextView = moduleCard1.findViewById<TextView>(R.id.Dismodule1)
             val difficultyTextView = moduleCard1.findViewById<TextView>(R.id.difficulty_module1)
             val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
@@ -106,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
                    { response ->
                         moduleTextView.text = response.get("name").toString()
-                        disModuleTextView.text = response.get("description").toString()
+                        //disModuleTextView.text = response.get("description").toString()
                         difficultyTextView.text = response.get("difficultyName").toString()
                         popularityTextView.text = response.get("price").toString()
                         ratingTextView.text = response.get("rating").toString()
@@ -118,11 +125,11 @@ class MainActivity : AppCompatActivity() {
                 queue.add(request)
             }
             else {
-                val url = "http://10.0.2.2:5051/module/"+(15140+index)
+                val url = "http://10.0.2.2:5051/module/"+(15139+index)
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
                     { response ->
                         moduleTextView.text = response.get("name").toString()
-                        disModuleTextView.text = response.get("description").toString()
+                        //disModuleTextView.text = response.get("description").toString()
                         difficultyTextView.text = response.get("difficultyName").toString()
                         popularityTextView.text = response.get("price").toString()
                         ratingTextView.text = response.get("rating").toString()
@@ -158,7 +165,7 @@ class MainActivity : AppCompatActivity() {
 
             // Εύρεση TextViews μέσα στο ModuleCard1
             val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
-            val disModuleTextView = moduleCard1.findViewById<TextView>(R.id.Dismodule1)
+            //val disModuleTextView = moduleCard1.findViewById<TextView>(R.id.Dismodule1)
             val difficultyTextView = moduleCard1.findViewById<TextView>(R.id.difficulty_module1)
             val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
@@ -174,7 +181,7 @@ class MainActivity : AppCompatActivity() {
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
                     { response ->
                         moduleTextView.text = response.get("name").toString()
-                        disModuleTextView.text = response.get("description").toString()
+                        //disModuleTextView.text = response.get("description").toString()
                         difficultyTextView.text = response.get("difficultyName").toString()
                         popularityTextView.text = response.get("price").toString()
                         ratingTextView.text = response.get("rating").toString()
@@ -186,11 +193,11 @@ class MainActivity : AppCompatActivity() {
                 queue.add(request)
             }
             else {
-                val url = "http://10.0.2.2:5051/module/"+(15140+index)
+                val url = "http://10.0.2.2:5051/module/"+(15139+index)
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
                     { response ->
                         moduleTextView.text = response.get("name").toString()
-                        disModuleTextView.text = response.get("description").toString()
+                        //disModuleTextView.text = response.get("description").toString()
                         difficultyTextView.text = response.get("difficultyName").toString()
                         popularityTextView.text = response.get("price").toString()
                         ratingTextView.text = response.get("rating").toString()
@@ -248,7 +255,7 @@ class MainActivity : AppCompatActivity() {
 
                     // Αντιστοίχιση του subCategoryId με το όνομα της κατηγορίας
                     when (subCategory) {
-                        1 -> subCategoryName = "Μηχανική"
+                        1 -> subCategoryName = "ΜηχανικήμηχανικηΜΗΧΑΝΙΚΗ"
                         2 -> subCategoryName = "Διοίκηση επιχειρήσεων - Οικονομικά"
                         3 -> subCategoryName = "Πληροφορική"
                         4 -> subCategoryName = "Περιβάλλον και αειφορία"
@@ -266,7 +273,7 @@ class MainActivity : AppCompatActivity() {
                     // Έλεγχος αν ο όρος αναζήτησης ταιριάζει με το όνομα της υποκατηγορίας
                     if (subCategoryName.contains(searchTerm, ignoreCase = true)) {
                         val moduleName = moduleObject.getString("name")
-                        val description = moduleObject.getString("description")
+                        //val description = moduleObject.getString("description")
                         val created = moduleObject.getString("created")
 
                         val moduleCard = layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
