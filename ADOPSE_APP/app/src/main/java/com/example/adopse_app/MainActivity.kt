@@ -55,9 +55,9 @@ class MainActivity : AppCompatActivity() {
         }
         // Κουμπί που μεταφέρει στην οθόνη πλοήγησης
         val navigationButton = findViewById<ImageButton>(R.id.navigation_button)
-           navigationButton.setOnClickListener {
-           val intent = Intent(this, NavigationActivity::class.java)
-           startActivity(intent)
+        navigationButton.setOnClickListener {
+            val intent = Intent(this, NavigationActivity::class.java)
+            startActivity(intent)
         }
 
         // Κουμπί που μεταφέρει στην οθόνη εισόδου
@@ -67,11 +67,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-/*        val profilePage =findViewById<ImageButton>(R.id.User)
-        profilePage.setOnClickListener {
-            val intent = Intent(this, UserProfileActivity::class.java)
-            startActivity(intent)
-         }*/
+        /*        val profilePage =findViewById<ImageButton>(R.id.User)
+                profilePage.setOnClickListener {
+                    val intent = Intent(this, UserProfileActivity::class.java)
+                    startActivity(intent)
+                 }*/
 
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)
         val listModules = findViewById<ImageButton>(R.id.listViewButton)
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         }
         // Οταν ανοιγη το app τοτε θα φορτωθει η μια λιστα
         twoModuleList()
-        }
+    }
 
     fun singleModuleList() {
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
             {
                 val url = "http://10.0.2.2:5051/module/"+(15139+index)
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
-                   { response ->
+                    { response ->
                         moduleTextView.text = response.get("name").toString()
                         //disModuleTextView.text = response.get("description").toString()
                         difficultyTextView.text = response.get("difficultyName").toString()
