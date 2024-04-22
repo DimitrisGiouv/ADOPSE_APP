@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 //           val intent = Intent(this, NavigationActivity::class.java)
 //           startActivity(intent)
 //        }
-        
+
         // Κουμπί που μεταφέρει στην οθόνη εισόδου
         val loginPage = findViewById<ImageButton>(R.id.User)
         loginPage.setOnClickListener {
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 
             if (index %2 ==0)
             {
-                val url = "http://10.0.2.2:5051/module/15139"
+                val url = "http://10.0.2.2:5051/module/"+(15139+index)
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
                    { response ->
                         moduleTextView.text = response.get("name").toString()
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                 queue.add(request)
             }
             else {
-                val url = "http://10.0.2.2:5051/module/15140"
+                val url = "http://10.0.2.2:5051/module/"+(15140+index)
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
                     { response ->
                         moduleTextView.text = response.get("name").toString()
@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity() {
 
             if (index %2 ==0)
             {
-                val url = "http://10.0.2.2:5051/module/15139"
+                val url = "http://10.0.2.2:5051/module/"+(15139+index)
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
                     { response ->
                         moduleTextView.text = response.get("name").toString()
@@ -186,7 +186,7 @@ class MainActivity : AppCompatActivity() {
                 queue.add(request)
             }
             else {
-                val url = "http://10.0.2.2:5051/module/15140"
+                val url = "http://10.0.2.2:5051/module/"+(15140+index)
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
                     { response ->
                         moduleTextView.text = response.get("name").toString()
@@ -227,64 +227,28 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun performSearch(searchBar: String) {
-
-        val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
-        parentLayout.removeAllViews()
-
-        val url = "http://10.0.2.2:5051/module/$searchBar"
-        val queue = Volley.newRequestQueue(this)
-
-        val request = JsonObjectRequest(Request.Method.GET, url, null,
-            { response ->
-                val moduleId = response.getInt("id")
-
-                if (moduleId == searchBar.toInt()) {
-                    val moduleCard1 = layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
-                    moduleCard1.id = View.generateViewId()
-
-                    val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
-                    val difficultyTextView = moduleCard1.findViewById<TextView>(R.id.difficulty_module1)
-                    val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
-                    val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
-
-                    moduleTextView.text = response.getString("name")
-                    difficultyTextView.text = response.getString("difficultyName")
-                    popularityTextView.text = response.getInt("price").toString()
-                    ratingTextView.text = response.getInt("rating").toString()
-
-                    parentLayout.addView(moduleCard1)
-                } else {
-                    Toast.makeText(this, "No modules found with ID $searchBar", Toast.LENGTH_SHORT).show()
-                }
-            },
-            { error ->
-                Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
-            }
-        )
-
-        queue.add(request)
-    }
-
     fun performSearchByCategory(searchTerm: String) {
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
-        val url = "http://10.0.2.2:5051/module/"  // Ολόκληρο URL για το αίτημα
+        val url = "http://10.0.2.2:5051/module/stack/100/1/"  // Ολόκληρο URL για το αίτημα
         val queue = Volley.newRequestQueue(this)
 
-        val request = JsonArrayRequest(Request.Method.GET, url, null,
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
             { response ->
-                for (i in 0 until response.length()) {
-                    val moduleObject = response.getJSONObject(i)
-                    val moduleName = moduleObject.getString("name")
-                    val description = moduleObject.getString("description")
-                    val created = moduleObject.getString("created")
+                var foundModules = false
+                val modulesArray = response.getJSONArray("modules") // Ανάκτηση του πίνακα modules από την απόκριση JSON
+                for (i in 0 until modulesArray.length()) {
+                    val moduleObject = modulesArray.getJSONObject(i) // Ανάκτηση του κάθε module από τον πίνακα modules
                     val subCategory = moduleObject.getInt("subCategoryId").toString()
 
-                    // Έλεγχος αν το searchTerm υπάρχει
+                    // Έλεγχος αν ο όρος αναζήτησης ταιριάζει με το subCategoryId
                     if (subCategory == searchTerm) {
-                        val moduleCard1 = layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
+                        val moduleName = moduleObject.getString("name")
+                        val description = moduleObject.getString("description")
+                        val created = moduleObject.getString("created")
+
+                        val moduleCard1 = layoutInflater.inflate(R.layout.module, null) as ConstraintLayout
                         moduleCard1.id = View.generateViewId()
 
                         val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
@@ -298,11 +262,12 @@ class MainActivity : AppCompatActivity() {
                         ratingTextView.text = moduleObject.getInt("rating").toString()
 
                         parentLayout.addView(moduleCard1)
+                        foundModules = true
                     }
                 }
-
-                if (parentLayout.childCount == 0) {
+                if (!foundModules) {
                     Toast.makeText(this, "No modules found with the given subCategory", Toast.LENGTH_SHORT).show()
+                    twoModuleList()
                 }
             },
             { error ->
@@ -312,11 +277,6 @@ class MainActivity : AppCompatActivity() {
 
         queue.add(request)
     }
-
-
-
-
-
 
 
 }
