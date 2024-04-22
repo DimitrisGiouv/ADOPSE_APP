@@ -93,12 +93,11 @@
 
             <EditText
                 android:id="@+id/SearchBar"
-                android:layout_width="280dp"
-                android:layout_height="51dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="23dp"
+                android:layout_width="330dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="33dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="19dp"
                 android:layout_weight="1"
                 android:background="@drawable/banner_white"
                 android:drawableStart="@android:drawable/ic_search_category_default"
@@ -110,25 +109,9 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/searchButton"
-                app:layout_constraintTop_toBottomOf="@+id/searchtext" />
-
-            <Button
-                android:id="@+id/searchButton"
-                android:layout_width="82dp"
-                android:layout_height="49dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="9dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="23dp"
-                android:background="@null"
-                android:text="Search"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/SearchBar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchtext" />
+                app:layout_constraintTop_toBottomOf="@+id/searchtext"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
