@@ -24,6 +24,8 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
+var already_loged = false;
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,12 +55,21 @@ class MainActivity : AppCompatActivity() {
 //           val intent = Intent(this, NavigationActivity::class.java)
 //           startActivity(intent)
 //        }
-        
+
+
         // Κουμπί που μεταφέρει στην οθόνη εισόδου
-        val loginPage = findViewById<ImageButton>(R.id.User)
-        loginPage.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        val UserManagement = findViewById<ImageButton>(R.id.User)
+        UserManagement.setOnClickListener {
+            if(already_loged)
+            {
+                val intent = Intent(this, UserProfileActivity::class.java)
+                  startActivity(intent)
+            }
+            else
+            {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
 
 //        val profilePage =findViewById<ImageButton>(R.id.User)

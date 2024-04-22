@@ -33,10 +33,12 @@ class LoginActivity : AppCompatActivity() {
             Items.put("email","x@x.x")
 
             val queue = Volley.newRequestQueue(this)
-            val url = "http://10.0.2.2:5051/Authentication/login"
+            val url = "http://10.0.2.2:5051/authentication/login"
 
             val request = JsonObjectRequest(Request.Method.POST, url, Items,
                 { response ->
+                    already_loged = true;
+                    Toast.makeText(this,"welcome back", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 },
