@@ -43,7 +43,7 @@ class SignupActivity :AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if(hasSpecialCharAndUpper(passwordText)){
+            if(!hasSpecialCharAndUpper(passwordText)){
                 Toast.makeText(this, "Password has to contain special characters and uppers", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -60,8 +60,8 @@ class SignupActivity :AppCompatActivity() {
             val request = JsonObjectRequest (Request.Method.POST,url,Items,
                 Response.Listener { response ->
                     Toast.makeText(this,"Welocome back "+ Items.get("username") + "!", Toast.LENGTH_SHORT).show()
-
-                    //Toast.makeText(this,response.toString(),Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                 }
                 , Response.ErrorListener{ error ->
                     Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
@@ -81,7 +81,12 @@ class SignupActivity :AppCompatActivity() {
     }
 
     fun hasSpecialCharAndUpper(password: String): Boolean{
-        val specialCharAndUpperRegex = Regex("[^A-Z!@#$%^&*(){}:;><.,?]")
-        return specialCharAndUpperRegex.containsMatchIn(password)
+        val specialCharRegex = Regex("[!@#$%^&*(){}:;><.,?]")
+        val upperRegex = Regex("[A-Z]")
+
+        val containsSpecialChar = specialCharRegex.containsMatchIn(password)
+        val containsUpper = upperRegex.containsMatchIn(password)
+
+        return containsSpecialChar && containsUpper
     }
 }
