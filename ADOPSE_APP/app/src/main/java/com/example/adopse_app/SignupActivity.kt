@@ -28,12 +28,33 @@ class SignupActivity :AppCompatActivity() {
         val btnSignup = findViewById<LinearLayout>(R.id.register_button)
 
         btnSignup.setOnClickListener{
+
+            val emailText = email.text.toString().trim()
+            val usernameText = username.text.toString().trim()
+            val passwordText = password.text.toString().trim()
+
+            if(emailText.isEmpty() || usernameText.isEmpty() || passwordText.isEmpty()){
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener // Stop further execution
+            }
+
+            if(passwordText.length < 8){
+                Toast.makeText(this, "Password has to be more than 8 characters.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if(hasSpecialCharAndUpper(passwordText)){
+                Toast.makeText(this, "Password has to contain special characters and uppers", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
             val Items = JSONObject();
             Items.put("username", username.text)
             Items.put("password",password.text)
             Items.put("email",email.text)
             val queue = Volley.newRequestQueue(this)
-            val url = "http://10.0.2.2:5051/Authentication/register"
+            val url = "http://10.0.2.2:7014/Authentication/register"
 
             // Request a string response from the provided URL.
             val request = JsonObjectRequest (Request.Method.POST,url,Items,
@@ -55,5 +76,12 @@ class SignupActivity :AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+
+
+    }
+
+    fun hasSpecialCharAndUpper(password: String): Boolean{
+        val specialCharAndUpperRegex = Regex("[^A-Z!@#$%^&*(){}:;><.,?]")
+        return specialCharAndUpperRegex.containsMatchIn(password)
     }
 }

@@ -88,7 +88,7 @@ class ModuleActivity: AppCompatActivity(){
 
                 if (index %2 ==0)
                 {
-                    val url = "http://10.0.2.2:5051/module/15139"
+                    val url = "http://10.0.2.2:7014/module/15139"
                     val request = JsonObjectRequest (Request.Method.GET,url,null,
                         { response ->
                             moduleTextView.text = response.get("name").toString()
@@ -104,7 +104,7 @@ class ModuleActivity: AppCompatActivity(){
                     queue.add(request)
                 }
                 else {
-                    val url = "http://10.0.2.2:5051/module/15140"
+                    val url = "http://10.0.2.2:7014/module/15140"
                     val request = JsonObjectRequest (Request.Method.GET,url,null,
                         { response ->
                             moduleTextView.text = response.get("name").toString()
@@ -154,7 +154,7 @@ class ModuleActivity: AppCompatActivity(){
 
             if (index %2 ==0)
             {
-                val url = "http://10.0.2.2:5051/module/15139"
+                val url = "http://10.0.2.2:7014/module/15139"
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
                     Response.Listener { response ->
                         moduleTextView.text = response.get("name").toString()
@@ -170,7 +170,7 @@ class ModuleActivity: AppCompatActivity(){
                 queue.add(request)
             }
             else {
-                val url = "http://10.0.2.2:5051/module/15140"
+                val url = "http://10.0.2.2:7014/module/15140"
                 val request = JsonObjectRequest (Request.Method.GET,url,null,
                     Response.Listener { response ->
                         moduleTextView.text = response.get("name").toString()

@@ -30,7 +30,7 @@ class SearchActivity : AppCompatActivity() {
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
-        val url = "http://10.0.2.2:5051/module?id=$searchBar"
+        val url = "http://10.0.2.2:7014/module?id=$searchBar"
         val queue = Volley.newRequestQueue(this)
 
         val request = JsonObjectRequest(Request.Method.GET, url, null,

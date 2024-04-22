@@ -36,6 +36,31 @@
             android:exported="true"
             android:theme="@style/Theme.ADOPSE_APP"/>
 
+        <activity
+            android:name=".SignupActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".ModuleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".ModuleProfilActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".NavigationActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".SearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
 
     </application>
 
