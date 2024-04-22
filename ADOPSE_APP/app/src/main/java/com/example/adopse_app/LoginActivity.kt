@@ -25,8 +25,17 @@ class LoginActivity : AppCompatActivity() {
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.pwd)
         val btnLogin = findViewById<LinearLayout>(R.id.login_button)
+        val btnSignUp = findViewById<LinearLayout>(R.id.signup)
 
         btnLogin.setOnClickListener{
+            val usernameText = username.text.toString().trim()
+            val passwordText = password.text.toString().trim()
+
+            if(usernameText.isEmpty() || passwordText.isEmpty()){
+                Toast.makeText(this, "Please fill the fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val Items = JSONObject()
             Items.put("username", username.text.toString())
             Items.put("password", password.text.toString())
@@ -45,6 +54,13 @@ class LoginActivity : AppCompatActivity() {
 
             queue.add(request)
         }
+
+        btnSignUp.setOnClickListener {
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
    }
 
