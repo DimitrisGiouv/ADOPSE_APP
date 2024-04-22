@@ -270,42 +270,58 @@ class MainActivity : AppCompatActivity() {
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
-        val url = "http://10.0.2.2:5051/module/stack/100/1/"  // Ολόκληρο URL για το αίτημα
+        val url = "http://10.0.2.2:5051/module/stack/18000/0/"  // Ολόκληρο URL για το αίτημα
         val queue = Volley.newRequestQueue(this)
 
         val request = JsonObjectRequest(Request.Method.GET, url, null,
             { response ->
                 var foundModules = false
                 val modulesArray = response.getJSONArray("modules") // Ανάκτηση του πίνακα modules από την απόκριση JSON
+
+                var prevModuleId = ConstraintLayout.LayoutParams.PARENT_ID
+
                 for (i in 0 until modulesArray.length()) {
                     val moduleObject = modulesArray.getJSONObject(i) // Ανάκτηση του κάθε module από τον πίνακα modules
                     val subCategory = moduleObject.getInt("subCategoryId").toString()
-
                     // Έλεγχος αν ο όρος αναζήτησης ταιριάζει με το subCategoryId
                     if (subCategory == searchTerm) {
                         val moduleName = moduleObject.getString("name")
                         val description = moduleObject.getString("description")
                         val created = moduleObject.getString("created")
 
-                        val moduleCard1 = layoutInflater.inflate(R.layout.module, null) as ConstraintLayout
-                        moduleCard1.id = View.generateViewId()
+                        val moduleCard = layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
+                        moduleCard.id = View.generateViewId()
 
-                        val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
-                        val difficultyTextView = moduleCard1.findViewById<TextView>(R.id.difficulty_module1)
-                        val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
-                        val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
+                        val moduleTextView = moduleCard.findViewById<TextView>(R.id.module1)
+                        val difficultyTextView = moduleCard.findViewById<TextView>(R.id.difficulty_module1)
+                        val popularityTextView = moduleCard.findViewById<TextView>(R.id.popularity_module1)
+                        val ratingTextView = moduleCard.findViewById<TextView>(R.id.rating_module1)
 
                         moduleTextView.text = moduleName
                         difficultyTextView.text = moduleObject.getString("difficultyName")
                         popularityTextView.text = moduleObject.getInt("price").toString()
                         ratingTextView.text = moduleObject.getInt("rating").toString()
 
-                        parentLayout.addView(moduleCard1)
+                        val layoutParams = ConstraintLayout.LayoutParams(
+                            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                            ConstraintLayout.LayoutParams.WRAP_CONTENT
+                        )
+
+                        layoutParams.setMargins(10, 30, 10, 10)
+
+                        if (prevModuleId != ConstraintLayout.LayoutParams.PARENT_ID) {
+                            layoutParams.topToBottom = prevModuleId
+                            layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+                        }
+
+                        parentLayout.addView(moduleCard, layoutParams)
+                        prevModuleId = moduleCard.id
+
                         foundModules = true
                     }
                 }
                 if (!foundModules) {
-                    Toast.makeText(this, "No modules found with the given subCategory", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Δεν υπάρχουν μαθήματα στην κατηγορία που αναζητήσατε!", Toast.LENGTH_SHORT).show()
                     twoModuleList()
                 }
             },
@@ -316,11 +332,6 @@ class MainActivity : AppCompatActivity() {
 
         queue.add(request)
     }
-
-
-
-
-
 
 
 }
