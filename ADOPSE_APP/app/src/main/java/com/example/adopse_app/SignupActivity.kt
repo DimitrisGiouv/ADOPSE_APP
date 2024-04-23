@@ -54,7 +54,7 @@ class SignupActivity :AppCompatActivity() {
             Items.put("password",password.text)
             Items.put("email",email.text)
             val queue = Volley.newRequestQueue(this)
-            val url = "http://10.0.2.2:7014/Authentication/register"
+            val url = "http://10.0.2.2:5051/Authentication/register"
 
             // Request a string response from the provided URL.
             val request = JsonObjectRequest (Request.Method.POST,url,Items,
