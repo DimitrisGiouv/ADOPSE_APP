@@ -52,6 +52,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,6 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/navigation_bar"
         app:layout_constraintBottom_toTopOf="@+id/Modules_discovery">
 
+
         <TextView
             android:id="@+id/moduleText"
             android:layout_width="wrap_content"
@@ -74,11 +76,11 @@
             android:textFontWeight="100"
             android:textSize="30dp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/gridViewButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageButton
             android:id="@+id/gridViewButton"
@@ -116,8 +118,8 @@
 
     <ScrollView
         android:id="@+id/Modules_discovery"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="382dp"
+        android:layout_height="474dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -131,5 +133,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical" />
     </ScrollView>
+
+    <EditText
+        android:id="@+id/SearchBarModule"
+        android:layout_width="330dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="2dp"
+        android:layout_weight="1"
+        android:background="@drawable/banner_white"
+        android:drawableStart="@android:drawable/ic_search_category_default"
+        android:drawablePadding="15dp"
+        android:ems="10"
+        android:hint="Search"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/moduleBlock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navigation_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

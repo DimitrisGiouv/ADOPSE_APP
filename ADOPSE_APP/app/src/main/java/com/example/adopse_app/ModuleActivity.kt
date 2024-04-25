@@ -1,9 +1,12 @@
 package com.example.adopse_app
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -20,11 +23,25 @@ import com.android.volley.toolbox.Volley
 
 class ModuleActivity: AppCompatActivity(){
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_module)
-
+        val searchEditText = findViewById<EditText>(R.id.SearchBarModule)
+        // Εισαγωγή ακροατή γεγονότος στο EditText του search bar
+        val startIndex = 18000
+        val endIndex = 0
+        searchEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
+                val searchTerm = searchEditText.text.toString()
+                MainActivity.performSearchByCategory(searchTerm,startIndex,endIndex)
+                true
+            } else {
+                false
+            }
+        }
         // Καθορισμός των περιοχών των system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.modulepage)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -88,7 +105,7 @@ class ModuleActivity: AppCompatActivity(){
 
                 if (index %2 ==0)
                 {
-                    val url = "http://10.0.2.2:5051/module/15139"
+                    val url = "http://10.0.2.2:5051/module/"+(15139+index)
                     val request = JsonObjectRequest (Request.Method.GET,url,null,
                         { response ->
                             moduleTextView.text = response.get("name").toString()
@@ -104,7 +121,7 @@ class ModuleActivity: AppCompatActivity(){
                     queue.add(request)
                 }
                 else {
-                    val url = "http://10.0.2.2:5051/module/15140"
+                    val url = "http://10.0.2.2:5051/module/"+(15139+index)
                     val request = JsonObjectRequest (Request.Method.GET,url,null,
                         { response ->
                             moduleTextView.text = response.get("name").toString()
@@ -208,5 +225,9 @@ class ModuleActivity: AppCompatActivity(){
         }
     }
 
+
+}
+
+private fun MainActivity.Companion.performSearchByCategory(searchTerm: String, startIndex: Int, endIndex: Int) {
 
 }

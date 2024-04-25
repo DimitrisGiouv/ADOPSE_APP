@@ -379,4 +379,6 @@ class MainActivity : AppCompatActivity() {
 
         queue.add(request)
     }
+
+    companion object
 }
