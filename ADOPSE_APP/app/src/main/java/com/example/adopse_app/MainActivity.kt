@@ -2,10 +2,6 @@ package com.example.adopse_app
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.KeyEvent
-import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -19,15 +15,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     private var page = 0
     private val pageSize = 10 // Μέγεθος σελίδας
+    var isSingleView = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -57,11 +51,6 @@ class MainActivity : AppCompatActivity() {
             endIndex+10
         }
 
-
-
-
-
-
         // Καθορισμός των περιοχών των system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -89,170 +78,97 @@ class MainActivity : AppCompatActivity() {
                  }*/
 
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)
-        val listModules = findViewById<ImageButton>(R.id.listViewButton)
-        // Κωδικας για την αλλαγη της λιστας απο δυο σε μια και αντιστροφα
-
         gridModules.setOnClickListener {
-            gridModules.isEnabled = false// Απενεργοποίηση του κουμπιού
-            listModules.isEnabled = true// Ενεργοποίηση του κουμπιού
-            twoModuleList()
-            gridModules.setBackgroundResource(R.drawable.module_button_twolist_active)
-            listModules.setBackgroundResource(R.drawable.module_button_singlelist)
+            if(isSingleView)
+                gridModules.setBackgroundResource(R.drawable.button_background_twolist)
+            else
+                gridModules.setBackgroundResource(R.drawable.button_background_singlelist)
+            toggleModuleList()
+            onToggleViewButtonClick()
         }
 
-        listModules.setOnClickListener {
-            gridModules.isEnabled = true// Ενεργοποίηση του κουμπιού
-            listModules.isEnabled = false// Απενεργοποίηση του κουμπιού
-            singleModuleList()
-            listModules.setBackgroundResource(R.drawable.module_button_singlelist_active)
-            gridModules.setBackgroundResource(R.drawable.module_button_twolist)
-        }
         // Οταν ανοιγη το app τοτε θα φορτωθει η μια λιστα
-        twoModuleList()
+        toggleModuleList()
+
     }
-
-    fun singleModuleList() {
-        val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
-        parentLayout.removeAllViews()
-        repeat(10) { index ->
-            val moduleCard1 = layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
-            moduleCard1.id = View.generateViewId()
-
-            val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
-            //val disModuleTextView = moduleCard1.findViewById<TextView>(R.id.Dismodule1)
-            val difficultyTextView = moduleCard1.findViewById<TextView>(R.id.difficulty_module1)
-            val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
-            val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
-
-
-
-            val queue = Volley.newRequestQueue(this)
-
-            if (index %2 ==0)
-            {
-                val url = "http://10.0.2.2:5051/module/"+(15139+index)
-                val request = JsonObjectRequest (Request.Method.GET,url,null,
-                    { response ->
-                        moduleTextView.text = response.get("name").toString()
-                        //disModuleTextView.text = response.get("description").toString()
-                        difficultyTextView.text = response.get("difficultyName").toString()
-                        popularityTextView.text = response.get("price").toString()
-                        ratingTextView.text = response.get("rating").toString()
-                    }
-                    ,{ error ->
-                        Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
-                    }
-                )
-                queue.add(request)
-            }
-            else {
-                val url = "http://10.0.2.2:5051/module/"+(15139+index)
-                val request = JsonObjectRequest (Request.Method.GET,url,null,
-                    { response ->
-                        moduleTextView.text = response.get("name").toString()
-                        //disModuleTextView.text = response.get("description").toString()
-                        difficultyTextView.text = response.get("difficultyName").toString()
-                        popularityTextView.text = response.get("price").toString()
-                        ratingTextView.text = response.get("rating").toString()
-                    },
-
-                    { error ->
-                        Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
-                    }
-                )
-                queue.add(request)
-            }
-
-            val layoutParams = ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT,
-                ConstraintLayout.LayoutParams.PARENT_ID
-            )
-
-            layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-            layoutParams.topToBottom = if (index == 0) R.id.Recommend else parentLayout.getChildAt(index - 1).id
-
-            layoutParams.setMargins(10, 10, 10, 10)
-            parentLayout.addView(moduleCard1, layoutParams)
-        }
-    }
-
-    fun twoModuleList(){
+    fun toggleModuleList() {
         val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
-        repeat(10) { index ->
-            val moduleCard1 = layoutInflater.inflate(R.layout.module, null) as ConstraintLayout
-            moduleCard1.id = View.generateViewId() // Δημιουργία μοναδικού αναγνωριστικού για κάθε κάρτα ενότητας
+        repeat(6) { index ->
+            val moduleCard = if (isSingleView) {
+                layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
+            } else {
+                layoutInflater.inflate(R.layout.module, null) as ConstraintLayout
+            }
+            moduleCard.id = View.generateViewId()
 
-            // Εύρεση TextViews μέσα στο ModuleCard1
-            val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
-            //val disModuleTextView = moduleCard1.findViewById<TextView>(R.id.Dismodule1)
-            val difficultyTextView = moduleCard1.findViewById<TextView>(R.id.difficulty_module1)
-            val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
-            val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
-
-            //val module = JsonOb
-
+            val moduleTextView = moduleCard.findViewById<TextView>(R.id.module1)
+            var descriptorTextView = moduleCard.findViewById<TextView>(R.id.Dismodule1)
+            val difficultyTextView = moduleCard.findViewById<TextView>(R.id.difficulty_module1)
+            val popularityTextView = moduleCard.findViewById<TextView>(R.id.popularity_module1)
+            val ratingTextView = moduleCard.findViewById<TextView>(R.id.rating_module1)
 
             val queue = Volley.newRequestQueue(this)
 
-            if (index %2 ==0)
-            {
-                val url = "http://10.0.2.2:5051/module/"+(15139+index)
-                val request = JsonObjectRequest (Request.Method.GET,url,null,
-                    { response ->
-                        moduleTextView.text = response.get("name").toString()
-                        //disModuleTextView.text = response.get("description").toString()
-                        difficultyTextView.text = response.get("difficultyName").toString()
-                        popularityTextView.text = response.get("price").toString()
-                        ratingTextView.text = response.get("rating").toString()
-                    }
-                    ,{ error ->
-                        Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
-                    }
-                )
-                queue.add(request)
+            val url = "http://10.0.2.2:5051/module/" + (15139 + index)
+            val request = JsonObjectRequest(Request.Method.GET, url, null,
+            { response ->
+                moduleTextView.text = response.get("name").toString()
+                descriptorTextView.text = response.get("description").toString()
+                difficultyTextView.text = response.get("difficultyName").toString()
+                popularityTextView.text = response.get("price").toString()
+                ratingTextView.text = response.get("rating").toString()
+
+                val sizeLimitation = response.get("description").toString()
+
+                // Truncate the description text if it exceeds 30 characters
+                val truncatedDescription = if (sizeLimitation.length > 30) {
+                    sizeLimitation.substring(0, 30) + "..." // Add ellipsis if truncated
+                } else {
+                    sizeLimitation // Otherwise, use the original text
+                }
+
+               descriptorTextView.text = truncatedDescription
+            },
+            { error ->
+                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
             }
-            else {
-                val url = "http://10.0.2.2:5051/module/"+(15139+index)
-                val request = JsonObjectRequest (Request.Method.GET,url,null,
-                    { response ->
-                        moduleTextView.text = response.get("name").toString()
-                        //disModuleTextView.text = response.get("description").toString()
-                        difficultyTextView.text = response.get("difficultyName").toString()
-                        popularityTextView.text = response.get("price").toString()
-                        ratingTextView.text = response.get("rating").toString()
-                    }
-                    ,{ error ->
-                        Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
-                    }
+        )
+            queue.add(request)
+
+            val moduleCardHeight =550 // Ύψος του moduleCard
+
+            if (isSingleView) {
+                val layoutParams = ConstraintLayout.LayoutParams(
+                    ConstraintLayout.LayoutParams.MATCH_PARENT,
+                    moduleCardHeight
                 )
-                queue.add(request)
-            }
-            // Request a string response from the provided URL.
-
-            // Ορισμός κειμένου για τα TextViews
-
-            // Προσθήκη περιορισμών για τη θέση
-            val layoutParams = ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT
-            )
-
-
-            if (index % 2 == 0) {
+                layoutParams.setMargins(10, 10, 10, 10)
+                parentLayout.addView(moduleCard, layoutParams)
                 layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 layoutParams.topToBottom = if (index == 0) R.id.RecommendBlock else parentLayout.getChildAt(index - 1).id
             } else {
-                layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-                layoutParams.topToBottom = if (index == 1) R.id.RecommendBlock else parentLayout.getChildAt(index - 2).id
+                val layoutParams = ConstraintLayout.LayoutParams(
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                    moduleCardHeight
+                )
+                layoutParams.setMargins(10, 10, 10, 10)
+                parentLayout.addView(moduleCard, layoutParams)
+                if (index % 2 == 0) {
+                    layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+                    layoutParams.topToBottom = if (index == 0) R.id.RecommendBlock else parentLayout.getChildAt(index - 1).id
+                } else {
+                    layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+                    layoutParams.topToBottom = if (index == 1) R.id.RecommendBlock else parentLayout.getChildAt(index - 2).id
+                }
             }
-
-            layoutParams.setMargins(10, 30, 10, 10)
-            parentLayout.addView(moduleCard1, layoutParams)
-
         }
+    }
 
+    fun onToggleViewButtonClick() {
+        isSingleView = !isSingleView // Toggle the boolean flag
+        toggleModuleList() // Refresh the view
     }
 
     fun performSearchByCategory(searchTerm: String, startIndex: Int, endIndex: Int) {
@@ -261,7 +177,7 @@ class MainActivity : AppCompatActivity() {
 
         if (searchTerm.isBlank()) {
             Toast.makeText(this, "Η αναζήτηση είναι κενή", Toast.LENGTH_SHORT).show()
-            twoModuleList()
+            toggleModuleList()
             return
         }
 
@@ -368,7 +284,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (!foundModules) {
                     Toast.makeText(this, "Δεν υπάρχουν μαθήματα στην κατηγορία που αναζητήσατε!", Toast.LENGTH_SHORT).show()
-                    twoModuleList()
+                    toggleModuleList()
                     findViewById<Button>(R.id.loadMoreButton).visibility = View.INVISIBLE;
                 }
             },

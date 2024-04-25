@@ -31,6 +31,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="Discription of module 1"
+        android:textSize="10dp"
         android:gravity="center_horizontal"
         android:textColor="@color/light_orange"
         app:layout_constraintBottom_toTopOf="@+id/difficulty_module1"

@@ -56,15 +56,54 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/moduleBlock"
+        android:id="@+id/searchBlock"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/navigation_bar"
-        app:layout_constraintBottom_toTopOf="@+id/Modules_discovery">
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/navigation_bar">
 
+        <EditText
+        android:id="@+id/searchBarModule"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/banner_white"
+        android:drawableStart="@android:drawable/ic_search_category_default"
+        android:drawablePadding="15dp"
+        android:ems="10"
+        android:hint="Search"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/filterButton"/>
+
+        <ImageButton
+            android:id="@+id/filterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/white"
+            app:srcCompat="@drawable/filter"
+            app:layout_constraintStart_toEndOf="@+id/searchBarModule"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/moduleBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchBlock">
 
         <TextView
             android:id="@+id/moduleText"
@@ -86,30 +125,9 @@
             android:id="@+id/gridViewButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/button_background_twolist"
-            app:layout_constraintStart_toEndOf="@+id/moduleText"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/listViewButton"/>
-
-        <ImageButton
-            android:id="@+id/listViewButton"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_marginEnd="150dp"
             android:background="@drawable/button_background_singlelist"
-            app:layout_constraintStart_toEndOf="@+id/gridViewButton"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/filterButton"/>
-
-        <ImageButton
-            android:id="@+id/filterButton"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="50dp"
-            android:background="@color/white"
-            app:srcCompat="@drawable/filter"
-            app:layout_constraintStart_toEndOf="@+id/listViewButton"
+            app:layout_constraintStart_toEndOf="@+id/moduleText"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -118,8 +136,8 @@
 
     <ScrollView
         android:id="@+id/Modules_discovery"
-        android:layout_width="382dp"
-        android:layout_height="474dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,30 +148,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/LinearModules"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical" />
     </ScrollView>
-
-    <EditText
-        android:id="@+id/SearchBarModule"
-        android:layout_width="330dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="2dp"
-        android:layout_weight="1"
-        android:background="@drawable/banner_white"
-        android:drawableStart="@android:drawable/ic_search_category_default"
-        android:drawablePadding="15dp"
-        android:ems="10"
-        android:hint="Search"
-        android:inputType="text"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/moduleBlock"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/navigation_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

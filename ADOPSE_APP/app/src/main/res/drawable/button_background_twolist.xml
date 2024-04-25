@@ -1,6 +1,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Pressed state -->
-    <item android:drawable="@drawable/module_button_twolist_active" />
+    <item android:drawable="@drawable/module_button_twolist_active" android:state_pressed="true"   />
     <!-- Default state -->
-    <item android:drawable="@drawable/module_button_twolist" android:state_pressed="true"  />
+    <item android:drawable="@drawable/module_button_twolist"/>
 </selector>

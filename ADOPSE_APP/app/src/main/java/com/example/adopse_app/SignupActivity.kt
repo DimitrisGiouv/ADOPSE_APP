@@ -50,21 +50,23 @@ class SignupActivity :AppCompatActivity() {
 
 
             val Items = JSONObject();
-            Items.put("username", username.text)
-            Items.put("password",password.text)
-            Items.put("email",email.text)
+            Items.put("username", usernameText)
+            Items.put("password",passwordText)
+            Items.put("email",emailText)
             val queue = Volley.newRequestQueue(this)
             val url = "http://10.0.2.2:5051/Authentication/register"
 
             // Request a string response from the provided URL.
             val request = JsonObjectRequest (Request.Method.POST,url,Items,
-                Response.Listener { response ->
-                    Toast.makeText(this,"Welocome back "+ Items.get("username") + "!", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
-                , Response.ErrorListener{ error ->
-                    Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
+                { response ->
+                    // Handle response from server
+                    // For example, show a toast message indicating successful registration
+                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
+                },
+                { error ->
+                    // Handle error response from server
+                    // For example, show a toast message indicating registration failed
+                    Toast.makeText(this, "Registration failed: ${error.message}", Toast.LENGTH_SHORT).show()
                 }
             )
             queue.add(request)
@@ -76,7 +78,6 @@ class SignupActivity :AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-
 
     }
 
