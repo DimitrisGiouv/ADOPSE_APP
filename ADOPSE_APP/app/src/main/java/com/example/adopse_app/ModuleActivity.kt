@@ -36,7 +36,6 @@ class ModuleActivity: AppCompatActivity(){
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
                 val searchTerm = searchEditText.text.toString()
-                MainActivity.performSearchByCategory(searchTerm,startIndex,endIndex)
                 true
             } else {
                 false
@@ -160,9 +159,5 @@ class ModuleActivity: AppCompatActivity(){
         toggleModuleList() // Refresh the view
     }
 
-
 }
 
-private fun MainActivity.Companion.performSearchByCategory(searchTerm: String, startIndex: Int, endIndex: Int) {
-
-}
