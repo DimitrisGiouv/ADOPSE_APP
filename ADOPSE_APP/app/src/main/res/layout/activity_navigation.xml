@@ -29,10 +29,10 @@
         />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btn_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Navigation"
+        android:text="PROFILE"
         android:textSize="30sp"
         android:textStyle="bold"
         android:background="@android:color/transparent"
@@ -50,7 +50,7 @@
         android:background="@color/light_orange"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_profile"
         />
 
     <Button

@@ -28,19 +28,7 @@ class ModuleActivity: AppCompatActivity(){
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_module)
-        val searchEditText = findViewById<EditText>(R.id.searchBarModule)
-        // Εισαγωγή ακροατή γεγονότος στο EditText του search bar
-        val startIndex = 18000
-        val endIndex = 0
-        searchEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
-                val searchTerm = searchEditText.text.toString()
-                true
-            } else {
-                false
-            }
-        }
+
         // Καθορισμός των περιοχών των system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.modulepage)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -56,11 +44,31 @@ class ModuleActivity: AppCompatActivity(){
             startActivity(intent)
         }
 
+        val logobutton = findViewById<ImageButton>(R.id.logo_button)
+        logobutton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
         // Κουμπί που μεταφέρει στην οθόνη εισόδου
         val loginPage = findViewById<ImageButton>(R.id.User)
         loginPage.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+        }
+
+        val searchEditText = findViewById<EditText>(R.id.searchBarModule)
+        // Εισαγωγή ακροατή γεγονότος στο EditText του search bar
+        val startIndex = 18000
+        val endIndex = 0
+        searchEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
+                val searchTerm = searchEditText.text.toString()
+                true
+            } else {
+                false
+            }
         }
 
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)

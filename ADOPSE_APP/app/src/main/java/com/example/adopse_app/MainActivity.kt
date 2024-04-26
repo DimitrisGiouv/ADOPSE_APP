@@ -121,7 +121,6 @@ class MainActivity : AppCompatActivity() {
                 ratingTextView.text = response.get("rating").toString()
 
                 val sizeLimitation = response.get("description").toString()
-
                 // Truncate the description text if it exceeds 30 characters
                 val truncatedDescription = if (sizeLimitation.length > 30) {
                     sizeLimitation.substring(0, 30) + "..." // Add ellipsis if truncated
@@ -235,8 +234,6 @@ class MainActivity : AppCompatActivity() {
                         else -> subCategoryName = "" // Εκχώρηση κενού string στην περίπτωση που η υποκατηγορία δεν ανήκει σε καμία από τις παραπάνω κατηγορίες
                     }
 
-
-
                     // Έλεγχος αν ο όρος αναζήτησης ταιριάζει με το όνομα της υποκατηγορίας
                     if (!subCategoryName.isNullOrEmpty() && subCategoryName.contains(searchTerm, ignoreCase = true)) {
                         val moduleName = moduleObject.getString("name")
@@ -256,7 +253,7 @@ class MainActivity : AppCompatActivity() {
                         ratingTextView.text = moduleObject.getInt("rating").toString()
 
                         val layoutParams = ConstraintLayout.LayoutParams(
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                            ConstraintLayout.LayoutParams.MATCH_PARENT,
                             ConstraintLayout.LayoutParams.WRAP_CONTENT
                         )
 

@@ -26,15 +26,21 @@ class UserProfileActivity : AppCompatActivity() {
 
         /* Redirection to Sign up if user does not have an account */
         val tempRedirect = findViewById<ImageButton>(R.id.user_profile_picture)
-
         tempRedirect.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
         /* Navigation Hamburger */
         val navigationButton = findViewById<ImageButton>(R.id.navigation_button)
         navigationButton.setOnClickListener {
             val intent = Intent(this, NavigationActivity::class.java)
+            startActivity(intent)
+        }
+
+        val logoButton = findViewById<ImageButton>(R.id.logo_button)
+        logoButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
