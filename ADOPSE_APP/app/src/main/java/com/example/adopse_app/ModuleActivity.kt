@@ -36,136 +36,36 @@ class ModuleActivity: AppCompatActivity(){
             insets
         }
 
+        var navigationCode = NavigationBar()
+        navigationCode.NavigationCode(this)
 
-        // Κουμπί που μεταφέρει στην οθόνη πλοήγησης
-        val navigationButton = findViewById<ImageButton>(R.id.navigation_button)
-        navigationButton.setOnClickListener {
-            val intent = Intent(this, NavigationActivity::class.java)
-            startActivity(intent)
-        }
-
-        val logobutton = findViewById<ImageButton>(R.id.logo_button)
-        logobutton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Κουμπί που μεταφέρει στην οθόνη εισόδου
-        val loginPage = findViewById<ImageButton>(R.id.User)
-        loginPage.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
-
-        val searchEditText = findViewById<EditText>(R.id.searchBarModule)
-        // Εισαγωγή ακροατή γεγονότος στο EditText του search bar
-        val startIndex = 18000
-        val endIndex = 0
-        searchEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
-                val searchTerm = searchEditText.text.toString()
-                true
-            } else {
-                false
-            }
-        }
+        var viewActivity = BuildModules()
+        viewActivity.toggleModuleList(this)
 
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)
         gridModules.setOnClickListener {
-            if(isSingleView)
+            if (viewActivity.isSingleView)
                 gridModules.setBackgroundResource(R.drawable.button_background_twolist)
             else
                 gridModules.setBackgroundResource(R.drawable.button_background_singlelist)
-            toggleModuleList()
-            onToggleViewButtonClick()
+            viewActivity.onToggleViewButtonClick()
+            viewActivity.toggleModuleList(this)
         }
 
-        // Οταν ανοιγη το app τοτε θα φορτωθει η μια λιστα
-        toggleModuleList()
+            /*  val searchEditText = findViewById<EditText>(R.id.searchBarModule)
+          // Εισαγωγή ακροατή γεγονότος στο EditText του search bar
+          val startIndex = 18000
+          val endIndex = 0
+          searchEditText.setOnEditorActionListener { _, actionId, _ ->
+              if (actionId == EditorInfo.IME_ACTION_DONE) {
+                  // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
+                  val searchTerm = searchEditText.text.toString()
+                  true
+              } else {
+                  false
+              }
+          }*/
 
     }
-    fun toggleModuleList() {
-        val parentLayout: ConstraintLayout = findViewById(R.id.LinearModules)
-        parentLayout.removeAllViews()
-
-        repeat(30) { index ->
-            val moduleCard = if (isSingleView) {
-                layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
-            } else {
-                layoutInflater.inflate(R.layout.module, null) as ConstraintLayout
-            }
-            moduleCard.id = View.generateViewId()
-
-            val moduleTextView = moduleCard.findViewById<TextView>(R.id.module1)
-            var descriptorTextView = moduleCard.findViewById<TextView>(R.id.Dismodule1)
-            val difficultyTextView = moduleCard.findViewById<TextView>(R.id.difficulty_module1)
-            val popularityTextView = moduleCard.findViewById<TextView>(R.id.popularity_module1)
-            val ratingTextView = moduleCard.findViewById<TextView>(R.id.rating_module1)
-
-            val queue = Volley.newRequestQueue(this)
-
-            val url = "http://10.0.2.2:5051/module/" + (15139 + index)
-            val request = JsonObjectRequest(Request.Method.GET, url, null,
-                { response ->
-                    moduleTextView.text = response.get("name").toString()
-                    descriptorTextView.text = response.get("description").toString()
-                    difficultyTextView.text = response.get("difficultyName").toString()
-                    popularityTextView.text = response.get("price").toString()
-                    ratingTextView.text = response.get("rating").toString()
-
-                    val sizeLimitation = response.get("description").toString()
-
-                    // Truncate the description text if it exceeds 30 characters
-                    val truncatedDescription = if (sizeLimitation.length > 30) {
-                        sizeLimitation.substring(0, 30) + "..." // Add ellipsis if truncated
-                    } else {
-                        sizeLimitation // Otherwise, use the original text
-                    }
-
-                    descriptorTextView.text = truncatedDescription
-                },
-                { error ->
-                    Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
-                }
-            )
-            queue.add(request)
-
-
-
-            val moduleCardHeight =550 // Ύψος του moduleCard
-
-            if (isSingleView) {
-                val layoutParams = ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.MATCH_PARENT,
-                    moduleCardHeight
-                )
-                layoutParams.setMargins(10, 10, 10, 10)
-                parentLayout.addView(moduleCard, layoutParams)
-                layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-                layoutParams.topToBottom = if (index == 0) R.id.RecommendBlock else parentLayout.getChildAt(index - 1).id
-            } else {
-                val layoutParams = ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                    moduleCardHeight
-                )
-                layoutParams.setMargins(10, 10, 10, 10)
-                parentLayout.addView(moduleCard, layoutParams)
-                if (index % 2 == 0) {
-                    layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-                    layoutParams.topToBottom = if (index == 0) R.id.RecommendBlock else parentLayout.getChildAt(index - 1).id
-                } else {
-                    layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-                    layoutParams.topToBottom = if (index == 1) R.id.RecommendBlock else parentLayout.getChildAt(index - 2).id
-                }
-            }
-        }
-    }
-
-    fun onToggleViewButtonClick() {
-        isSingleView = !isSingleView // Toggle the boolean flag
-        toggleModuleList() // Refresh the view
-    }
-
 }
 

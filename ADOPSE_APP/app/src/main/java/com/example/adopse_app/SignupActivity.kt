@@ -28,7 +28,6 @@ class SignupActivity :AppCompatActivity() {
         val btnSignup = findViewById<LinearLayout>(R.id.register_button)
 
         btnSignup.setOnClickListener{
-
             val emailText = email.text.toString().trim()
             val usernameText = username.text.toString().trim()
             val passwordText = password.text.toString().trim()
@@ -49,7 +48,7 @@ class SignupActivity :AppCompatActivity() {
             }
 
 
-            val Items = JSONObject();
+            val Items = JSONObject()
             Items.put("username", usernameText)
             Items.put("password",passwordText)
             Items.put("email",emailText)
