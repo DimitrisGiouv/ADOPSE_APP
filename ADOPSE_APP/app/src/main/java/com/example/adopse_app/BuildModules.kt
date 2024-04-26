@@ -1,6 +1,7 @@
 package com.example.adopse_app
 
 import android.app.Activity
+import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -57,6 +58,16 @@ class BuildModules : AppCompatActivity() {
                 }
             )
             queue.add(request)
+
+
+            moduleCard.setOnClickListener {
+                val moduleName = moduleTextView.text.toString()
+                val intent = Intent(activity, UserProfileActivity::class.java).apply {
+                    putExtra("moduleName", moduleName)
+                }
+                activity.startActivity(intent)
+            }
+
 
             val moduleCardHeight = 550 // Ύψος του moduleCard
 

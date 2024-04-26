@@ -39,9 +39,6 @@ class MainActivity : AppCompatActivity() {
             viewActivity.onToggleViewButtonClick()
             viewActivity.toggleModuleList(this)
         }
-
-
-
     }
 
 }

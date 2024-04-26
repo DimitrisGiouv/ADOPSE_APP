@@ -72,13 +72,14 @@ class UserProfileActivity : AppCompatActivity() {
             val moduleCard = layoutInflater.inflate(R.layout.module, null) as ConstraintLayout
             moduleCard.id = moduleIds[index]
 
+            val moduleName = intent.getStringExtra("moduleName")
             val moduleTextView = moduleCard.findViewById<TextView>(R.id.module1)
             val disModuleTextView = moduleCard.findViewById<TextView>(R.id.Dismodule1)
             val difficultyTextView = moduleCard.findViewById<TextView>(R.id.difficulty_module1)
             val popularityTextView = moduleCard.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard.findViewById<TextView>(R.id.rating_module1)
 
-            moduleTextView.text = "Module ${index + 1}"
+            moduleTextView.text = moduleName
             disModuleTextView.text = "Description of module ${index + 1}"
             difficultyTextView.text = "Easy"
             popularityTextView.text = "50"

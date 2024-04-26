@@ -79,10 +79,10 @@
         />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_moduleProfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Navigation"
+        android:text="MODULE PROFILE"
         android:textSize="30sp"
         android:textStyle="bold"
         android:background="@android:color/transparent"
@@ -100,7 +100,7 @@
         android:background="@color/light_orange"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/btn_moduleProfil"
         />
 
     <Button
