@@ -72,7 +72,8 @@
             app:layout_constraintBottom_toTopOf="@+id/email_field"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:singleLine="true"/>
 
         <EditText
             android:id="@+id/email_field"
@@ -84,6 +85,7 @@
             android:drawablePadding="10dp"
             android:elevation="10dp"
             android:hint="@string/email_hint"
+            android:singleLine="true"
             app:layout_constraintBottom_toTopOf="@id/password"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -99,6 +101,7 @@
             android:drawableLeft="@drawable/password_login"
             android:drawablePadding="10dp"
             android:elevation="10dp"
+            android:singleLine="true"
             android:hint="@string/password_hint"
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@id/register_button"
