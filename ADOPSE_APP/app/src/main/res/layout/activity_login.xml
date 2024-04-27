@@ -8,28 +8,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/title_section"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="-26dp"
-        tools:layout_editor_absoluteY="210dp" >
-
-        <!--<ImageView
-            android:id="@+id/logoImg"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:srcCompat="@drawable/logo" />!-->
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/form_section"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Educator"
             android:textColor="@color/white"
             android:textSize="60dp"
             android:textStyle="bold"
-            android:layout_marginBottom="30px"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,29 +42,50 @@
             android:text="Login"
             android:textColor="@color/black"
             android:textSize="30dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/form_section"
+        app:layout_constraintTop_toBottomOf="@+id/title_section">
 
         <EditText
             android:id="@+id/username"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+
             android:background="@drawable/input_text"
             android:drawableLeft="@drawable/username_login"
             android:drawablePadding="10dp"
             android:elevation="10dp"
-            android:hint="@string/login_username_hint" />
+            android:hint="@string/login_username_hint"
+            app:layout_constraintBottom_toTopOf="@+id/pwd"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
             android:id="@+id/pwd"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/input_text"
             android:drawableLeft="@drawable/password_login"
             android:drawablePadding="10dp"
             android:elevation="10dp"
-            android:hint="@string/login_password_hint" />
+            android:hint="@string/login_password_hint"
+            app:layout_constraintBottom_toTopOf="@id/login_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/username"/>
 
         <LinearLayout
             android:id="@+id/login_button"
@@ -73,9 +93,14 @@
             android:layout_height="50dp"
             android:background="@drawable/login_button"
             android:orientation="horizontal"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="5dp"
             android:elevation="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pwd"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -97,7 +122,11 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:layout_marginBottom="25dp">
+            android:layout_marginTop="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_button"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <CheckBox
                 android:layout_width="10dp"
@@ -113,23 +142,42 @@
 
         </LinearLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/form_section"
+        android:layout_marginBottom="25dp">
 
         <TextView
+            android:id="@+id/remember_me_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
             android:text="Forgot password?"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/or_choice"/>
 
         <LinearLayout
+            android:id="@+id/or_choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginBottom="25dp">
+            android:layout_marginBottom="25dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/remember_me_text"
+            app:layout_constraintBottom_toTopOf="@id/signup">
 
             <LinearLayout
                 android:layout_width="100dp"
@@ -158,7 +206,11 @@
             android:background="@drawable/signup_button"
             android:orientation="horizontal"
             android:elevation="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/or_choice">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -176,7 +228,11 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
