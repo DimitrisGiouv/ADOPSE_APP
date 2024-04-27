@@ -21,8 +21,8 @@ class SignupActivity :AppCompatActivity() {
         enableEdgeToEdge();
         setContentView(R.layout.activity_signup)
 
-        val email = findViewById<EditText>(R.id.email)
-        val username = findViewById<EditText>(R.id.username)
+        val email = findViewById<EditText>(R.id.email_field)
+        val username = findViewById<EditText>(R.id.username_field)
         val password = findViewById<EditText>(R.id.password)
         /* Temporary Until Full Development */
         val btnSignup = findViewById<LinearLayout>(R.id.register_button)
