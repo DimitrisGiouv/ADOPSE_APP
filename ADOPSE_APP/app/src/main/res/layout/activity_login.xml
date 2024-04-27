@@ -87,6 +87,7 @@
             android:drawablePadding="10dp"
             android:elevation="10dp"
             android:hint="@string/password_hint"
+            android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@id/login_button"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
