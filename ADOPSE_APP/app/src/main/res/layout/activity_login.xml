@@ -52,6 +52,7 @@
             android:layout_marginBottom="25dp"
             android:background="@drawable/input_text"
             android:drawableLeft="@drawable/username_login"
+            android:drawablePadding="10dp"
             android:elevation="10dp"
             android:hint="@string/login_username_hint" />
 
@@ -62,6 +63,7 @@
             android:layout_marginBottom="25dp"
             android:background="@drawable/input_text"
             android:drawableLeft="@drawable/password_login"
+            android:drawablePadding="10dp"
             android:elevation="10dp"
             android:hint="@string/login_password_hint" />
 
