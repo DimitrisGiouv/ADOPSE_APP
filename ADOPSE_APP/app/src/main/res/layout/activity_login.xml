@@ -8,18 +8,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/title_section"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/form_section"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_chainStyle="packed">
+        tools:layout_editor_absoluteX="-26dp"
+        tools:layout_editor_absoluteY="210dp" >
+
+        <!--<ImageView
+            android:id="@+id/logoImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/logo" />!-->
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -33,13 +34,13 @@
             />
 
         <TextView
-            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Educator"
             android:textColor="@color/white"
             android:textSize="60dp"
             android:textStyle="bold"
+            android:layout_marginBottom="30px"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,57 +54,28 @@
             android:text="Login"
             android:textColor="@color/black"
             android:textSize="30dp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/form_section"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/title_section"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/redirection_signup">
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/username"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/input_text"
-            android:drawableLeft="@drawable/username_singup"
-            android:drawablePadding="10dp"
-            android:layout_marginTop="40dp"
+            android:drawableLeft="@drawable/username_login"
             android:elevation="10dp"
-            android:hint="@string/username_hint"
-            app:layout_constraintBottom_toTopOf="@+id/pwd"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:singleLine="true"/>
+            android:hint="@string/login_username_hint" />
 
         <EditText
             android:id="@+id/pwd"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/input_text"
             android:drawableLeft="@drawable/password_login"
-            android:drawablePadding="10dp"
             android:elevation="10dp"
-            android:hint="@string/password_hint"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@id/login_button"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/username"
-            android:singleLine="true"/>
+            android:password="true"
+            android:hint="@string/login_password_hint" />
 
         <LinearLayout
             android:id="@+id/login_button"
@@ -111,14 +83,9 @@
             android:layout_height="50dp"
             android:background="@drawable/login_button"
             android:orientation="horizontal"
-            android:layout_marginBottom="25dp"
-            android:layout_marginTop="-15dp"
+            android:layout_marginBottom="5dp"
             android:elevation="10dp"
-            android:gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pwd"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -140,11 +107,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:layout_marginTop="15dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login_button"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:layout_marginBottom="25dp">
 
             <CheckBox
                 android:layout_width="10dp"
@@ -160,42 +123,23 @@
 
         </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/redirection_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/form_section">
 
         <TextView
-            android:id="@+id/remember_me_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
             android:text="Forgot password?"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/or_choice"/>
+            android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/or_choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginBottom="25dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/remember_me_text"
-            app:layout_constraintBottom_toTopOf="@id/signup">
+            android:layout_marginBottom="25dp">
 
             <LinearLayout
                 android:layout_width="100dp"
@@ -224,11 +168,7 @@
             android:background="@drawable/signup_button"
             android:orientation="horizontal"
             android:elevation="10dp"
-            android:gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/or_choice">
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -246,11 +186,7 @@
 
         </LinearLayout>
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
