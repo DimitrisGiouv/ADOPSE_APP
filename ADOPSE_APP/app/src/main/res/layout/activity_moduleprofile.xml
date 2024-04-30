@@ -14,7 +14,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-
     <ImageView
         android:id="@+id/moduleImage"
         android:layout_width="match_parent"
@@ -24,7 +23,7 @@
         app:srcCompat="@drawable/studing" />
 
         <TextView
-            android:id="@+id/TextModuleName"
+            android:id="@+id/textModuleName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -33,7 +32,7 @@
             android:textSize="28dp"
             app:layout_constraintTop_toTopOf="@+id/moduleImage"/>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/colorBar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -43,7 +42,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/moduleImage">
 
             <ImageView
-                android:id="@+id/imageBarTeam"
+                android:id="@+id/imageBarPopularity"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -53,7 +52,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:id="@+id/textBarTeam"
+                android:id="@+id/textBarPopularity"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -61,30 +60,32 @@
                 android:layout_marginStart="5dp"
                 android:textSize="18dp"
                 android:text="99"
-                app:layout_constraintStart_toEndOf="@id/imageBarTeam"
+                app:layout_constraintStart_toEndOf="@id/imageBarPopularity"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
             <ImageView
-                android:id="@+id/imageBarStar"
+                android:id="@+id/imageBarRating"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/star_fill"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintStart_toEndOf="@id/textBarPopularity"
+                app:layout_constraintEnd_toStartOf="@id/imageBarDifficulty"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:id="@+id/textBarStar"
+                android:id="@+id/textBarRating"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="15dp"
                 android:textSize="18dp"
                 android:text="99"
-                app:layout_constraintStart_toEndOf="@id/imageBarStar"
+                app:layout_constraintStart_toEndOf="@id/textBarPopularity"
+                app:layout_constraintEnd_toEndOf="@id/imageBarDifficulty"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -92,24 +93,101 @@
                 android:id="@+id/imageBarDifficulty"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
                 app:srcCompat="@drawable/difficulty"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textBarDifficulty"
+                />
 
             <TextView
                 android:id="@+id/textBarDifficulty"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:textSize="18dp"
                 android:text="Medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageBarDifficulty"/>
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Module Description"
+            android:layout_marginStart="5dp"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/colorBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/Modules_discovery"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/ModuleEventsBlock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moduleNameBlock"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/DescriptionBlock"
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textModuleDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No description available"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ModuleEventsBlock"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/Modules_discovery"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/textModuleInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textSize="20dp"
+            android:text="Upcoming Events"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No upcoming events"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/textModuleInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

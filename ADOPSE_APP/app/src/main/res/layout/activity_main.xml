@@ -165,21 +165,10 @@
             android:layout_height="0dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/testtext"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:textSize="30dp"
-                android:text="test"
-                android:gravity="center_horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
     <Button
         android:id="@+id/loadMoreButton"
         android:layout_width="wrap_content"

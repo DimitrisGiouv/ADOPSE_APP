@@ -40,6 +40,7 @@ class BuildModules : AppCompatActivity() {
             val request = JsonObjectRequest(Request.Method.GET, url, null,
                 { response ->
                     moduleTextView.text = response.get("name").toString()
+                    val fullDescription = response.getString("description")
                     descriptorTextView.text = response.get("description").toString()
                     difficultyTextView.text = response.get("difficultyName").toString()
                     popularityTextView.text = response.get("price").toString()
@@ -54,6 +55,23 @@ class BuildModules : AppCompatActivity() {
                     }
 
                     descriptorTextView.text = truncatedDescription
+
+                    moduleCard?.setOnClickListener {
+                        val moduleName = moduleTextView?.text?.toString()
+                        val moduleDifficulty = difficultyTextView?.text?.toString()
+                        val modulePopularity = popularityTextView?.text?.toString()
+                        val moduleRating = ratingTextView?.text?.toString()
+
+                        val intent = Intent(activity, ModuleProfileActivity::class.java).apply {
+                            putExtra("moduleName", moduleName)
+                            putExtra("moduleDescription", fullDescription)
+                            putExtra("moduleDifficulty", moduleDifficulty)
+                            putExtra("modulePopularity", modulePopularity)
+                            putExtra("moduleRating", moduleRating)
+                        }
+                        activity.startActivity(intent)
+                    }
+
                 },
                 { error ->
                     if (error is NoConnectionError || error is TimeoutError) {
@@ -65,14 +83,6 @@ class BuildModules : AppCompatActivity() {
             )
             queue.add(request)
 
-
-            moduleCard?.setOnClickListener {
-                val moduleName = moduleTextView?.text?.toString()
-                    val intent = Intent(activity, UserProfileActivity::class.java).apply {
-                        putExtra("moduleName", moduleName)
-                    }
-                    activity.startActivity(intent)
-            }
 
 
             val moduleCardHeight = 550 // Ύψος του moduleCard
