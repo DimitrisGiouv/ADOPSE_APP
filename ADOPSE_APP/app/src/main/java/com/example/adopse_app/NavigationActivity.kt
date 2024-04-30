@@ -41,9 +41,9 @@ class NavigationActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val ModuleProfilPage = findViewById<Button>(R.id.btn_moduleProfil)
-        ModuleProfilPage.setOnClickListener {
-            val intent = Intent(this, ModuleProfilPage::class.java)
+        val moduleProfilPage = findViewById<Button>(R.id.btn_moduleProfil)
+        moduleProfilPage.setOnClickListener {
+            val intent = Intent(this, ModuleProfileActivity::class.java)
             startActivity(intent)
         }
 

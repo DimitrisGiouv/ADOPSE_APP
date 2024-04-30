@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class ModuleProfileAxtivity : AppCompatActivity() {
-    private var page = 0
-    private val pageSize = 10 // Μέγεθος σελίδας
-
+class ModuleProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
