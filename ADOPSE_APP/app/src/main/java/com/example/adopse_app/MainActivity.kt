@@ -2,11 +2,21 @@ package com.example.adopse_app
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONArray
 
 class MainActivity : AppCompatActivity() {
     private var page = 0
@@ -39,25 +49,23 @@ class MainActivity : AppCompatActivity() {
             viewActivity.onToggleViewButtonClick()
             viewActivity.toggleModuleList(this)
         }
+        val searchEditText = findViewById<EditText>(R.id.SearchBar)
+        searchEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
+                val searchTerm = searchEditText.text.toString()
+                var search = Search()
+                search.performSearch(this, searchTerm)
+                true
+            } else {
+                false
+            }
+        }
     }
 
 }
 
-/*  val searchEditText = findViewById<EditText>(R.id.SearchBar)
-     // Εισαγωγή ακροατή γεγονότος στο EditText του search bar
-     val startIndex = 18000
-     val endIndex = 0
-     searchEditText.setOnEditorActionListener { _, actionId, _ ->
-         if (actionId == EditorInfo.IME_ACTION_DONE) {
-             // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
-             val searchTerm = searchEditText.text.toString()
-             performSearchByCategory(searchTerm,startIndex,endIndex)
-             true
-         } else {
-             false
-         }
-     }
-
+/*
      // Προσθήκη λειτουργικότητας στο κουμπί "Φόρτωση Περισσότερων"
      val loadMoreButton: Button = findViewById(R.id.loadMoreButton)
      loadMoreButton.setOnClickListener {
