@@ -47,7 +47,7 @@
             android:theme="@style/Theme.ADOPSE_APP"/>
 
         <activity
-            android:name=".ModuleProfilActivity"
+            android:name=".ModuleProfileActivity"
             android:exported="true"
             android:theme="@style/Theme.ADOPSE_APP"/>
 

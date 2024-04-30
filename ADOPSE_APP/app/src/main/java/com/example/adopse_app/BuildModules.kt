@@ -7,7 +7,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.android.volley.NoConnectionError
 import com.android.volley.Request
+import com.android.volley.TimeoutError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 
@@ -54,18 +56,22 @@ class BuildModules : AppCompatActivity() {
                     descriptorTextView.text = truncatedDescription
                 },
                 { error ->
-                    Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                    if (error is NoConnectionError || error is TimeoutError) {
+                        Toast.makeText(activity, "No internet connection or server unavailable", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(activity, "Failed to retrieve module data", Toast.LENGTH_SHORT).show()
+                    }
                 }
             )
             queue.add(request)
 
 
-            moduleCard.setOnClickListener {
-                val moduleName = moduleTextView.text.toString()
-                val intent = Intent(activity, UserProfileActivity::class.java).apply {
-                    putExtra("moduleName", moduleName)
-                }
-                activity.startActivity(intent)
+            moduleCard?.setOnClickListener {
+                val moduleName = moduleTextView?.text?.toString()
+                    val intent = Intent(activity, UserProfileActivity::class.java).apply {
+                        putExtra("moduleName", moduleName)
+                    }
+                    activity.startActivity(intent)
             }
 
 
