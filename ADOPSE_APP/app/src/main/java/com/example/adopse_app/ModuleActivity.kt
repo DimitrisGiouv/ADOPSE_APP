@@ -52,19 +52,18 @@ class ModuleActivity: AppCompatActivity(){
             viewActivity.toggleModuleList(this)
         }
 
-            /*  val searchEditText = findViewById<EditText>(R.id.searchBarModule)
-          // Εισαγωγή ακροατή γεγονότος στο EditText του search bar
-          val startIndex = 18000
-          val endIndex = 0
-          searchEditText.setOnEditorActionListener { _, actionId, _ ->
-              if (actionId == EditorInfo.IME_ACTION_DONE) {
-                  // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
-                  val searchTerm = searchEditText.text.toString()
-                  true
-              } else {
-                  false
-              }
-          }*/
+        val searchEditText = findViewById<EditText>(R.id.searchBarModule)
+        searchEditText?.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
+                val searchTerm = searchEditText.text.toString()
+                var search = Search()
+                search.performSearch(this, searchTerm)
+                true
+            } else {
+                false
+            }
+        }
 
     }
 }
