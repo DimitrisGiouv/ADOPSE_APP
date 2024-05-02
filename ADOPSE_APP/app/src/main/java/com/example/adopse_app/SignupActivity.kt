@@ -13,6 +13,8 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
+import java.util.logging.Handler
+import kotlin.concurrent.timerTask
 
 class SignupActivity :AppCompatActivity() {
 
@@ -60,12 +62,16 @@ class SignupActivity :AppCompatActivity() {
                 { response ->
                     // Handle response from server
                     // For example, show a toast message indicating successful registration
-                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Welcome ${usernameText}", Toast.LENGTH_SHORT).show()
+                    android.os.Handler().postDelayed({
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    },2000)
                 },
                 { error ->
                     // Handle error response from server
                     // For example, show a toast message indicating registration failed
-                    Toast.makeText(this, "Registration failed: ${error.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Username already exists", Toast.LENGTH_LONG).show()
                 }
             )
             queue.add(request)
