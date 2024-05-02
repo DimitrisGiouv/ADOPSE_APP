@@ -1,5 +1,6 @@
 package com.example.adopse_app
 
+import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -23,7 +24,7 @@ class Search {
             { response ->
                 val modulesArray = response.getJSONArray("modules")
                 if (modulesArray.length() > 0) {
-                    showResults(activity, modulesArray)
+                    showResults(activity, modulesArray, false)
                 } else {
                     Toast.makeText(activity, "No modules found with ID $searchBar", Toast.LENGTH_SHORT).show()
                 }
@@ -36,42 +37,86 @@ class Search {
         queue.add(request)
     }
 
-    fun showResults(activity: AppCompatActivity, modulesArray: JSONArray) {
+    fun showResults(activity: AppCompatActivity, modulesArray: JSONArray, isSingleView: Boolean) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
-        var rowIndex = 0
-        var columnIndex = 0
 
         for (i in 0 until modulesArray.length()) {
             val module = modulesArray.getJSONObject(i)
-            val moduleCard1 = activity.layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
-            moduleCard1.id = View.generateViewId()
+            val moduleCard = activity.layoutInflater.inflate(
+                if (isSingleView) R.layout.module_long else R.layout.module,
+                null
+            ) as ConstraintLayout
+            moduleCard.id = View.generateViewId()
 
-            val moduleTextView = moduleCard1.findViewById<TextView>(R.id.module1)
-            val difficultyTextView = moduleCard1.findViewById<TextView>(R.id.difficulty_module1)
-            val popularityTextView = moduleCard1.findViewById<TextView>(R.id.popularity_module1)
-            val ratingTextView = moduleCard1.findViewById<TextView>(R.id.rating_module1)
+            val moduleTextView = moduleCard.findViewById<TextView>(R.id.module1)
+            val difficultyTextView = moduleCard.findViewById<TextView>(R.id.difficulty_module1)
+            var descriptorTextView = moduleCard.findViewById<TextView>(R.id.Dismodule1)
+            val popularityTextView = moduleCard.findViewById<TextView>(R.id.popularity_module1)
+            val ratingTextView = moduleCard.findViewById<TextView>(R.id.rating_module1)
 
             moduleTextView.text = module.getString("name")
             difficultyTextView.text = module.getString("difficultyName")
+            val fullDescription = module.getString("description")
+            descriptorTextView.text = module.get("description").toString()
             popularityTextView.text = module.getInt("price").toString()
             ratingTextView.text = module.getInt("rating").toString()
+            // Περιορίζουμε την περιγραφή σε 30 χαρακτήρες και προσθέτουμε "..." στο τέλος αν είναι απαραίτητο
+            val sizeLimitation = module.getString("description")
+            val truncatedDescription = if (sizeLimitation.length > 30) {
+                sizeLimitation.substring(0, 30) + "..."
+            } else {
+                sizeLimitation
+            }
 
-            val layoutParams = ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT
-            )
-            layoutParams.setMargins(10, 30, 10, 10)
-            layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-            layoutParams.topToBottom = if (columnIndex == 0 && rowIndex == 0) R.id.RecommendBlock else parentLayout.getChildAt(parentLayout.childCount - 1).id
+            descriptorTextView.text = truncatedDescription
 
-            parentLayout.addView(moduleCard1, layoutParams)
+            moduleCard?.setOnClickListener {
+                val moduleName = moduleTextView?.text?.toString()
+                val moduleDifficulty = difficultyTextView?.text?.toString()
+                val modulePopularity = popularityTextView?.text?.toString()
+                val moduleRating = ratingTextView?.text?.toString()
 
-            columnIndex++
-            if (columnIndex == 2) {
-                columnIndex = 0
-                rowIndex++
+                val intent = Intent(activity, ModuleProfileActivity::class.java).apply {
+                    putExtra("moduleName", moduleName)
+                    putExtra("moduleDescription", fullDescription)
+                    putExtra("moduleDifficulty", moduleDifficulty)
+                    putExtra("modulePopularity", modulePopularity)
+                    putExtra("moduleRating", moduleRating)
+                }
+                activity.startActivity(intent)
+            }
+
+            val moduleCardHeight = 550 // Ύψος του moduleCard
+
+            if (isSingleView) {
+                val layoutParams = ConstraintLayout.LayoutParams(
+                    ConstraintLayout.LayoutParams.MATCH_PARENT,
+                    moduleCardHeight
+                )
+                layoutParams.setMargins(10, 10, 10, 10)
+                parentLayout.addView(moduleCard, layoutParams)
+                layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+                layoutParams.topToBottom =
+                    if (i == 0) R.id.RecommendBlock else parentLayout.getChildAt(i - 1).id
+            } else {
+                val layoutParams = ConstraintLayout.LayoutParams(
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                    moduleCardHeight
+                )
+                layoutParams.setMargins(10, 10, 10, 10)
+                parentLayout.addView(moduleCard, layoutParams)
+                if (i % 2 == 0) {
+                    layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+                    layoutParams.topToBottom =
+                        if (i == 0) R.id.RecommendBlock else parentLayout.getChildAt(i - 1).id
+                } else {
+                    layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+                    layoutParams.topToBottom =
+                        if (i == 1) R.id.RecommendBlock else parentLayout.getChildAt(i - 2).id
+                }
             }
         }
     }
+
 
 }
