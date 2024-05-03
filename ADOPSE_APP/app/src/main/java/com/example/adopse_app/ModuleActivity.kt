@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 
 class ModuleActivity: AppCompatActivity(){
+    private var currentPage = 0;
     var isSingleView = true
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,11 +37,23 @@ class ModuleActivity: AppCompatActivity(){
             insets
         }
 
-        var navigationCode = NavigationBar()
+        val navigationCode = NavigationBar()
         navigationCode.NavigationCode(this)
 
-        var viewActivity = BuildModules()
-        viewActivity.toggleModuleList(this)
+        val viewActivity = BuildModules()
+        viewActivity.modulesPerPage(this,currentPage)
+
+        val nextPage = findViewById<ImageButton>(R.id.nextPage)
+        nextPage.setOnClickListener {
+            currentPage += 1;
+            viewActivity.modulesPerPage(this,currentPage)
+        }
+
+        val previousPage = findViewById<ImageButton>(R.id.previousPage)
+        previousPage.setOnClickListener {
+            if (currentPage != 0){currentPage -= 1}else {}
+            viewActivity.modulesPerPage(this,currentPage)
+        }
 
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)
         gridModules.setOnClickListener {
@@ -49,7 +62,7 @@ class ModuleActivity: AppCompatActivity(){
             else
                 gridModules.setBackgroundResource(R.drawable.button_background_singlelist)
             viewActivity.onToggleViewButtonClick()
-            viewActivity.toggleModuleList(this)
+            viewActivity.modulesPerPage(this,currentPage)
         }
 
         val searchEditText = findViewById<EditText>(R.id.searchBarModule)
@@ -57,7 +70,7 @@ class ModuleActivity: AppCompatActivity(){
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
                 val searchTerm = searchEditText.text.toString()
-                var search = Search()
+                val search = Search()
                 search.performSearch(this, searchTerm)
                 true
             } else {
