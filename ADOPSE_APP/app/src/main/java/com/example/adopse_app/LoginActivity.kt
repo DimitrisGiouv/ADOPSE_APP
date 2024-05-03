@@ -37,18 +37,21 @@ class LoginActivity : AppCompatActivity() {
             }
 
             val Items = JSONObject()
-            Items.put("username", username.text.toString())
-            Items.put("password", password.text.toString())
+            Items.put("username", usernameText)
+            Items.put("password", passwordText)
             Items.put("email","x@x.x")
             val queue = Volley.newRequestQueue(this)
             val url = "http://10.0.2.2:5051/Authentication/login"
 
             val request = JsonObjectRequest(Request.Method.POST, url, Items,
-                Response.Listener { response ->
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+                {response ->
+                    Toast.makeText(this,"Welcome back ${usernameText}", Toast.LENGTH_SHORT).show()
+                    android.os.Handler().postDelayed({
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    },2000)
                 },
-                Response.ErrorListener { error ->
+                {error ->
                     Toast.makeText(this,"User not found", Toast.LENGTH_SHORT).show()
                 })
 
