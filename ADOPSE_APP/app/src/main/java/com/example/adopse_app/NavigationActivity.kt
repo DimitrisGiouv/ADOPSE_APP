@@ -47,5 +47,11 @@ class NavigationActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val changePwd = findViewById<Button>(R.id.button5)
+        changePwd.setOnClickListener {
+            val intent = Intent(this, ChangePasswordActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

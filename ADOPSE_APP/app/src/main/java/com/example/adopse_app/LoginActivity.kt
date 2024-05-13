@@ -1,5 +1,6 @@
 package com.example.adopse_app
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -46,6 +47,10 @@ class LoginActivity : AppCompatActivity() {
             val request = JsonObjectRequest(Request.Method.POST, url, Items,
                 {response ->
                     Toast.makeText(this,"Welcome back ${usernameText}", Toast.LENGTH_SHORT).show()
+                    val sharedPreferences = getSharedPreferences("myAppPref", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("username", usernameText)
+                    editor.putString("password", passwordText)
                     android.os.Handler().postDelayed({
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)

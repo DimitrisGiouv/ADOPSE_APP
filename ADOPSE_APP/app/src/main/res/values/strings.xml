@@ -3,4 +3,6 @@
     <string name="title_activity_main_page">MainPage</string>
     <string name="login_username_hint"><font size="15"><b>Username</b></font></string>
     <string name="login_password_hint"><font size="15"><b>Password</b></font></string>
+    <string name="old_password_hint"><font size="15"><b>Old password</b></font></string>
+    <string name="new_password_hint"><font size="15"><b>New password</b></font></string>
 </resources>

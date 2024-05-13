@@ -1,5 +1,6 @@
 package com.example.adopse_app
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -60,8 +61,6 @@ class SignupActivity :AppCompatActivity() {
             // Request a string response from the provided URL.
             val request = JsonObjectRequest (Request.Method.POST,url,Items,
                 { response ->
-                    // Handle response from server
-                    // For example, show a toast message indicating successful registration
                     Toast.makeText(this, "Welcome ${usernameText}", Toast.LENGTH_SHORT).show()
                     android.os.Handler().postDelayed({
                         val intent = Intent(this, MainActivity::class.java)
