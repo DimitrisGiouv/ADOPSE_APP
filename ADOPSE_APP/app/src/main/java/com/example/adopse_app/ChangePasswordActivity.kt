@@ -25,6 +25,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
         val usernameField = findViewById<EditText>(R.id.username)
         val emailField = findViewById<EditText>(R.id.email)
+        val oldPwdField = findViewById<EditText>(R.id.oldPassword)
         val newPwdField = findViewById<EditText>(R.id.newPassword)
         val submitBtn = findViewById<TextView>(R.id.submitBtn)
 
@@ -32,8 +33,9 @@ class ChangePasswordActivity : AppCompatActivity() {
             val usernameText = usernameField.text.toString().trim()
             val emailText = emailField.text.toString().trim()
             val newPwdText = newPwdField.text.toString().trim()
+            val oldPwdText = oldPwdField.text.toString().trim()
 
-            if(usernameText.isEmpty() || newPwdText.isEmpty() || emailText.isEmpty()){
+            if(usernameText.isEmpty() || newPwdText.isEmpty() || emailText.isEmpty() || oldPwdText.isEmpty()){
                 Toast.makeText(this, "Please fill the fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -51,9 +53,10 @@ class ChangePasswordActivity : AppCompatActivity() {
             val sharedPreferences = getSharedPreferences("myAppPref", Context.MODE_PRIVATE)
             val username = sharedPreferences.getString("username", "")
             val email = sharedPreferences.getString("email", "")
+            val oldPassword = sharedPreferences.getString("password", "")
             val id = sharedPreferences.getInt("id", -1)
 
-            if(usernameText != username || emailText != email){
+            if(usernameText != username || emailText != email || oldPwdText != oldPassword){
                 Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

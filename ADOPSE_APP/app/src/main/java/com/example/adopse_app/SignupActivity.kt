@@ -88,6 +88,7 @@ class SignupActivity :AppCompatActivity() {
                                 val sharedPreferences = getSharedPreferences("myAppPref", MODE_PRIVATE)
                                 with(sharedPreferences.edit()){
                                     putString("username", userJsonObject?.getString("username"))
+                                    putString("password", userJsonObject?.getString("password"))
                                     putString("email", userJsonObject?.getString("email"))
                                     putInt("id", userJsonObject?.getInt("id")?: -1)
                                     apply()
