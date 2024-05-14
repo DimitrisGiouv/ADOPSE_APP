@@ -144,27 +144,6 @@
             app:layout_constraintVertical_bias="0.0"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <ImageButton
-            android:id="@+id/previousPage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/nextPage"
-            app:layout_constraintStart_toEndOf="@+id/gridViewButton"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_close_24" />
-
-        <ImageButton
-            android:id="@+id/nextPage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/previousPage"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_arrow_forward_24_blue" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- This is the Module discovery block -->
@@ -196,7 +175,8 @@
         android:layout_height="wrap_content"
         android:text="Φόρτωση Περισσότερων"
         android:visibility="gone"
-        android:background="@color/light_orange"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/light_orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

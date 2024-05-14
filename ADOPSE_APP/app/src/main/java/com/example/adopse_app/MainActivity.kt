@@ -3,6 +3,7 @@ package com.example.adopse_app
 import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
@@ -59,25 +60,14 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
-        val nextPage = findViewById<ImageButton>(R.id.nextPage)
-        nextPage.setOnClickListener {
+        val loadMoreButton = findViewById<Button>(R.id.loadMoreButton)
+        loadMoreButton.setOnClickListener {
             val searchTerm = searchEditText.text.toString()
             if (searchTerm.isEmpty()) {
                 currentPage += 1
                 viewActivity.modulesPerPage(this, currentPage)
             } else {
                 search.nextPage(this, searchTerm)
-            }
-        }
-
-        val previousPage = findViewById<ImageButton>(R.id.previousPage)
-        previousPage.setOnClickListener {
-            val searchTerm = searchEditText.text.toString()
-            if (searchTerm.isEmpty() || currentPage == 0) {
-                if (currentPage != 0) currentPage -= 1
-                viewActivity.modulesPerPage(this, currentPage)
-            } else {
-                search.previousPage(this, searchTerm)
             }
         }
     }

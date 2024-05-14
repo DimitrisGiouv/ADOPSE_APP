@@ -2,6 +2,7 @@ package com.example.adopse_app
 
 import android.content.Intent
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -129,6 +130,11 @@ class Search {
                     layoutParams.topToBottom =
                         if (i == 1) R.id.RecommendBlock else parentLayout.getChildAt(i - 2).id
                 }
+            }
+            // Εμφανίζει το κουμπί "Φόρτωση Περισσότερων" αν υπάρχουν περισσότερα αποτελέσματα
+            if (i == modulesArray.length() - 1) {
+                val loadMoreButton = activity.findViewById<Button>(R.id.loadMoreButton)
+                loadMoreButton.visibility = if (isSingleView) View.GONE else View.VISIBLE
             }
         }
     }
