@@ -66,6 +66,11 @@
             android:exported="true"
             android:theme="@style/Theme.ADOPSE_APP"/>
 
+        <activity
+        android:name=".EditActivity"
+        android:exported="true"
+        android:theme="@style/Theme.ADOPSE_APP"/>
+
     </application>
 
 </manifest>
