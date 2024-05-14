@@ -133,7 +133,6 @@ class SignupActivity :AppCompatActivity() {
         }
 
     }
-
     fun hasSpecialCharAndUpper(password: String): Boolean{
         val specialCharRegex = Regex("[!@#$%^&*(){}:;><.,?]")
         val upperRegex = Regex("[A-Z]")
