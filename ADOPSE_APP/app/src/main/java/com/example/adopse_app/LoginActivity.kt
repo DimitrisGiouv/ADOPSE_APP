@@ -51,6 +51,8 @@ class LoginActivity : AppCompatActivity() {
                     val editor = sharedPreferences.edit()
                     editor.putString("username", usernameText)
                     editor.putString("password", passwordText)
+                    editor.putString("isLogged", "true")
+                    editor.apply()
                     android.os.Handler().postDelayed({
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
@@ -63,13 +65,12 @@ class LoginActivity : AppCompatActivity() {
             queue.add(request)
         }
 
+
+
         btnSignUp.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
-
-
-
    }
 
 

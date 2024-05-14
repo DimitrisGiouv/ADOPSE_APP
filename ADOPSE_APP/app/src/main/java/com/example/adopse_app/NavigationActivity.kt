@@ -29,27 +29,10 @@ class NavigationActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-        val profilePage = findViewById<Button>(R.id.btn_profile)
-        profilePage.setOnClickListener {
-            val intent = Intent(this, UserProfileActivity::class.java)
-            startActivity(intent)
-        }
         // Κουμπί που μεταφέρει στην οθόνη με τις ενότητες
         val modulePage = findViewById<Button>(R.id.btn_modules)
         modulePage.setOnClickListener {
             val intent = Intent(this, ModuleActivity::class.java)
-            startActivity(intent)
-        }
-
-        val moduleProfilPage = findViewById<Button>(R.id.btn_moduleProfil)
-        moduleProfilPage.setOnClickListener {
-            val intent = Intent(this, ModuleProfileActivity::class.java)
-            startActivity(intent)
-        }
-
-        val changePwd = findViewById<Button>(R.id.button5)
-        changePwd.setOnClickListener {
-            val intent = Intent(this, ChangePasswordActivity::class.java)
             startActivity(intent)
         }
 

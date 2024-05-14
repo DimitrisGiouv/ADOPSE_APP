@@ -1,5 +1,6 @@
 package com.example.adopse_app
 
+import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -23,8 +24,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        var navigationCode = NavigationBar()
-        navigationCode.NavigationCode(this)
+        val sharedPreferences = getSharedPreferences("myAppPref", Context.MODE_PRIVATE)
+        val isLogged = sharedPreferences.getString("isLogged", "")
+
+        println("The value of isLogged: $isLogged")
+        var navigationBar = NavigationBar()
+        navigationBar.NavigationCode(this)
 
         val viewActivity = BuildModules()
         viewActivity.modulesPerPage(this,currentPage)

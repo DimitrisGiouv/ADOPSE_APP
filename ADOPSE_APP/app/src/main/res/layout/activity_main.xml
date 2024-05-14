@@ -38,13 +38,13 @@
             android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/navigation_button"
-            app:layout_constraintRight_toLeftOf="@id/User"
+            app:layout_constraintRight_toLeftOf="@id/user_button"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo_transparent"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
-            android:id="@+id/User"
+            android:id="@+id/user_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="15dp"

@@ -1,6 +1,7 @@
 package com.example.adopse_app
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText

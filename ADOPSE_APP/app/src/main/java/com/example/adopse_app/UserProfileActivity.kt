@@ -1,8 +1,10 @@
 package com.example.adopse_app
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -24,28 +26,33 @@ class UserProfileActivity : AppCompatActivity() {
             insets
         }
 
-        /* Redirection to Sign up if user does not have an account */
-        val tempRedirect = findViewById<ImageButton>(R.id.user_profile_picture)
-        tempRedirect.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
+        val navigationCode = NavigationBar()
+        navigationCode.NavigationCode(this)
+
+        val logoutButton = findViewById<Button>(R.id.logout_button)
+        logoutButton.setOnClickListener {
+            // Perform logout actions
+            val sharedPreferences = getSharedPreferences("myAppPref", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.clear()
+            editor.apply()
+            // Redirect to LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
-        /* Navigation Hamburger */
-        val navigationButton = findViewById<ImageButton>(R.id.navigation_button)
-        navigationButton.setOnClickListener {
-            val intent = Intent(this, NavigationActivity::class.java)
+        val editProfileButton = findViewById<Button>(R.id.edit_button)
+        editProfileButton.setOnClickListener {
+            val intent = Intent(this, EditActivity::class.java)
             startActivity(intent)
         }
-
-        val logoButton = findViewById<ImageButton>(R.id.logo_button)
-        logoButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-
 
         populateUserCourses();
+
+        val sharedPreferences = getSharedPreferences("myAppPref", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", "")
+        val textViewUsername = findViewById<TextView>(R.id.profile_welcome)
+        textViewUsername.text = username
     }
 
     private fun populateUserCourses(){
@@ -106,5 +113,11 @@ class UserProfileActivity : AppCompatActivity() {
 
             parentLayout.addView(moduleCard, layoutParams)
         }
+
     }
+    private fun isLoggedIn(): Boolean {
+        val sharedPreferences = getSharedPreferences("myAppPref", Context.MODE_PRIVATE)
+        return sharedPreferences.contains("isLogged")
+    }
+
 }
