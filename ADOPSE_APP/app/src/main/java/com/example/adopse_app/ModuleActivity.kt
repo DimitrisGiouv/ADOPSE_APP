@@ -1,29 +1,18 @@
 package com.example.adopse_app
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.content.ContextCompat
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 
 class ModuleActivity: AppCompatActivity(){
     private var currentPage = 0;
-    var isSingleView = true
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,20 +29,10 @@ class ModuleActivity: AppCompatActivity(){
         val navigationCode = NavigationBar()
         navigationCode.NavigationCode(this)
 
+        var search = Search()
+
         val viewActivity = BuildModules()
         viewActivity.modulesPerPage(this,currentPage)
-
-        val nextPage = findViewById<ImageButton>(R.id.nextPage)
-        nextPage.setOnClickListener {
-            currentPage += 1;
-            viewActivity.modulesPerPage(this,currentPage)
-        }
-
-        val previousPage = findViewById<ImageButton>(R.id.previousPage)
-        previousPage.setOnClickListener {
-            if (currentPage != 0){currentPage -= 1}else {}
-            viewActivity.modulesPerPage(this,currentPage)
-        }
 
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)
         gridModules.setOnClickListener {
@@ -70,11 +49,31 @@ class ModuleActivity: AppCompatActivity(){
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
                 val searchTerm = searchEditText.text.toString()
-                val search = Search()
                 search.performSearch(this, searchTerm)
                 true
             } else {
                 false
+            }
+        }
+        val nextPage = findViewById<ImageButton>(R.id.nextPage)
+        nextPage.setOnClickListener {
+            val searchTerm = searchEditText.text.toString()
+            if (searchTerm.isEmpty()) {
+                currentPage += 1
+                viewActivity.modulesPerPage(this, currentPage)
+            } else {
+                search.nextPage(this, searchTerm)
+            }
+        }
+
+        val previousPage = findViewById<ImageButton>(R.id.previousPage)
+        previousPage.setOnClickListener {
+            val searchTerm = searchEditText.text.toString()
+            if (searchTerm.isEmpty() || currentPage == 0) {
+                if (currentPage != 0) currentPage -= 1
+                viewActivity.modulesPerPage(this, currentPage)
+            } else {
+                search.previousPage(this, searchTerm)
             }
         }
 

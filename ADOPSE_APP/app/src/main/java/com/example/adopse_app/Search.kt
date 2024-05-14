@@ -12,11 +12,26 @@ import com.android.volley.toolbox.Volley
 import org.json.JSONArray
 
 class Search {
+    private var currentPage = 0
+
+
     fun performSearch(activity: AppCompatActivity, searchBar: String) {
+        currentPage = 0
+        if (searchBar.isBlank()) {
+            Toast.makeText(activity, "Το πεδίο αναζήτησης είναι κενό", Toast.LENGTH_SHORT).show()
+            val intent = Intent(activity, MainActivity::class.java)
+            activity.startActivity(intent)
+        } else {
+            requestModules(activity, searchBar)
+        }
+    }
+
+
+    private fun requestModules(activity: AppCompatActivity, searchBar: String) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
-        val url = "http://10.0.2.2:5051/Module/filtered/200/0/?SearchQuery=$searchBar"
+        val url = "http://10.0.2.2:5051/Module/filtered/10/$currentPage/?SearchQuery=$searchBar"
         val queue = Volley.newRequestQueue(activity)
 
         val request = JsonObjectRequest(
@@ -37,7 +52,7 @@ class Search {
         queue.add(request)
     }
 
-    fun showResults(activity: AppCompatActivity, modulesArray: JSONArray, isSingleView: Boolean) {
+    private fun showResults(activity: AppCompatActivity, modulesArray: JSONArray, isSingleView: Boolean) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
 
         for (i in 0 until modulesArray.length()) {
@@ -118,5 +133,16 @@ class Search {
         }
     }
 
+    fun nextPage(activity: AppCompatActivity, searchTerm: String) {
+        currentPage+=10
+        requestModules(activity, searchTerm)
+    }
 
+
+    fun previousPage(activity: AppCompatActivity, searchTerm: String) {
+        if (currentPage > 0) {
+            currentPage-=10
+            requestModules(activity, searchTerm)
+        }
+    }
 }
