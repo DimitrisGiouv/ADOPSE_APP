@@ -1,19 +1,19 @@
 package com.example.adopse_app
 
-import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class ModuleActivity: AppCompatActivity(){
-    private var currentPage = 0;
+class ModuleActivity : AppCompatActivity() {
+    private var currentPage = 0
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,7 +32,7 @@ class ModuleActivity: AppCompatActivity(){
         var search = Search()
 
         val viewActivity = BuildModules()
-        viewActivity.modulesPerPage(this,currentPage)
+        viewActivity.modulesPerPage(this, currentPage)
 
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)
         gridModules.setOnClickListener {
@@ -41,7 +41,7 @@ class ModuleActivity: AppCompatActivity(){
             else
                 gridModules.setBackgroundResource(R.drawable.button_background_singlelist)
             viewActivity.onToggleViewButtonClick()
-            viewActivity.modulesPerPage(this,currentPage)
+            viewActivity.modulesPerPage(this, currentPage)
         }
 
         val searchEditText = findViewById<EditText>(R.id.searchBarModule)
@@ -49,12 +49,13 @@ class ModuleActivity: AppCompatActivity(){
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
                 val searchTerm = searchEditText.text.toString()
-                search.performSearch(this, searchTerm,true)
+                search.performSearch(this, searchTerm, true)
                 true
             } else {
                 false
             }
         }
+
         val nextPage = findViewById<ImageButton>(R.id.nextPage)
         nextPage.setOnClickListener {
             val searchTerm = searchEditText.text.toString()
@@ -77,6 +78,24 @@ class ModuleActivity: AppCompatActivity(){
             }
         }
 
+        // Προσθήκη του click listener για το κουμπί φίλτρων
+        val filterButton = findViewById<ImageButton>(R.id.filterButton)
+        filterButton.setOnClickListener {
+            showFilterDialog()
+        }
+    }
+
+    private fun showFilterDialog() {
+        val dialog = Dialog(this)
+        val inflater = LayoutInflater.from(this)
+        val view = inflater.inflate(R.layout.dialog_filters, null)
+
+        dialog.setContentView(view)
+        dialog.show()
+
+        val applyButton = view.findViewById<Button>(R.id.apply_filters_button)
+        applyButton.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 }
-
