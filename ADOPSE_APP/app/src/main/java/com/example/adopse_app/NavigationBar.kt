@@ -10,11 +10,11 @@ class NavigationBar: AppCompatActivity() {
 
     fun NavigationCode(activity: Activity) {
         val navigationButton = activity.findViewById<ImageButton>(R.id.navigation_button)
-        navigationButton.setOnClickListener()
-        {
+        navigationButton.setOnClickListener {
             val intent = Intent(activity, NavigationActivity::class.java)
             activity.startActivity(intent)
         }
+
 
         // Κουμπί που μεταφέρει στην οθόνη εισόδου
         if (isLoggedIn(activity)) {

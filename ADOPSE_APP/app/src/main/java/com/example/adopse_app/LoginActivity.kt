@@ -1,6 +1,5 @@
 package com.example.adopse_app
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +8,11 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
 
 
 class LoginActivity : AppCompatActivity() {
@@ -54,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
                         { response ->
                             var userFound = false
                             var userJsonObject: JSONObject? = null
+                            var isLogged = false
 
                             // Iterate through users to find the user with the same username
                             for (i in 0 until response.length()) {
@@ -64,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
                                     // User found
                                     userFound = true
                                     userJsonObject = user
+                                    isLogged = true
                                     break
                                 }
                             }
@@ -75,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
                                     putString("password", userJsonObject?.getString("password"))
                                     putString("email", userJsonObject?.getString("email"))
                                     putInt("id", userJsonObject?.getInt("id")?: -1)
+                                    putBoolean("isLogged", true)
                                     apply()
                                 }
 

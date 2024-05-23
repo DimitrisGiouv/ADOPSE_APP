@@ -1,5 +1,6 @@
 package com.example.adopse_app
 
+import Search
 import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val sharedPreferences = getSharedPreferences("myAppPref", Context.MODE_PRIVATE)
-        val isLogged = sharedPreferences.getString("isLogged", "")
+        val isLogged = sharedPreferences.getBoolean("isLogged", false)
 
         println("The value of isLogged: $isLogged")
         var navigationBar = NavigationBar()
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 currentPage += 1
                 viewActivity.modulesPerPage(this, currentPage)
             } else {
-                search.nextPage(this, searchTerm)
+                search.nextPage(this, searchTerm, false)
             }
         }
     }

@@ -385,19 +385,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/popularity_module2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/moreModules_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="30dp"
-            android:text="See More"
-            android:textColor="@color/blue"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ModuleCard2"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Category Card 1 -->
@@ -417,8 +404,10 @@
             android:id="@+id/categories_pill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="249dp"
+            android:layout_marginBottom="176dp"
             android:background="@drawable/banner_blue"
             android:elevation="5dp"
             android:paddingLeft="20dp"
@@ -429,7 +418,25 @@
             android:textColor="@color/white"
             android:textSize="16dp"
             android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/moreModules_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginBottom="222dp"
+            android:text="See More"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/categories_pill"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

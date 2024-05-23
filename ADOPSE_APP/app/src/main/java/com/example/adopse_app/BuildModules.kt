@@ -20,7 +20,7 @@ class BuildModules : AppCompatActivity() {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
-        repeat(6) { index ->
+        repeat(10) { index ->
             val moduleCard = if (isSingleView) {
                 activity.layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
             } else {

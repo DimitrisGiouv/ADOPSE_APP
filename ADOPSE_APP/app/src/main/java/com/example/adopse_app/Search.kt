@@ -1,5 +1,3 @@
-package com.example.adopse_app
-
 import android.content.Intent
 import android.view.View
 import android.widget.Button
@@ -10,25 +8,26 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.adopse_app.BuildModules
+import com.example.adopse_app.ModuleProfileActivity
+import com.example.adopse_app.R
 import org.json.JSONArray
 
 class Search {
     private var currentPage = 0
 
-
-    fun performSearch(activity: AppCompatActivity, searchBar: String) {
+    fun performSearch(activity: AppCompatActivity, searchBar: String, isModuleActivity: Boolean = false) {
         currentPage = 0
         if (searchBar.isBlank()) {
             Toast.makeText(activity, "Το πεδίο αναζήτησης είναι κενό", Toast.LENGTH_SHORT).show()
-            val intent = Intent(activity, MainActivity::class.java)
-            activity.startActivity(intent)
+            val build = BuildModules()
+            build.toggleModuleList(activity)
         } else {
-            requestModules(activity, searchBar)
+            requestModules(activity, searchBar, isModuleActivity)
         }
     }
 
-
-    private fun requestModules(activity: AppCompatActivity, searchBar: String) {
+    private fun requestModules(activity: AppCompatActivity, searchBar: String, isModuleActivity: Boolean) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
@@ -40,9 +39,11 @@ class Search {
             { response ->
                 val modulesArray = response.getJSONArray("modules")
                 if (modulesArray.length() > 0) {
-                    showResults(activity, modulesArray, false)
+                    showResults(activity, modulesArray, false, isModuleActivity)
                 } else {
-                    Toast.makeText(activity, "No modules found with ID $searchBar", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Δεν βρέθηκαν άλλα μαθήματα που να ταιριάζουν με τον όρο αναζήτησης: $searchBar", Toast.LENGTH_SHORT).show()
+                    val build = BuildModules()
+                    build.toggleModuleList(activity)
                 }
             },
             { error ->
@@ -53,7 +54,7 @@ class Search {
         queue.add(request)
     }
 
-    private fun showResults(activity: AppCompatActivity, modulesArray: JSONArray, isSingleView: Boolean) {
+    private fun showResults(activity: AppCompatActivity, modulesArray: JSONArray, isSingleView: Boolean, isModuleActivity: Boolean) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
 
         for (i in 0 until modulesArray.length()) {
@@ -132,23 +133,24 @@ class Search {
                 }
             }
             // Εμφανίζει το κουμπί "Φόρτωση Περισσότερων" αν υπάρχουν περισσότερα αποτελέσματα
-            if (i == modulesArray.length() - 1) {
+            if (!isModuleActivity && i == modulesArray.length() - 1) {
                 val loadMoreButton = activity.findViewById<Button>(R.id.loadMoreButton)
-                loadMoreButton.visibility = if (isSingleView) View.GONE else View.VISIBLE
+                loadMoreButton?.let {
+                    it.visibility = if (isSingleView) View.GONE else View.VISIBLE
+                }
             }
         }
     }
 
-    fun nextPage(activity: AppCompatActivity, searchTerm: String) {
-        currentPage+=10
-        requestModules(activity, searchTerm)
+    fun nextPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false) {
+        currentPage += 10
+        requestModules(activity, searchTerm, isModuleActivity)
     }
 
-
-    fun previousPage(activity: AppCompatActivity, searchTerm: String) {
+    fun previousPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false) {
         if (currentPage > 0) {
-            currentPage-=10
-            requestModules(activity, searchTerm)
+            currentPage -= 10
+            requestModules(activity, searchTerm, isModuleActivity)
         }
     }
 }

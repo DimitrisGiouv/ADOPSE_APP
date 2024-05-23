@@ -1,5 +1,6 @@
 package com.example.adopse_app
 
+import Search
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
@@ -63,7 +64,7 @@ class ModuleActivity: AppCompatActivity(){
                 currentPage += 1
                 viewActivity.modulesPerPage(this, currentPage)
             } else {
-                search.nextPage(this, searchTerm)
+                search.nextPage(this, searchTerm, true)
             }
         }
 
@@ -74,7 +75,7 @@ class ModuleActivity: AppCompatActivity(){
                 if (currentPage != 0) currentPage -= 1
                 viewActivity.modulesPerPage(this, currentPage)
             } else {
-                search.previousPage(this, searchTerm)
+                search.previousPage(this, searchTerm, true)
             }
         }
 
