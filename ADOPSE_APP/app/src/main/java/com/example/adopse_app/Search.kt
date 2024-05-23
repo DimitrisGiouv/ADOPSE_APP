@@ -1,3 +1,5 @@
+package com.example.adopse_app
+
 import android.content.Intent
 import android.view.View
 import android.widget.Button
@@ -8,9 +10,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.adopse_app.BuildModules
-import com.example.adopse_app.ModuleProfileActivity
-import com.example.adopse_app.R
 import org.json.JSONArray
 
 class Search {
@@ -67,7 +66,7 @@ class Search {
 
             val moduleTextView = moduleCard.findViewById<TextView>(R.id.module1)
             val difficultyTextView = moduleCard.findViewById<TextView>(R.id.difficulty_module1)
-            var descriptorTextView = moduleCard.findViewById<TextView>(R.id.Dismodule1)
+            val descriptorTextView = moduleCard.findViewById<TextView>(R.id.Dismodule1)
             val popularityTextView = moduleCard.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard.findViewById<TextView>(R.id.rating_module1)
 
@@ -77,21 +76,20 @@ class Search {
             descriptorTextView.text = module.get("description").toString()
             popularityTextView.text = module.getInt("price").toString()
             ratingTextView.text = module.getInt("rating").toString()
-            // Περιορίζουμε την περιγραφή σε 30 χαρακτήρες και προσθέτουμε "..." στο τέλος αν είναι απαραίτητο
+
             val sizeLimitation = module.getString("description")
             val truncatedDescription = if (sizeLimitation.length > 30) {
                 sizeLimitation.substring(0, 30) + "..."
             } else {
                 sizeLimitation
             }
-
             descriptorTextView.text = truncatedDescription
 
-            moduleCard?.setOnClickListener {
-                val moduleName = moduleTextView?.text?.toString()
-                val moduleDifficulty = difficultyTextView?.text?.toString()
-                val modulePopularity = popularityTextView?.text?.toString()
-                val moduleRating = ratingTextView?.text?.toString()
+            moduleCard.setOnClickListener {
+                val moduleName = moduleTextView.text.toString()
+                val moduleDifficulty = difficultyTextView.text.toString()
+                val modulePopularity = popularityTextView.text.toString()
+                val moduleRating = ratingTextView.text.toString()
 
                 val intent = Intent(activity, ModuleProfileActivity::class.java).apply {
                     putExtra("moduleName", moduleName)
@@ -103,44 +101,33 @@ class Search {
                 activity.startActivity(intent)
             }
 
-            val moduleCardHeight = 550 // Ύψος του moduleCard
+            val moduleCardHeight = 550 // Adjust height as needed
 
-            if (isSingleView) {
-                val layoutParams = ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.MATCH_PARENT,
-                    moduleCardHeight
-                )
-                layoutParams.setMargins(10, 10, 10, 10)
-                parentLayout.addView(moduleCard, layoutParams)
+            val layoutParams = ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                moduleCardHeight
+            )
+            layoutParams.setMargins(10, 10, 10, 10)
+
+            if (i % 2 == 0) {
                 layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-                layoutParams.topToBottom =
-                    if (i == 0) R.id.RecommendBlock else parentLayout.getChildAt(i - 1).id
+                layoutParams.topToBottom = if (i == 0) R.id.RecommendBlock else parentLayout.getChildAt(i - 1).id
             } else {
-                val layoutParams = ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                    moduleCardHeight
-                )
-                layoutParams.setMargins(10, 10, 10, 10)
-                parentLayout.addView(moduleCard, layoutParams)
-                if (i % 2 == 0) {
-                    layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-                    layoutParams.topToBottom =
-                        if (i == 0) R.id.RecommendBlock else parentLayout.getChildAt(i - 1).id
-                } else {
-                    layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-                    layoutParams.topToBottom =
-                        if (i == 1) R.id.RecommendBlock else parentLayout.getChildAt(i - 2).id
-                }
+                layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+                layoutParams.topToBottom = if (i == 1) R.id.RecommendBlock else parentLayout.getChildAt(i - 2).id
             }
-            // Εμφανίζει το κουμπί "Φόρτωση Περισσότερων" αν υπάρχουν περισσότερα αποτελέσματα
-            if (!isModuleActivity && i == modulesArray.length() - 1) {
-                val loadMoreButton = activity.findViewById<Button>(R.id.loadMoreButton)
-                loadMoreButton?.let {
-                    it.visibility = if (isSingleView) View.GONE else View.VISIBLE
-                }
+
+            parentLayout.addView(moduleCard, layoutParams)
+        }
+
+        if (!isModuleActivity && modulesArray.length() > 0) {
+            val loadMoreButton = activity.findViewById<Button>(R.id.loadMoreButton)
+            loadMoreButton?.let {
+                it.visibility = if (isSingleView) View.GONE else View.VISIBLE
             }
         }
     }
+
 
     fun nextPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false) {
         currentPage += 10

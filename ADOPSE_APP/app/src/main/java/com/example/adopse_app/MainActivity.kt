@@ -1,6 +1,5 @@
 package com.example.adopse_app
 
-import Search
 import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
                 val searchTerm = searchEditText.text.toString()
 
-                search.performSearch(this, searchTerm)
+                search.performSearch(this, searchTerm,false)
                 true
             } else {
                 false
