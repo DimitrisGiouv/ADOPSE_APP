@@ -53,7 +53,7 @@ class Search {
         queue.add(request)
     }
 
-    private fun showResults(activity: AppCompatActivity, modulesArray: JSONArray, isSingleView: Boolean, isModuleActivity: Boolean) {
+    fun showResults(activity: AppCompatActivity, modulesArray: JSONArray, isSingleView: Boolean, isModuleActivity: Boolean) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
 
         for (i in 0 until modulesArray.length()) {

@@ -57,31 +57,32 @@
 
         <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/type_radio_group">
 
             <RadioButton
                 android:id="@+id/type_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="77dp"
+                android:layout_height="28dp"
                 android:checked="true"
                 android:text="ALL" />
 
             <RadioButton
                 android:id="@+id/type_lab"
-                android:layout_width="129dp"
-                android:layout_height="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
                 android:text="Εργαστήριο" />
 
             <RadioButton
                 android:id="@+id/type_theory"
-                android:layout_width="116dp"
-                android:layout_height="32dp"
+                android:layout_width="111dp"
+                android:layout_height="31dp"
                 android:text="Θεωρία" />
 
             <RadioButton
                 android:id="@+id/type_mix"
-                android:layout_width="103dp"
-                android:layout_height="37dp"
+                android:layout_width="107dp"
+                android:layout_height="33dp"
                 android:text="Mix" />
         </RadioGroup>
 
@@ -94,32 +95,33 @@
             android:textSize="16sp" />
 
         <RadioGroup
-            android:layout_width="331dp"
-            android:layout_height="161dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/difficulty_radio_group">
 
             <RadioButton
                 android:id="@+id/difficulty_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="79dp"
+                android:layout_height="33dp"
                 android:checked="true"
                 android:text="ALL" />
 
             <RadioButton
                 android:id="@+id/difficulty_easy"
-                android:layout_width="79dp"
-                android:layout_height="36dp"
+                android:layout_width="81dp"
+                android:layout_height="31dp"
                 android:text="Easy" />
 
             <RadioButton
                 android:id="@+id/difficulty_medium"
                 android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_height="29dp"
                 android:text="Medium" />
 
             <RadioButton
                 android:id="@+id/difficulty_hard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="89dp"
+                android:layout_height="33dp"
                 android:text="Hard" />
         </RadioGroup>
 
@@ -132,47 +134,46 @@
             android:textSize="16sp" />
 
         <LinearLayout
-            android:layout_width="335dp"
-            android:layout_height="173dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <CheckBox
                 android:id="@+id/rating_5"
-                android:layout_width="124dp"
+                android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:text="★★★★★ 5" />
 
             <CheckBox
                 android:id="@+id/rating_4"
-                android:layout_width="131dp"
-                android:layout_height="36dp"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
                 android:text="★★★★☆ >4" />
 
             <CheckBox
                 android:id="@+id/rating_3"
-                android:layout_width="133dp"
+                android:layout_width="wrap_content"
                 android:layout_height="34dp"
                 android:text="★★★☆☆ >3" />
 
             <CheckBox
                 android:id="@+id/rating_2"
-                android:layout_width="131dp"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:text="★★☆☆☆ >2" />
 
             <CheckBox
                 android:id="@+id/rating_all"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="34dp"
                 android:text="★☆☆☆☆ All" />
         </LinearLayout>
 
         <Button
             android:id="@+id/apply_filters_button"
-            android:layout_width="356dp"
-            android:layout_height="34dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/light_orange"
             android:text="Apply Filters" />
     </LinearLayout>
 </ScrollView>
