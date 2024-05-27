@@ -112,7 +112,6 @@ class ModuleActivity : AppCompatActivity() {
         dialog.setContentView(view)
         dialog.show()
 
-        // Initialize the references
         val minValueEditText = view.findViewById<EditText>(R.id.min_price)
         val maxValueEditText = view.findViewById<EditText>(R.id.max_price)
         val seekBar = view.findViewById<SeekBar>(R.id.price_seekbar)
@@ -124,12 +123,10 @@ class ModuleActivity : AppCompatActivity() {
         val rating2CheckBox = view.findViewById<CheckBox>(R.id.rating_2)
         val ratingAllCheckBox = view.findViewById<CheckBox>(R.id.rating_all)
 
-        // Set initial values
         minValueEditText.setText(priceRange[0].toString())
         maxValueEditText.setText(priceRange[1].toString())
         seekBar.progress = ((priceRange[0] + priceRange[1]) / 2).toInt()
 
-        // Handle SeekBar changes
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 val minValue = (progress - seekBar!!.max / 2).coerceAtLeast(0)
@@ -139,14 +136,12 @@ class ModuleActivity : AppCompatActivity() {
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 priceRange[0] = minValueEditText.text.toString().toFloat()
                 priceRange[1] = maxValueEditText.text.toString().toFloat()
             }
         })
 
-        // Handle EditText changes
         minValueEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val value = s?.toString()?.toFloatOrNull()
@@ -175,7 +170,6 @@ class ModuleActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
-        // Handle type change
         typeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             selectedType = when (checkedId) {
                 R.id.type_all -> 0
@@ -186,7 +180,6 @@ class ModuleActivity : AppCompatActivity() {
             }
         }
 
-        // Handle difficulty change
         difficultyRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             selectedDifficulty = when (checkedId) {
                 R.id.difficulty_all -> 0
@@ -197,7 +190,6 @@ class ModuleActivity : AppCompatActivity() {
             }
         }
 
-        // Handle ratings change
         rating5CheckBox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) selectedRatings = 5
         }
@@ -255,8 +247,6 @@ class ModuleActivity : AppCompatActivity() {
     }
 
     private fun filteredModulesPerPage(activity: Activity, numberOfPage: Int, filters: Map<String, String>) {
-        Log.d("ModuleActivity", "filteredModulesPerPage method started")
-
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
@@ -267,19 +257,14 @@ class ModuleActivity : AppCompatActivity() {
                 "DifficultyId=${filters["DifficultyId"]}&" +
                 "Rating=${filters["Rating"]}"
 
-        Log.d("ModuleActivity", "URL: $url")
-
         val request = JsonObjectRequest(
             Request.Method.GET, url, null,
             { response ->
-                Log.d("ModuleActivity", "Response received successfully")
-
                 val modules = response.getJSONArray("modules")
                 val search = Search()
                 search.showResults(this, modules, false, true)
             },
             { error ->
-                Log.e("ModuleActivity", "Error: $error")
 
                 if (error is NoConnectionError || error is TimeoutError) {
                     Toast.makeText(activity, "No internet connection or server unavailable", Toast.LENGTH_SHORT).show()
