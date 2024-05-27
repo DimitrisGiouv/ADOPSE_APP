@@ -7,7 +7,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.android.volley.NoConnectionError
 import com.android.volley.Request
+import com.android.volley.TimeoutError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
@@ -22,15 +24,24 @@ class Search {
             val build = BuildModules()
             build.toggleModuleList(activity)
         } else {
-            requestModules(activity, searchBar, isModuleActivity)
+            requestModules(activity, searchBar, isModuleActivity, filters = null)
         }
     }
 
-    private fun requestModules(activity: AppCompatActivity, searchBar: String, isModuleActivity: Boolean) {
+    private fun requestModules(activity: AppCompatActivity, searchBar: String, isModuleActivity: Boolean, filters: Map<String, String>?) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
-        val url = "http://10.0.2.2:5051/Module/filtered/10/$currentPage/?SearchQuery=$searchBar"
+        val url = if (filters == null || filters.isEmpty()) {
+            "http://10.0.2.2:5051/Module/filtered/10/$currentPage/?SearchQuery=$searchBar"
+        } else {
+            "http://10.0.2.2:5051/Module/filtered/10/$currentPage?" +
+                    "ModuleTypeId=${filters["ModuleTypeId"]}&" +
+                    "DifficultyId=${filters["DifficultyId"]}&" +
+                    "Rating=${filters["Rating"]}&" +
+                    "SearchQuery=$searchBar"
+        }
+
         val queue = Volley.newRequestQueue(activity)
 
         val request = JsonObjectRequest(
@@ -52,6 +63,40 @@ class Search {
 
         queue.add(request)
     }
+    fun filteredModulesPerPage(activity: AppCompatActivity, numberOfPage: Int, filters: Map<String, String>) {
+        val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
+        parentLayout.removeAllViews()
+
+        val moduleOfPage = numberOfPage * 10
+
+        val url = "http://10.0.2.2:5051/Module/filtered/10/$moduleOfPage?" +
+                "ModuleTypeId=${filters["ModuleTypeId"]}&" +
+                "DifficultyId=${filters["DifficultyId"]}&" +
+                "Rating=${filters["Rating"]}"
+
+        val request = JsonObjectRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                val modulesArray = response.getJSONArray("modules")
+                if (modulesArray.length() > 0) {
+                    showResults(activity, modulesArray, false, true)
+                } else {
+                    Toast.makeText(activity, "Δεν βρέθηκαν άλλα μαθήματα ", Toast.LENGTH_SHORT).show()
+                    val build = BuildModules()
+                    build.toggleModuleList(activity)
+                }
+            },
+            { error ->
+                if (error is NoConnectionError || error is TimeoutError) {
+                    Toast.makeText(activity, "Δεν υπάρχει σύνδεση στο διαδίκτυο ή ο διακομιστής δεν είναι διαθέσιμος", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(activity, "Αποτυχία ανάκτησης δεδομένων μαθημάτων", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+        Volley.newRequestQueue(activity).add(request)
+    }
+
 
     fun showResults(activity: AppCompatActivity, modulesArray: JSONArray, isSingleView: Boolean, isModuleActivity: Boolean) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
@@ -131,13 +176,13 @@ class Search {
 
     fun nextPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false) {
         currentPage += 10
-        requestModules(activity, searchTerm, isModuleActivity)
+        requestModules(activity, searchTerm, isModuleActivity , filters = null)
     }
 
     fun previousPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false) {
         if (currentPage > 0) {
             currentPage -= 10
-            requestModules(activity, searchTerm, isModuleActivity)
+            requestModules(activity, searchTerm, isModuleActivity, filters = null)
         }
     }
 }

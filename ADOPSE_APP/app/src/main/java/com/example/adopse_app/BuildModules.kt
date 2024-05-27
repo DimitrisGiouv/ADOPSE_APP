@@ -36,7 +36,7 @@ class BuildModules : AppCompatActivity() {
 
             val queue = Volley.newRequestQueue(activity)
 
-            val url = "http://10.0.2.2:5051/module/" + (15139 + index)
+            val url = "http://10.0.2.2:5051/module/" + (15138 + index)
             val request = JsonObjectRequest(Request.Method.GET, url, null,
                 { response ->
                     moduleTextView.text = response.get("name").toString()
@@ -119,7 +119,7 @@ class BuildModules : AppCompatActivity() {
     fun modulesPerPage(activity: Activity,numberOfPage : Int) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
-        val moduleOfPage = 15139 + (numberOfPage * 10)
+        val moduleOfPage = 15138 + (numberOfPage * 10)
         repeat(10) { index ->
             val moduleCard = if (isSingleView) {
                 activity.layoutInflater.inflate(R.layout.module_long, null) as ConstraintLayout
