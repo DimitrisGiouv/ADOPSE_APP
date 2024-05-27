@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
                 val searchTerm = searchEditText.text.toString()
 
-                search.performSearch(this, searchTerm,false)
+                search.performSearch(this, searchTerm, false)
                 true
             } else {
                 false

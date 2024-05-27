@@ -1,6 +1,5 @@
 package com.example.adopse_app
 
-import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +7,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.android.volley.NoConnectionError
-import com.android.volley.Request
-import com.android.volley.TimeoutError
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 
 class ModuleActivity : AppCompatActivity() {
     private var currentPage = 0
@@ -60,7 +53,12 @@ class ModuleActivity : AppCompatActivity() {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
                 val searchTerm = searchEditText.text.toString()
-                search.performSearch(this, searchTerm, true)
+                if (filters.isNullOrEmpty()) {
+                    search.performSearch(this, searchTerm, true)
+                }
+                else{
+                    search.performSearch(this, searchTerm, true, filters)
+                }
                 true
             } else {
                 false
@@ -70,7 +68,7 @@ class ModuleActivity : AppCompatActivity() {
         val nextPage = findViewById<ImageButton>(R.id.nextPage)
         nextPage.setOnClickListener {
             val searchTerm = searchEditText.text.toString()
-            if (searchTerm.isEmpty()) {
+            if (searchTerm.isEmpty() || filters.isEmpty()) {
                 currentPage += 1
                 if (filters.isEmpty()) {
                     viewActivity.modulesPerPage(this, currentPage)
@@ -78,14 +76,14 @@ class ModuleActivity : AppCompatActivity() {
                     search.filteredModulesPerPage(this, currentPage, filters)
                 }
             } else {
-                search.nextPage(this, searchTerm, true)
+                search.nextPage(this, searchTerm, true,filters)
             }
         }
 
         val previousPage = findViewById<ImageButton>(R.id.previousPage)
         previousPage.setOnClickListener {
             val searchTerm = searchEditText.text.toString()
-            if (searchTerm.isEmpty() || currentPage == 0) {
+            if (searchTerm.isEmpty() || currentPage == 0 || filters.isEmpty()) {
                 if (currentPage != 0) currentPage -= 1
                 if (filters.isEmpty()) {
                     viewActivity.modulesPerPage(this, currentPage)
@@ -93,7 +91,7 @@ class ModuleActivity : AppCompatActivity() {
                     search.filteredModulesPerPage(this, currentPage, filters)
                 }
             } else {
-                search.previousPage(this, searchTerm, true)
+                search.previousPage(this, searchTerm, true,filters)
             }
         }
 

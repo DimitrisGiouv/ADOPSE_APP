@@ -17,14 +17,19 @@ import org.json.JSONArray
 class Search {
     private var currentPage = 0
 
-    fun performSearch(activity: AppCompatActivity, searchBar: String, isModuleActivity: Boolean = false) {
+    fun performSearch(
+        activity: AppCompatActivity,
+        searchBar: String,
+        isModuleActivity: Boolean = false,
+        filters: MutableMap<String, String>? = null
+    ) {
         currentPage = 0
         if (searchBar.isBlank()) {
             Toast.makeText(activity, "Το πεδίο αναζήτησης είναι κενό", Toast.LENGTH_SHORT).show()
             val build = BuildModules()
             build.toggleModuleList(activity)
         } else {
-            requestModules(activity, searchBar, isModuleActivity, filters = null)
+            requestModules(activity, searchBar, isModuleActivity, filters)
         }
     }
 
@@ -32,7 +37,7 @@ class Search {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
-        val url = if (filters == null || filters.isEmpty()) {
+        val url = if (filters.isNullOrEmpty()) {
             "http://10.0.2.2:5051/Module/filtered/10/$currentPage/?SearchQuery=$searchBar"
         } else {
             "http://10.0.2.2:5051/Module/filtered/10/$currentPage?" +
@@ -174,15 +179,16 @@ class Search {
     }
 
 
-    fun nextPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false) {
+    fun nextPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false, filters: Map<String, String>? = null) {
         currentPage += 10
-        requestModules(activity, searchTerm, isModuleActivity , filters = null)
+        requestModules(activity, searchTerm, isModuleActivity, filters)
     }
 
-    fun previousPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false) {
+    fun previousPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false, filters: Map<String, String>? = null) {
         if (currentPage > 0) {
             currentPage -= 10
-            requestModules(activity, searchTerm, isModuleActivity, filters = null)
+            requestModules(activity, searchTerm, isModuleActivity, filters)
         }
     }
+
 }
