@@ -33,6 +33,7 @@ class BuildModules : AppCompatActivity() {
             val difficultyTextView = moduleCard.findViewById<TextView>(R.id.difficulty_module1)
             val popularityTextView = moduleCard.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard.findViewById<TextView>(R.id.rating_module1)
+            val priceTextView = moduleCard.findViewById<TextView>(R.id.textView)
 
             val queue = Volley.newRequestQueue(activity)
 
@@ -44,6 +45,7 @@ class BuildModules : AppCompatActivity() {
                     descriptorTextView.text = response.get("description").toString()
                     difficultyTextView.text = response.get("difficultyName").toString()
                     popularityTextView.text = response.get("price").toString()
+                    priceTextView.text = response.get("price").toString()
                     ratingTextView.text = response.get("rating").toString()
 
                     val sizeLimitation = response.get("description").toString()
@@ -61,6 +63,7 @@ class BuildModules : AppCompatActivity() {
                         val moduleDifficulty = difficultyTextView?.text?.toString()
                         val modulePopularity = popularityTextView?.text?.toString()
                         val moduleRating = ratingTextView?.text?.toString()
+                        val price = priceTextView?.text?.toString()
 
                         val intent = Intent(activity, ModuleProfileActivity::class.java).apply {
                             putExtra("moduleName", moduleName)
@@ -68,6 +71,7 @@ class BuildModules : AppCompatActivity() {
                             putExtra("moduleDifficulty", moduleDifficulty)
                             putExtra("modulePopularity", modulePopularity)
                             putExtra("moduleRating", moduleRating)
+                            putExtra("modulePrice",price)
                         }
                         activity.startActivity(intent)
                     }
@@ -133,6 +137,7 @@ class BuildModules : AppCompatActivity() {
             val difficultyTextView = moduleCard.findViewById<TextView>(R.id.difficulty_module1)
             val popularityTextView = moduleCard.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard.findViewById<TextView>(R.id.rating_module1)
+            val priceTextView = moduleCard.findViewById<TextView>(R.id.textView)
 
             val queue = Volley.newRequestQueue(activity)
 
@@ -145,6 +150,7 @@ class BuildModules : AppCompatActivity() {
                     difficultyTextView.text = response.get("difficultyName").toString()
                     popularityTextView.text = response.get("price").toString()
                     ratingTextView.text = response.get("rating").toString()
+                    priceTextView.text = response.get("price").toString()
 
                     val sizeLimitation = response.get("description").toString()
                     // Truncate the description text if it exceeds 30 characters
@@ -161,6 +167,7 @@ class BuildModules : AppCompatActivity() {
                         val moduleDifficulty = difficultyTextView?.text?.toString()
                         val modulePopularity = popularityTextView?.text?.toString()
                         val moduleRating = ratingTextView?.text?.toString()
+                        val modulePrice = priceTextView?.text?.toString()
 
                         val intent = Intent(activity, ModuleProfileActivity::class.java).apply {
                             putExtra("moduleName", moduleName)
@@ -168,6 +175,7 @@ class BuildModules : AppCompatActivity() {
                             putExtra("moduleDifficulty", moduleDifficulty)
                             putExtra("modulePopularity", modulePopularity)
                             putExtra("moduleRating", moduleRating)
+                            putExtra("modulePrice", modulePrice)
                         }
                         activity.startActivity(intent)
                     }

@@ -17,12 +17,7 @@ import org.json.JSONArray
 class Search {
     private var currentPage = 0
 
-    fun performSearch(
-        activity: AppCompatActivity,
-        searchBar: String,
-        isModuleActivity: Boolean = false,
-        filters: MutableMap<String, String>? = null
-    ) {
+    fun performSearch( activity: AppCompatActivity, searchBar: String, isModuleActivity: Boolean = false, filters: MutableMap<String, String>? = null) {
         currentPage = 0
         if (searchBar.isBlank()) {
             Toast.makeText(activity, "Το πεδίο αναζήτησης είναι κενό", Toast.LENGTH_SHORT).show()
@@ -119,6 +114,7 @@ class Search {
             val descriptorTextView = moduleCard.findViewById<TextView>(R.id.Dismodule1)
             val popularityTextView = moduleCard.findViewById<TextView>(R.id.popularity_module1)
             val ratingTextView = moduleCard.findViewById<TextView>(R.id.rating_module1)
+            val priceTextView = moduleCard.findViewById<TextView>(R.id.textView)
 
             moduleTextView.text = module.getString("name")
             difficultyTextView.text = module.getString("difficultyName")
@@ -126,6 +122,7 @@ class Search {
             descriptorTextView.text = module.get("description").toString()
             popularityTextView.text = module.getInt("price").toString()
             ratingTextView.text = module.getInt("rating").toString()
+            priceTextView.text = module.getInt("price").toString()
 
             val sizeLimitation = module.getString("description")
             val truncatedDescription = if (sizeLimitation.length > 30) {
@@ -140,6 +137,7 @@ class Search {
                 val moduleDifficulty = difficultyTextView.text.toString()
                 val modulePopularity = popularityTextView.text.toString()
                 val moduleRating = ratingTextView.text.toString()
+                val modulePrice = priceTextView.text.toString()
 
                 val intent = Intent(activity, ModuleProfileActivity::class.java).apply {
                     putExtra("moduleName", moduleName)
@@ -147,6 +145,7 @@ class Search {
                     putExtra("moduleDifficulty", moduleDifficulty)
                     putExtra("modulePopularity", modulePopularity)
                     putExtra("moduleRating", moduleRating)
+                    putExtra("modulePrice", modulePrice)
                 }
                 activity.startActivity(intent)
             }
