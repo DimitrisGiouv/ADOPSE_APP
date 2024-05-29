@@ -17,6 +17,7 @@ class ModuleActivity : AppCompatActivity() {
     private var selectedRatings = 1
 
     private var filters: MutableMap<String, String> = mutableMapOf()
+    private val viewActivity = BuildModules()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,7 @@ class ModuleActivity : AppCompatActivity() {
 
         var search = Search()
 
-        val viewActivity = BuildModules()
+
         viewActivity.modulesPerPage(this, currentPage)
 
         val gridModules = findViewById<ImageButton>(R.id.gridViewButton)
@@ -53,12 +54,7 @@ class ModuleActivity : AppCompatActivity() {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
                 val searchTerm = searchEditText.text.toString()
-                if (filters.isNullOrEmpty()) {
-                    search.performSearch(this, searchTerm, true)
-                }
-                else{
-                    search.performSearch(this, searchTerm, true, filters)
-                }
+                search.performSearch(this, searchTerm, true, viewActivity.isSingleView, filters)
                 true
             } else {
                 false
@@ -68,15 +64,15 @@ class ModuleActivity : AppCompatActivity() {
         val nextPage = findViewById<ImageButton>(R.id.nextPage)
         nextPage.setOnClickListener {
             val searchTerm = searchEditText.text.toString()
-            if (searchTerm.isEmpty() || filters.isEmpty()) {
+            if (searchTerm.isEmpty()) {
                 currentPage += 1
                 if (filters.isEmpty()) {
                     viewActivity.modulesPerPage(this, currentPage)
                 } else {
-                    search.filteredModulesPerPage(this, currentPage, filters)
+                    search.filteredModulesPerPage(this, currentPage, viewActivity.isSingleView, filters)
                 }
             } else {
-                search.nextPage(this, searchTerm, true,filters)
+                search.nextPage(this, searchTerm, true,viewActivity.isSingleView, filters)
             }
         }
 
@@ -88,10 +84,10 @@ class ModuleActivity : AppCompatActivity() {
                 if (filters.isEmpty()) {
                     viewActivity.modulesPerPage(this, currentPage)
                 } else {
-                    search.filteredModulesPerPage(this, currentPage, filters)
+                    search.filteredModulesPerPage(this, currentPage, viewActivity.isSingleView, filters)
                 }
             } else {
-                search.previousPage(this, searchTerm, true,filters)
+                search.previousPage(this, searchTerm, true,viewActivity.isSingleView, filters)
             }
         }
 
@@ -188,7 +184,7 @@ class ModuleActivity : AppCompatActivity() {
 
         // Χρήση της `modulesPerPage` με τα φίλτρα
             val search = Search()
-            search.filteredModulesPerPage(this@ModuleActivity, 0, filters)
+            search.filteredModulesPerPage(this@ModuleActivity, 0, viewActivity.isSingleView, filters)
         }
 
     }

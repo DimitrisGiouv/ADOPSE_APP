@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     private var currentPage = 0
+    private val viewActivity = BuildModules()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         var navigationBar = NavigationBar()
         navigationBar.NavigationCode(this)
 
-        val viewActivity = BuildModules()
         viewActivity.modulesPerPage(this,currentPage)
 
         var search = Search()
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 // Καλέστε τη λειτουργία αναζήτησης με το νέο κείμενο που εισήχθη
                 val searchTerm = searchEditText.text.toString()
 
-                search.performSearch(this, searchTerm, false)
+                search.performSearch(this, searchTerm, false, viewActivity.isSingleView)
                 true
             } else {
                 false
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 currentPage += 1
                 viewActivity.modulesPerPage(this, currentPage)
             } else {
-                search.nextPage(this, searchTerm, false)
+                search.nextPage(this, searchTerm, false, viewActivity.isSingleView)
             }
         }
     }

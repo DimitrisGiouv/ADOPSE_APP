@@ -17,18 +17,18 @@ import org.json.JSONArray
 class Search {
     private var currentPage = 0
 
-    fun performSearch( activity: AppCompatActivity, searchBar: String, isModuleActivity: Boolean = false, filters: MutableMap<String, String>? = null) {
+    fun performSearch( activity: AppCompatActivity, searchBar: String, isModuleActivity: Boolean = false, isSingleView: Boolean, filters: MutableMap<String, String>? = null) {
         currentPage = 0
         if (searchBar.isBlank()) {
             Toast.makeText(activity, "Το πεδίο αναζήτησης είναι κενό", Toast.LENGTH_SHORT).show()
             val build = BuildModules()
             build.toggleModuleList(activity)
         } else {
-            requestModules(activity, searchBar, isModuleActivity, filters)
+            requestModules(activity, searchBar, isModuleActivity, isSingleView, filters)
         }
     }
 
-    private fun requestModules(activity: AppCompatActivity, searchBar: String, isModuleActivity: Boolean, filters: Map<String, String>?) {
+    private fun requestModules(activity: AppCompatActivity, searchBar: String, isModuleActivity: Boolean, isSingleView: Boolean, filters: Map<String, String>?) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
@@ -49,7 +49,7 @@ class Search {
             { response ->
                 val modulesArray = response.getJSONArray("modules")
                 if (modulesArray.length() > 0) {
-                    showResults(activity, modulesArray, false, isModuleActivity)
+                    showResults(activity, modulesArray, isSingleView, isModuleActivity)
                 } else {
                     Toast.makeText(activity, "Δεν βρέθηκαν άλλα μαθήματα που να ταιριάζουν με τον όρο αναζήτησης: $searchBar", Toast.LENGTH_SHORT).show()
                     val build = BuildModules()
@@ -63,7 +63,7 @@ class Search {
 
         queue.add(request)
     }
-    fun filteredModulesPerPage(activity: AppCompatActivity, numberOfPage: Int, filters: Map<String, String>) {
+    fun filteredModulesPerPage(activity: AppCompatActivity, numberOfPage: Int, isSingleView: Boolean, filters: Map<String, String>) {
         val parentLayout: ConstraintLayout = activity.findViewById(R.id.LinearModules)
         parentLayout.removeAllViews()
 
@@ -79,7 +79,7 @@ class Search {
             { response ->
                 val modulesArray = response.getJSONArray("modules")
                 if (modulesArray.length() > 0) {
-                    showResults(activity, modulesArray, false, true)
+                    showResults(activity, modulesArray, isSingleView, true)
                 } else {
                     Toast.makeText(activity, "Δεν βρέθηκαν άλλα μαθήματα ", Toast.LENGTH_SHORT).show()
                     val build = BuildModules()
@@ -103,10 +103,7 @@ class Search {
 
         for (i in 0 until modulesArray.length()) {
             val module = modulesArray.getJSONObject(i)
-            val moduleCard = activity.layoutInflater.inflate(
-                if (isSingleView) R.layout.module_long else R.layout.module,
-                null
-            ) as ConstraintLayout
+            val moduleCard = activity.layoutInflater.inflate(if (isSingleView) R.layout.module_long else R.layout.module, null) as ConstraintLayout
             moduleCard.id = View.generateViewId()
 
             val moduleTextView = moduleCard.findViewById<TextView>(R.id.module1)
@@ -150,20 +147,24 @@ class Search {
                 activity.startActivity(intent)
             }
 
-            val moduleCardHeight = 550 // Adjust height as needed
-
+            val moduleCardHeight = 550 // Ύψος του moduleCard
             val layoutParams = ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                if (isSingleView) ConstraintLayout.LayoutParams.MATCH_PARENT else ConstraintLayout.LayoutParams.WRAP_CONTENT,
                 moduleCardHeight
             )
             layoutParams.setMargins(10, 10, 10, 10)
 
-            if (i % 2 == 0) {
+            if (isSingleView) {
                 layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 layoutParams.topToBottom = if (i == 0) R.id.RecommendBlock else parentLayout.getChildAt(i - 1).id
             } else {
-                layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-                layoutParams.topToBottom = if (i == 1) R.id.RecommendBlock else parentLayout.getChildAt(i - 2).id
+                if (i % 2 == 0) {
+                    layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+                    layoutParams.topToBottom = if (i == 0) R.id.RecommendBlock else parentLayout.getChildAt(i - 1).id
+                } else {
+                    layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+                    layoutParams.topToBottom = if (i == 1) R.id.RecommendBlock else parentLayout.getChildAt(i - 2).id
+                }
             }
 
             parentLayout.addView(moduleCard, layoutParams)
@@ -178,15 +179,15 @@ class Search {
     }
 
 
-    fun nextPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false, filters: Map<String, String>? = null) {
+    fun nextPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false, isSingleView: Boolean, filters: Map<String, String>? = null) {
         currentPage += 10
-        requestModules(activity, searchTerm, isModuleActivity, filters)
+        requestModules(activity, searchTerm, isModuleActivity, isSingleView, filters)
     }
 
-    fun previousPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false, filters: Map<String, String>? = null) {
+    fun previousPage(activity: AppCompatActivity, searchTerm: String, isModuleActivity: Boolean = false, isSingleView: Boolean, filters: Map<String, String>? = null) {
         if (currentPage > 0) {
             currentPage -= 10
-            requestModules(activity, searchTerm, isModuleActivity, filters)
+            requestModules(activity, searchTerm, isModuleActivity, isSingleView, filters)
         }
     }
 
