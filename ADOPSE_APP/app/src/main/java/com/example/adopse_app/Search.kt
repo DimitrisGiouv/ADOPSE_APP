@@ -21,6 +21,10 @@ class Search {
         currentPage = 0
         if (searchBar.isBlank()) {
             Toast.makeText(activity, "Το πεδίο αναζήτησης είναι κενό", Toast.LENGTH_SHORT).show()
+            val loadMoreButton = activity.findViewById<Button>(R.id.loadMoreButton)
+            loadMoreButton?.let {
+                it.visibility =  View.INVISIBLE
+            }
             val build = BuildModules()
             build.toggleModuleList(activity)
         } else {
@@ -52,6 +56,10 @@ class Search {
                     showResults(activity, modulesArray, isSingleView, isModuleActivity)
                 } else {
                     Toast.makeText(activity, "Δεν βρέθηκαν άλλα μαθήματα που να ταιριάζουν με τον όρο αναζήτησης: $searchBar", Toast.LENGTH_SHORT).show()
+                    val loadMoreButton = activity.findViewById<Button>(R.id.loadMoreButton)
+                    loadMoreButton?.let {
+                        it.visibility =  View.INVISIBLE
+                    }
                     val build = BuildModules()
                     build.toggleModuleList(activity)
                 }
@@ -173,7 +181,7 @@ class Search {
         if (!isModuleActivity && modulesArray.length() > 0) {
             val loadMoreButton = activity.findViewById<Button>(R.id.loadMoreButton)
             loadMoreButton?.let {
-                it.visibility = if (isSingleView) View.GONE else View.VISIBLE
+                it.visibility =  View.VISIBLE
             }
         }
     }
