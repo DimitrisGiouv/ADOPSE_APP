@@ -37,9 +37,9 @@ class Search {
         parentLayout.removeAllViews()
 
         val url = if (filters.isNullOrEmpty()) {
-            "http://10.0.2.2:5051/Module/filtered/10/$currentPage/?SearchQuery=$searchBar"
+            "http://185.234.52.109/api/Module/filtered/10/$currentPage/?SearchQuery=$searchBar"
         } else {
-            "http://10.0.2.2:5051/Module/filtered/10/$currentPage?" +
+            "http://185.234.52.109/api/Module/filtered/10/$currentPage?" +
                     "ModuleTypeId=${filters["ModuleTypeId"]}&" +
                     "DifficultyId=${filters["DifficultyId"]}&" +
                     "Rating=${filters["Rating"]}&" +
@@ -79,7 +79,7 @@ class Search {
         val moduleOfPage = numberOfPage * 10
 
         // Construct the URL with the filters
-        val url = "http://10.0.2.2:5051/Module/filtered/10/$moduleOfPage?" +
+        val url = "http://185.234.52.109/api/Module/filtered/10/$moduleOfPage?" +
                 "ModuleTypeId=${filters["ModuleTypeId"]}&" +
                 "DifficultyId=${filters["DifficultyId"]}&" +
                 "Rating=${filters["Rating"]}&" +

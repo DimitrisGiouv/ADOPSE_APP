@@ -120,7 +120,7 @@ class UserProfileActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
 
         val moduleOfPage = 15139 + (index * 10)
-        val url = "http://10.0.2.2:5051/module/$moduleOfPage"
+        val url = "http://185.234.52.109/api/module/$moduleOfPage"
         val request = JsonObjectRequest(
             Request.Method.GET, url, null,
             { response ->

@@ -41,13 +41,13 @@ class LoginActivity : AppCompatActivity() {
             Items.put("password", passwordText)
             Items.put("email","x@x.x")
             val queue = Volley.newRequestQueue(this)
-            val url = "http://10.0.2.2:5051/Authentication/login"
+            val url = "http://185.234.52.109/api/Authentication/login"
 
             val request = JsonObjectRequest(Request.Method.POST, url, Items,
                 {response ->
                     Toast.makeText(this,"Welcome back $usernameText", Toast.LENGTH_SHORT).show()
                     // Find user's details
-                    val usersUrl = "http://10.0.2.2:5051/Authentication/getUsers"
+                    val usersUrl = "http://185.234.52.109/api/Authentication/getUsers"
                     val usersRequest = JsonArrayRequest(Request.Method.GET, usersUrl, null,
                         { response ->
                             var userFound = false

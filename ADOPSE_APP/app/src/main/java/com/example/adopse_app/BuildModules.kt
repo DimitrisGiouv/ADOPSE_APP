@@ -37,7 +37,7 @@ class BuildModules : AppCompatActivity() {
 
             val queue = Volley.newRequestQueue(activity)
 
-            val url = "http://10.0.2.2:5051/module/" + (moduleOfPage + index)
+            val url = "http://185.234.52.109/api/module/" + (moduleOfPage + index)
             val request = JsonObjectRequest(Request.Method.GET, url, null,
                 { response ->
                     moduleTextView.text = response.get("name").toString()
