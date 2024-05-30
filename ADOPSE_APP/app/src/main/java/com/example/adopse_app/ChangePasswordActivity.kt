@@ -23,19 +23,16 @@ class ChangePasswordActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_change_password)
 
-        val usernameField = findViewById<EditText>(R.id.username)
-        val emailField = findViewById<EditText>(R.id.email)
+
         val oldPwdField = findViewById<EditText>(R.id.oldPassword)
         val newPwdField = findViewById<EditText>(R.id.newPassword)
         val submitBtn = findViewById<TextView>(R.id.submitBtn)
 
         submitBtn.setOnClickListener{
-            val usernameText = usernameField.text.toString().trim()
-            val emailText = emailField.text.toString().trim()
             val newPwdText = newPwdField.text.toString().trim()
             val oldPwdText = oldPwdField.text.toString().trim()
 
-            if(usernameText.isEmpty() || newPwdText.isEmpty() || emailText.isEmpty() || oldPwdText.isEmpty()){
+            if( newPwdText.isEmpty() ||  oldPwdText.isEmpty()){
                 Toast.makeText(this, "Please fill the fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -56,15 +53,15 @@ class ChangePasswordActivity : AppCompatActivity() {
             val oldPassword = sharedPreferences.getString("password", "")
             val id = sharedPreferences.getInt("id", -1)
 
-            if(usernameText != username || emailText != email || oldPwdText != oldPassword){
-                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+            if(oldPwdText != oldPassword){
+                Toast.makeText(this, "Invalid password!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val Items = JSONObject()
             Items.put("id", id)
-            Items.put("username", usernameText)
-            Items.put("email", emailText)
+            Items.put("username", username)
+            Items.put("email", email)
             Items.put("password", newPwdText)
 
             val queue = Volley.newRequestQueue(this)
@@ -76,7 +73,7 @@ class ChangePasswordActivity : AppCompatActivity() {
                     Handler().postDelayed({
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
-                    },2000)
+                    }, 2000)
                 },
                 { error ->
                     // Error updating password
