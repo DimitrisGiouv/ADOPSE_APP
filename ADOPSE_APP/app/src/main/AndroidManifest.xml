@@ -67,9 +67,13 @@
             android:theme="@style/Theme.ADOPSE_APP"/>
 
         <activity
-        android:name=".EditActivity"
-        android:exported="true"
-        android:theme="@style/Theme.ADOPSE_APP"/>
+            android:name=".EditActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+        <activity
+            android:name=".LecturerList"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
 
     </application>
 

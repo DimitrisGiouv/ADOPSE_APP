@@ -20,6 +20,8 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.toolbox.JsonArrayRequest
+
 class LecturerList : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +35,8 @@ class LecturerList : AppCompatActivity() {
             insets
         }
 
-        val navigationCode = NavigationBar()
-        navigationCode.NavigationCode(this)
+        //val navigationCode = NavigationBar()
+        //navigationCode.NavigationCode(this)
 
         val logoutButton = findViewById<Button>(R.id.logout_button)
         logoutButton.setOnClickListener {
@@ -53,16 +55,29 @@ class LecturerList : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.lecturers_list)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Sample data
-        val lecturers = listOf(
-            Lecturer("Dr. Smith", "Professor of Mathematics", R.drawable.lecturer_image_placeholder),
-            Lecturer("Dr. Johnson", "Associate Professor of Physics", R.drawable.lecturer_image_placeholder),
-            Lecturer("Dr. Williams", "Senior Lecturer in Chemistry", R.drawable.lecturer_image_placeholder),
-            Lecturer("Dr. Brown", "Lecturer in Biology", R.drawable.lecturer_image_placeholder),
-            Lecturer("Dr. Jones", "Assistant Professor of Computer Science", R.drawable.lecturer_image_placeholder)
-        )
 
-        val adapter = LecturerAdapter(lecturers)
-        recyclerView.adapter = adapter
+
+        // Sample data
+        val queue = Volley.newRequestQueue(this)
+        val url = "http://185.234.52.109/api/Lecturer"
+        val request = JsonArrayRequest(Request.Method.GET, url, null,
+            {response ->
+                var data = response.getJSONObject(0)
+                val list = mutableListOf(Lecturer(data.getString("name"),data.getString("email"),R.drawable.lecturer_image_placeholder))
+                for (i in 1 until response.length()){
+                    data = response.getJSONObject(i)
+                    list += (Lecturer(data.getString("name"),data.getString("email"),R.drawable.lecturer_image_placeholder))
+                    //Toast.makeText(this, list.toString(), Toast.LENGTH_SHORT).show()
+                }
+
+                val adapter = LecturerAdapter(list)
+                recyclerView.adapter = adapter
+
+
+        },{error -> {}
+        })
+
+        queue.add(request)
+
     }
 }
