@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.slider.RangeSlider
 
 class ModuleActivity : AppCompatActivity() {
     private var currentPage = 0
@@ -113,6 +114,19 @@ class ModuleActivity : AppCompatActivity() {
         val rating3CheckBox = view.findViewById<CheckBox>(R.id.rating_3)
         val rating2CheckBox = view.findViewById<CheckBox>(R.id.rating_2)
         val ratingAllCheckBox = view.findViewById<CheckBox>(R.id.rating_all)
+        val priceSlider = view.findViewById<RangeSlider>(R.id.price_slider)
+        val minPriceEditText = view.findViewById<EditText>(R.id.min_price)
+        val maxPriceEditText = view.findViewById<EditText>(R.id.max_price)
+
+        // Initialize slider with min and max price values
+        priceSlider.setValues(0f, 100f)
+
+        // Listen for slider value changes and update the EditTexts
+        priceSlider.addOnChangeListener { _, _, _ ->
+            val values = priceSlider.values
+            minPriceEditText.setText(values[0].toInt().toString())
+            maxPriceEditText.setText(values[1].toInt().toString())
+        }
 
         typeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             selectedType = when (checkedId) {
@@ -153,7 +167,7 @@ class ModuleActivity : AppCompatActivity() {
 
             filters.clear()
 
-            // Προσθήκη της τιμής του φίλτρου τύπου (type)
+            // Add type filter value
             filters["ModuleTypeId"] = when (typeRadioGroup.checkedRadioButtonId) {
                 R.id.type_all -> ""
                 R.id.type_lab -> "1"
@@ -162,7 +176,7 @@ class ModuleActivity : AppCompatActivity() {
                 else -> ""
             }
 
-            // Προσθήκη της τιμής του φίλτρου δυσκολίας (difficulty)
+            // Add difficulty filter value
             filters["DifficultyId"] = when (difficultyRadioGroup.checkedRadioButtonId) {
                 R.id.difficulty_all -> ""
                 R.id.difficulty_easy -> "1"
@@ -171,7 +185,7 @@ class ModuleActivity : AppCompatActivity() {
                 else -> ""
             }
 
-            // Προσθήκη της τιμής του φίλτρου αξιολόγησης (rating)
+            // Add rating filter value
             filters["Rating"] = when {
                 rating5CheckBox.isChecked -> "5"
                 rating4CheckBox.isChecked -> "4"
@@ -181,11 +195,14 @@ class ModuleActivity : AppCompatActivity() {
                 else -> ""
             }
 
+            // Add price filter values
+            filters["MinPrice"] = minPriceEditText.text.toString()
+            filters["MaxPrice"] = maxPriceEditText.text.toString()
 
-        // Χρήση της `modulesPerPage` με τα φίλτρα
+            // Use `modulesPerPage` with filters
             val search = Search()
             search.filteredModulesPerPage(this@ModuleActivity, 0, viewActivity.isSingleView, filters)
         }
-
     }
+
 }

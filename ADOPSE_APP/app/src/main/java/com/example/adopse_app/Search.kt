@@ -77,10 +77,12 @@ class Search {
 
         val moduleOfPage = numberOfPage * 10
 
+        // Construct the URL with the filters
         val url = "http://10.0.2.2:5051/Module/filtered/10/$moduleOfPage?" +
                 "ModuleTypeId=${filters["ModuleTypeId"]}&" +
                 "DifficultyId=${filters["DifficultyId"]}&" +
-                "Rating=${filters["Rating"]}"
+                "Rating=${filters["Rating"]}&" +
+                "Price=${filters["MinPrice"]},${filters["MaxPrice"]}"
 
         val request = JsonObjectRequest(
             Request.Method.GET, url, null,
@@ -104,6 +106,7 @@ class Search {
         )
         Volley.newRequestQueue(activity).add(request)
     }
+
 
 
     fun showResults(activity: AppCompatActivity, modulesArray: JSONArray, isSingleView: Boolean, isModuleActivity: Boolean) {
