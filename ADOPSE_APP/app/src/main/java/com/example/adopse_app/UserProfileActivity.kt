@@ -35,11 +35,13 @@ class UserProfileActivity : AppCompatActivity() {
 
         val logoutButton = findViewById<Button>(R.id.logout_button)
         logoutButton.setOnClickListener {
+
             // Perform logout actions
             val sharedPreferences = getSharedPreferences("myAppPref", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.clear()
             editor.apply()
+
             // Redirect to LoginActivity
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -55,7 +57,7 @@ class UserProfileActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("myAppPref", Context.MODE_PRIVATE)
         val username = sharedPreferences.getString("username", "")
-        val textViewUsername = findViewById<TextView>(R.id.profile_welcome)
+        val textViewUsername = findViewById<TextView>(R.id.profile_name)
         textViewUsername.text = username
     }
 

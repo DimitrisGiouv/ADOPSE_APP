@@ -113,7 +113,7 @@ class SignupActivity :AppCompatActivity() {
 
                     Volley.newRequestQueue(this).add(usersRequest)
                     android.os.Handler().postDelayed({
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
                     },2000)
                 },
