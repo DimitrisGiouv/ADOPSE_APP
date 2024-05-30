@@ -43,6 +43,7 @@ class Search {
                     "ModuleTypeId=${filters["ModuleTypeId"]}&" +
                     "DifficultyId=${filters["DifficultyId"]}&" +
                     "Rating=${filters["Rating"]}&" +
+                    "Price=${filters["MinPrice"]},${filters["MaxPrice"]}" +
                     "SearchQuery=$searchBar"
         }
 
