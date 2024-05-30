@@ -30,9 +30,16 @@ class NavigationActivity : AppCompatActivity() {
             }
 
         // Κουμπί που μεταφέρει στην οθόνη με τις ενότητες
-        val modulePage = findViewById<Button>(R.id.btn_modules)
+        val modulePage = findViewById<Button>(R.id.Module)
         modulePage.setOnClickListener {
             val intent = Intent(this, ModuleActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Κουμπί που μεταφέρει στην οθόνη με τις ενότητες
+        val lecturersPage = findViewById<Button>(R.id.Lecturers)
+        lecturersPage.setOnClickListener {
+            val intent = Intent(this, LecturerList::class.java)
             startActivity(intent)
         }
 
