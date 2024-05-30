@@ -68,7 +68,7 @@ class ChangePasswordActivity : AppCompatActivity() {
             Items.put("password", newPwdText)
 
             val queue = Volley.newRequestQueue(this)
-            val updateUrl = "http://10.0.2.2:5051/Authentication/updateUser"
+            val updateUrl = "http://185.234.52.109/api/Authentication/updateUser"
             val request = JsonObjectRequest(Request.Method.POST, updateUrl, Items,
                 { response ->
                     // Password changed successfully
