@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             else
                 gridModules.setBackgroundResource(R.drawable.button_background_singlelist)
             viewActivity.onToggleViewButtonClick()
-            viewActivity.toggleModuleList(this)
+            viewActivity.modulesPerPage(this, currentPage)
         }
 
         val searchEditText = findViewById<EditText>(R.id.SearchBar)

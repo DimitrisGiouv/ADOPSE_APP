@@ -4,7 +4,7 @@
     android:padding="20dp">
 
     <LinearLayout
-        android:layout_width="250dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp">
@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:checked="true"
                 android:text="ALL"
-                android:buttonTint="@color/selector_orange" />
+                android:buttonTint="@color/light_orange" />
 
             <RadioButton
                 android:id="@+id/type_lab"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Lab"
-                android:buttonTint="@color/selector_orange" />
+                android:buttonTint="@color/light_orange" />
 
             <RadioButton
                 android:id="@+id/type_theory"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Theory"
-                android:buttonTint="@color/selector_orange" />
+                android:buttonTint="@color/light_orange" />
 
             <RadioButton
                 android:id="@+id/type_mix"
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Mix"
-                android:buttonTint="@color/selector_orange" />
+                android:buttonTint="@color/light_orange" />
         </RadioGroup>
 
         <!-- Difficulty Filter -->
@@ -69,7 +69,8 @@
             android:id="@+id/difficulty_radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:buttonTint="@color/light_orange">
 
             <RadioButton
                 android:id="@+id/difficulty_all"
@@ -78,7 +79,7 @@
                 android:layout_weight="1"
                 android:checked="true"
                 android:text="ALL"
-                android:buttonTint="@color/selector_orange" />
+                android:buttonTint="@color/light_orange" />
 
             <RadioButton
                 android:id="@+id/difficulty_easy"
@@ -86,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Easy"
-                android:buttonTint="@color/selector_orange" />
+                android:buttonTint="@color/light_orange" />
 
             <RadioButton
                 android:id="@+id/difficulty_medium"
@@ -94,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Medium"
-                android:buttonTint="@color/selector_orange" />
+                android:buttonTint="@color/light_orange" />
 
             <RadioButton
                 android:id="@+id/difficulty_hard"
@@ -102,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Hard"
-                android:buttonTint="@color/selector_orange" />
+                android:buttonTint="@color/light_orange" />
         </RadioGroup>
 
         <!-- Ratings Filter -->

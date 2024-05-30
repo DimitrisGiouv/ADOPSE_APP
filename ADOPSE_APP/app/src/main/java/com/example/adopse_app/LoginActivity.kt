@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
             val request = JsonObjectRequest(Request.Method.POST, url, Items,
                 {response ->
-                    Toast.makeText(this,"Welcome back ${usernameText}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Welcome back $usernameText", Toast.LENGTH_SHORT).show()
                     // Find user's details
                     val usersUrl = "http://10.0.2.2:5051/Authentication/getUsers"
                     val usersRequest = JsonArrayRequest(Request.Method.GET, usersUrl, null,

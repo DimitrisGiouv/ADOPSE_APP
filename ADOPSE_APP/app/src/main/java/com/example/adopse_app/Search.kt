@@ -26,7 +26,7 @@ class Search {
                 it.visibility =  View.INVISIBLE
             }
             val build = BuildModules()
-            build.toggleModuleList(activity)
+            build.modulesPerPage(activity, currentPage)
         } else {
             requestModules(activity, searchBar, isModuleActivity, isSingleView, filters)
         }
@@ -61,7 +61,7 @@ class Search {
                         it.visibility =  View.INVISIBLE
                     }
                     val build = BuildModules()
-                    build.toggleModuleList(activity)
+                    build.modulesPerPage(activity, currentPage)
                 }
             },
             { error ->
@@ -91,7 +91,7 @@ class Search {
                 } else {
                     Toast.makeText(activity, "Δεν βρέθηκαν άλλα μαθήματα ", Toast.LENGTH_SHORT).show()
                     val build = BuildModules()
-                    build.toggleModuleList(activity)
+                    build.modulesPerPage(activity, currentPage)
                 }
             },
             { error ->

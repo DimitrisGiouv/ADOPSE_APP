@@ -73,8 +73,8 @@
             android:id="@+id/profile_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="36dp"
             android:text="test"
             android:textColor="@color/light_orange"
             android:textSize="25dp"
@@ -86,29 +86,12 @@
             android:id="@+id/directional_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="40dp"
             android:text="Find a course you want to learn"
-            android:layout_marginTop="5dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profile_welcome" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/search_field"
-            android:elevation="5dp"
-            android:drawableStart="@android:drawable/ic_search_category_default"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:hint="Search"
-            android:inputType="text"
-            android:textColor="@color/black"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/directional_message" />
 
         <ImageButton
             android:id="@+id/user_button"
@@ -118,10 +101,8 @@
             android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editText"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/user_profile_picture"
-            />
+            app:srcCompat="@drawable/user_profile_picture" />
 
         <Button
             android:id="@+id/edit_button"
