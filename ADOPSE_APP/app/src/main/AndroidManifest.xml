@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +18,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_main_page"
+            android:label="Educator"
             android:theme="@style/Theme.ADOPSE_APP">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +31,49 @@
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.ADOPSE_APP"/>
+        <activity
+            android:name=".UserProfileActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
 
+        <activity
+            android:name=".SignupActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".ModuleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".ModuleProfileActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".NavigationActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".Search"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+
+        <activity
+            android:name=".EditActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
+        <activity
+            android:name=".LecturerList"
+            android:exported="true"
+            android:theme="@style/Theme.ADOPSE_APP"/>
 
     </application>
 

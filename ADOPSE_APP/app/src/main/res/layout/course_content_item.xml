@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/continue_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/continue_button_modules" />
+
+        <LinearLayout
+            android:id="@+id/minutes_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toEndOf="@id/continue_button">
+
+            <TextView
+                android:id="@+id/minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_toEndOf="@+id/continue_button"
+                android:text="20"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_toEndOf="@id/minutes"
+                android:text="min"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/module_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginLeft="3dp"
+            android:layout_toEndOf="@id/continue_button"
+            android:layout_below="@id/minutes_layout"
+            android:text="Introduction to UI/UX design"/>
+
+
+        <LinearLayout
+            android:id="@+id/grey_bar"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@id/continue_button"
+            android:layout_below="@id/module_title"
+            android:background="@drawable/grey_bar"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
