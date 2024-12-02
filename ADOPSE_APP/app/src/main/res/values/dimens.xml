@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="profile_modulecard_margin_start">30dp</dimen>
+    <dimen name="profile_modulecard_margin_top">20dp</dimen>
+    <dimen name="profile_modulecard_margin_right">10dp</dimen>
+</resources>
